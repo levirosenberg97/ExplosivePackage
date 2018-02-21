@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c4f4a4501d1966946b692932688edf6f
+timeCreated: 1519168947
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Future Narrow
+  fontNames:
+  - Kenney Future Narrow
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e88a3745ab7274a41ab390ee93b8b3c9, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

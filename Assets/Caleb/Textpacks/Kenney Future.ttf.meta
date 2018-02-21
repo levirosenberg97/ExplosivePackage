@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bd54c565c7e15e04c99e83548b4a2e8c
+timeCreated: 1519168947
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Future
+  fontNames:
+  - Kenney Future
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 96803c23991e4dd46994b19e6e3a5a5e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
