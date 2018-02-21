@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 66f881df046fb494d80edc5e1a5fa2e1
+timeCreated: 1519168951
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Blocks
+  fontNames:
+  - Kenney Blocks
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1516f48c46273b849b1320d29a414964, type: 3}
+  - {fileID: 12800000, guid: d3ea48af4d8939c489b0611e6acfd269, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
