@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8ee1963b044d6ea4da965e42115c1384
+timeCreated: 1519168947
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kenney Pixel
+  fontNames:
+  - Kenney Pixel
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a196b1ba0084e0c4d8f892ce81f31908, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
