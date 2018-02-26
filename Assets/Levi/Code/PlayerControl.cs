@@ -5,18 +5,26 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public float speed;
-
     public GameObject bomb;
-
     public float spawnTime;
+    public int playerNumber;
+    public float pickupTimer;
+    public bool isInvincible = false;
+    public ParticleSystem InvincibleParticles;
+
 
     private Rigidbody rb;
-
+    private float startingSpawnTimer;
+    private float startingPickUpTimer;
     private bool isAlive = true;
+   
     // Use this for initialization
     void Start ()
     {
+        isAlive = true;
         rb = GetComponent<Rigidbody>();
+        startingPickUpTimer = pickupTimer;
+        startingSpawnTimer = spawnTime;
 	}
 
     float moveHorizontal;
@@ -48,13 +56,31 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         move();
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton("Fire1"))
         {
             bombSpawner();
         }
-        if (spawnTime < 3)
+
+        if (spawnTime < startingSpawnTimer)
         {
             spawnTime += Time.deltaTime;
+        }
+
+        if (isInvincible == true)
+        {
+            pickupTimer -= Time.deltaTime;
+            isAlive = true;
+            if (pickupTimer <= 0)
+            {
+                isInvincible = false;
+                pickupTimer = startingPickUpTimer;
+                InvincibleParticles.gameObject.SetActive(false);
+            }
+        }
+
+        if (isAlive == false)
+        {
+            Destroy(gameObject);
         }
 
     }
@@ -63,38 +89,58 @@ public class PlayerControl : MonoBehaviour
     {
         if (isAlive == true)
         {
-            if (spawnTime >= 3)
+            if (spawnTime >= startingSpawnTimer)
             {
                 Instantiate(bomb, transform.position, transform.rotation);
                 spawnTime = 0;
-            }
-
-           
-        
+            }      
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SlowPickUp")
+        if (isAlive == true)
         {
-            if (speed > 3)
+            if ( other.tag == "Invincible")
             {
-                speed -= 3;
+                isInvincible = true;
+                InvincibleParticles.gameObject.SetActive(true);
                 Destroy(other.gameObject);
             }
-        }
 
-
-        if (other.tag == "SpeedPickUp")
-        {
-            if (speed != 9)
+            if (other.tag == "FireUp")
             {
-                speed += 3;
                 Destroy(other.gameObject);
+            }
+
+            if (other.tag == "FireDown")
+            {
+                Destroy(other.gameObject);
+            }
+
+            if (other.tag == "SlowPickUp")
+            {
+                if (speed > 3)
+                {
+                    speed -= 3;
+                    Destroy(other.gameObject);
+                }
+            }
+
+            if (other.tag == "Pain")
+            {
+                isAlive = false;
+            }
+
+            if (other.tag == "SpeedPickUp")
+            {
+                if (speed != 9)
+                {
+                    speed += 3;
+                    Destroy(other.gameObject);
+                }
             }
         }
     }
-
 
 }
