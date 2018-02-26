@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour
     public int playerNumber;
     public float pickupTimer;
     public bool isInvincible = false;
+    public ParticleSystem InvincibleParticles;
+
 
     private Rigidbody rb;
     private float startingSpawnTimer;
@@ -19,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        isAlive = true;
         rb = GetComponent<Rigidbody>();
         startingPickUpTimer = pickupTimer;
         startingSpawnTimer = spawnTime;
@@ -53,7 +56,7 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         move();
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton("Fire1"))
         {
             bombSpawner();
         }
@@ -71,6 +74,7 @@ public class PlayerControl : MonoBehaviour
             {
                 isInvincible = false;
                 pickupTimer = startingPickUpTimer;
+                InvincibleParticles.gameObject.SetActive(false);
             }
         }
 
@@ -100,6 +104,7 @@ public class PlayerControl : MonoBehaviour
             if ( other.tag == "Invincible")
             {
                 isInvincible = true;
+                InvincibleParticles.gameObject.SetActive(true);
                 Destroy(other.gameObject);
             }
 

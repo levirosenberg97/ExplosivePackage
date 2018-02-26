@@ -11,6 +11,7 @@ TagManager:
   - FireUp
   - FireDown
   - Pain
+  - SlowPickUp
   layers:
   - Default
   - TransparentFX
