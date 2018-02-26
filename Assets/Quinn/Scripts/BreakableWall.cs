@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakableWall : MonoBehaviour {
-
+    public GameObject dropArea;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +13,9 @@ public class BreakableWall : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void Destroy()
+    {
+        Instantiate(dropArea, gameObject.transform.position, gameObject.transform.rotation);
+        Destroy(gameObject);
+    }
 }

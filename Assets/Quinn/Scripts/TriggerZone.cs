@@ -105,4 +105,21 @@ public class TriggerZone : MonoBehaviour {
             }
         }
     }
+    //check if zone contians an object
+    public bool Contains(GameObject search)
+    {
+        if (GetInteractors(TriggerState.Enter).Contains(search))
+        {
+            return true;
+        }
+        else if (GetInteractors(TriggerState.Stay).Contains(search))
+        {
+            return true;
+        }
+        else if (GetInteractors(TriggerState.Exit).Contains(search))
+        {
+            return true;
+        }
+        return false;
+    }
 }

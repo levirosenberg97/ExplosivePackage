@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BombDropZone : MonoBehaviour {
-
+    public bool hasBomb = false;
 	// Use this for initialization
 	void Start () {
 		
