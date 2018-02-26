@@ -10,6 +10,7 @@ TagManager:
   - Invincible
   - FireUp
   - FireDown
+  - Pain
   layers:
   - Default
   - TransparentFX

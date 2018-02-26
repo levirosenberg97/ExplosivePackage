@@ -66,6 +66,7 @@ public class PlayerControl : MonoBehaviour
         if (isInvincible == true)
         {
             pickupTimer -= Time.deltaTime;
+            isAlive = true;
             if (pickupTimer <= 0)
             {
                 isInvincible = false;
@@ -73,6 +74,10 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+        if (isAlive == false)
+        {
+            Destroy(gameObject);
+        }
 
     }
 
@@ -115,6 +120,11 @@ public class PlayerControl : MonoBehaviour
                     speed -= 3;
                     Destroy(other.gameObject);
                 }
+            }
+
+            if (other.tag == "Pain")
+            {
+                isAlive = false;
             }
 
             if (other.tag == "SpeedPickUp")
