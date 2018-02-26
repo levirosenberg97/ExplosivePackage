@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 6ff714be34d6dc048b5ca6eb97f7325c
+  - enabled: 1
+    path: Assets/Caleb/Menu.unity
+    guid: 57704c6972cd59e44a80f7244a0ed06d
+  - enabled: 1
+    path: Assets/Caleb/NumberOfPlayers.unity
+    guid: 29c5b8cead777be458a81e2681f5378f
