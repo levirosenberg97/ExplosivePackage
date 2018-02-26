@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour {
 
     public void startGame()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("NumberOfPlayers");
     }
 
     public void endGame()
