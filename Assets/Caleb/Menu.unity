@@ -514,7 +514,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9a681583cabc6034a8d26b88cfa8db6e,
+      objectReference: {fileID: 21300000, guid: 213b6eaef82f78c4290b087b62707b83,
         type: 3}
     - target: {fileID: 114108408841028968, guid: a2740dc402e5ecc4c96b42e672ee0f29,
         type: 2}
@@ -525,7 +525,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9a681583cabc6034a8d26b88cfa8db6e,
+      objectReference: {fileID: 21300000, guid: 213b6eaef82f78c4290b087b62707b83,
         type: 3}
     - target: {fileID: 114381822365789278, guid: a2740dc402e5ecc4c96b42e672ee0f29,
         type: 2}
@@ -536,7 +536,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9a681583cabc6034a8d26b88cfa8db6e,
+      objectReference: {fileID: 21300000, guid: 213b6eaef82f78c4290b087b62707b83,
         type: 3}
     - target: {fileID: 114483369375516500, guid: a2740dc402e5ecc4c96b42e672ee0f29,
         type: 2}
@@ -660,7 +660,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 3e4b841da95a1764db028be5bda98f22, type: 3}
+  m_Texture: {fileID: 2800000, guid: 02e670d1a51d04a4fb3e3380b12d1ad7, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
