@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class PlayerControl : MonoBehaviour
 {
     public float speed;
     public BombPlacement placer;
     public float spawnTime;
-    public int playerNumber;
+
+    bool playerIndexSet = false;
+    public PlayerIndex playerNumber;
+    GamePadState state;
+    GamePadState prevState;
+
     public float pickupTimer;
     public bool isInvincible = false;
     public ParticleSystem InvincibleParticles;
@@ -32,14 +38,14 @@ public class PlayerControl : MonoBehaviour
     Vector3 movement;
 
     //takes an axis name and will add the appropreate player number to the end then return the input from that axis
-    public float GetAxisFromController(string axisName)
-    {
-        return Input.GetAxis(axisName + playerNumber);
-    }
-    public bool GetButtonFromController(string buttonName)
-    {
-        return Input.GetButton(buttonName + playerNumber);
-    }
+    //public float GetAxisFromController(string axisName)
+    //{
+    //    return Input.GetAxis(axisName + playerNumber);
+    //}
+    //public bool GetButtonFromController(string buttonName)
+    //{
+    //    return Input.GetButton(buttonName + playerNumber);
+    //}
 
     private void move()
     {
@@ -49,8 +55,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        moveHorizontal = GetAxisFromController("Horizontal");
-        moveVertical = -GetAxisFromController("Vertical");
+        moveHorizontal = state.ThumbSticks.Left.X;
+        moveVertical = state.ThumbSticks.Left.Y;
 
 
         movement = new Vector3(moveHorizontal, 0f, moveVertical);
@@ -62,11 +68,23 @@ public class PlayerControl : MonoBehaviour
         
 
     }
+
+    public void SetAlive(bool set = false)
+    {
+        isAlive = set;
+    }
+
+
     //moved from fixed update due to conflicts with triggerzones
     private void Update()
     {
+        prevState = state;
+        state = GamePad.GetState(playerNumber);
+
+        move();
+
         //places the bomb
-        if (GetButtonFromController("Bomb"))
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
@@ -86,7 +104,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        move();
+        
 
         //makes the invincible powerup work
         if (isInvincible == true)
@@ -133,16 +151,16 @@ public class PlayerControl : MonoBehaviour
             {
                 if (speed > 3)
                 {
-                    speed -= 3;
+                    speed -= 1;
                     Destroy(other.gameObject);
                 }
             }
 
             if (other.tag == "SpeedPickUp")
             {
-                if (speed != 9)
+                if (speed != 6)
                 {
-                    speed += 3;
+                    speed += 1;
                     Destroy(other.gameObject);
                 }
             }
