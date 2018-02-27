@@ -160,8 +160,8 @@ public class PlayerControl : MonoBehaviour
                 if (speed > 3)
                 {
                     speed -= 1;
-                    Destroy(other.gameObject);
                 }
+                Destroy(other.gameObject);
             }
 
             if (other.tag == "SpeedPickUp")
@@ -169,8 +169,8 @@ public class PlayerControl : MonoBehaviour
                 if (speed != 6)
                 {
                     speed += 1;
-                    Destroy(other.gameObject);
                 }
+                Destroy(other.gameObject);
             }
         }
     }

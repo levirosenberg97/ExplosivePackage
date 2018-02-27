@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     // Use this for initialization
 
 
-    float dropRate = .25f;
+    float dropRate = .4f;
     public List<Transform> items = new List<Transform>();
 
 

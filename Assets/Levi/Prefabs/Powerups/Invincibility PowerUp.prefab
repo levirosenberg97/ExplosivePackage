@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 33591300883054970}
   - component: {fileID: 114778476863046080}
   - component: {fileID: 65084815467811616}
+  - component: {fileID: 114784246543796260}
   m_Layer: 0
   m_Name: Invincibility PowerUp
   m_TagString: Invincible
@@ -4823,3 +4824,19 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114784246543796260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1219681419013128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7939dd2ca318dc049a496a874f454f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationRateX: 0
+  rotationRateY: 1
+  rotationRateZ: 0
+  amplitude: 0.15
+  frequency: 1
