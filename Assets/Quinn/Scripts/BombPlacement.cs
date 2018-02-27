@@ -48,6 +48,7 @@ public class BombPlacement : MonoBehaviour {
                 bomb.GetComponent<Bomb>().Radius = radius;
                 return true;
             }
+            i++;
         }
         return false;
     }
