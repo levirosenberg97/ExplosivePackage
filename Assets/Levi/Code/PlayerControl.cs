@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public float speed;
-    public GameObject bomb;
+    public BombPlacement placer;
     public float spawnTime;
     public int playerNumber;
     public float pickupTimer;
@@ -30,6 +30,8 @@ public class PlayerControl : MonoBehaviour
     float moveHorizontal;
     float moveVertical;
     Vector3 movement;
+
+
     private void move()
     {
         if(moveHorizontal != 0 || moveVertical != 0)
@@ -56,16 +58,25 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         move();
+
+        //places the bomb
         if (Input.GetButton("Fire1"))
         {
-            bombSpawner();
+            if (isAlive == true)
+            {
+                if (spawnTime >= startingSpawnTimer)
+                {
+                    placer.PlaceBomb();
+                    spawnTime = 0;
+                }
+            }
         }
-
+        //resets the bomb placement time
         if (spawnTime < startingSpawnTimer)
         {
             spawnTime += Time.deltaTime;
         }
-
+        //makes the invincible powerup work
         if (isInvincible == true)
         {
             pickupTimer -= Time.deltaTime;
@@ -77,24 +88,12 @@ public class PlayerControl : MonoBehaviour
                 InvincibleParticles.gameObject.SetActive(false);
             }
         }
-
+        //removes the player on death
         if (isAlive == false)
         {
             Destroy(gameObject);
         }
 
-    }
-
-    void bombSpawner()
-    {
-        if (isAlive == true)
-        {
-            if (spawnTime >= startingSpawnTimer)
-            {
-                Instantiate(bomb, transform.position, transform.rotation);
-                spawnTime = 0;
-            }      
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -125,11 +124,6 @@ public class PlayerControl : MonoBehaviour
                     speed -= 3;
                     Destroy(other.gameObject);
                 }
-            }
-
-            if (other.tag == "Pain")
-            {
-                isAlive = false;
             }
 
             if (other.tag == "SpeedPickUp")
