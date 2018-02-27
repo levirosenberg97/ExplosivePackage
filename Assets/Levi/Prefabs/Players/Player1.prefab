@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 4226704906934030}
   - component: {fileID: 136818757099095432}
   - component: {fileID: 114507395652984366}
+  - component: {fileID: 54111916864217414}
+  - component: {fileID: 114255112255366118}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -76,7 +78,6 @@ GameObject:
   - component: {fileID: 23591057877984062}
   - component: {fileID: 33562351774066094}
   - component: {fileID: 114578290203531832}
-  - component: {fileID: 54052647109054624}
   m_Layer: 0
   m_Name: Head
   m_TagString: Player
@@ -226,21 +227,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770916757321666}
   m_Mesh: {fileID: 0}
---- !u!54 &54052647109054624
+--- !u!54 &54111916864217414
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1770916757321666}
+  m_GameObject: {fileID: 1221910607431378}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &114255112255366118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1221910607431378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3448ded424d2cb41ba156cd9e9b78de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BombObject: {fileID: 1489254698031880, guid: 29f5b8c0a2717e849ad42e97fa2b2cf5, type: 2}
 --- !u!114 &114268367467138028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  bomb: {fileID: 0}
+  placer: {fileID: 114255112255366118}
   spawnTime: 0
   playerNumber: 1
   pickupTimer: 5
