@@ -8,8 +8,8 @@ public class PlayerControl : MonoBehaviour
     public float speed;
     public BombPlacement placer;
     public float spawnTime;
+    public float bombRadius;
 
-    bool playerIndexSet = false;
     public PlayerIndex playerNumber;
     GamePadState state;
     GamePadState prevState;
@@ -90,7 +90,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (spawnTime >= startingSpawnTimer)
                 {
-                    placer.PlaceBomb();
+                    placer.PlaceBomb(1, bombRadius + .5f);
                     spawnTime = 0;
                 }
             }
@@ -139,11 +139,19 @@ public class PlayerControl : MonoBehaviour
 
             if (other.tag == "FireUp")
             {
+                if (bombRadius < 4)
+                {
+                    bombRadius += 1;
+                }
                 Destroy(other.gameObject);
             }
 
             if (other.tag == "FireDown")
             {
+                if (bombRadius > 1)
+                {
+                    bombRadius -= 1;
+                }
                 Destroy(other.gameObject);
             }
 

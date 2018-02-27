@@ -6469,6 +6469,7 @@ MonoBehaviour:
   speed: 3
   placer: {fileID: 114253118236671584}
   spawnTime: 3
+  bombRadius: 1
   playerNumber: 1
   pickupTimer: 5
   isInvincible: 0
