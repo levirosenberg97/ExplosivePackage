@@ -13,43 +13,53 @@ public class BombPlacement : MonoBehaviour {
 	void Update () {
 		
 	}
-    //returns true if bomb was placed successfuly use radius to control explosion radius
-    public bool PlaceBomb(float radius = 1.5f)
+    //can be used to place a bomb via unity events
+    public void PlaceBombHere()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 1);
-        int i = 0;
+        PlaceBomb();
+    }
+    //returns true if bomb was placed successfuly use radius to control explosion radius
+    public bool PlaceBomb(float placeDist = 1f, float bombRadius = 1.5f)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, placeDist);
         List<GameObject> placeable = new List<GameObject>();
         //for each thing i hit with the sphere
-        while (i < hitColliders.Length)
+        for (int i = 0; i < hitColliders.Length; i++)
         {
             if (hitColliders[i].tag == "BombDropZone")
             {
                 TriggerZone placeZone = hitColliders[i].GetComponent<TriggerZone>();
                 BombDropZone dropZone = hitColliders[i].GetComponent<BombDropZone>();
+                //check that the tile doesnt have a bomb and contains the object that would like to place a bomb there
                 if (dropZone.hasBomb == false && placeZone.Contains(gameObject))
                 {
                     placeable.Add(hitColliders[i].gameObject);
                 }
             }
-            if(placeable.Count > 0)
-            {
-                BombDropZone dropZone = placeable[0].GetComponent<BombDropZone>();
-                float min = Vector3.Distance(placeable[0].gameObject.transform.position, gameObject.transform.position);
-                foreach (GameObject zone in placeable)
-                {
-                    float dist = Vector3.Distance(zone.gameObject.transform.position, gameObject.transform.position);
-                    if (min > dist)
-                    {
-                        min = dist;
-                        dropZone = zone.GetComponent<BombDropZone>();
-                    }
-                }
-                GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
-                bomb.GetComponent<Bomb>().Radius = radius;
-                return true;
-            }
-            i++;
         }
-        return false;
+        //check to see if i can place somewhere and decide where to place if multiple areas are valid
+        if (placeable.Count > 0)
+        {
+            BombDropZone dropZone = placeable[0].GetComponent<BombDropZone>();
+            float min = Vector3.Distance(placeable[0].gameObject.transform.position, gameObject.transform.position);
+            foreach (GameObject zone in placeable)
+            {
+                float dist = Vector3.Distance(zone.gameObject.transform.position, gameObject.transform.position);
+                if (min >= dist)
+                {
+                    min = dist;
+                    dropZone = zone.GetComponent<BombDropZone>();
+                }
+            }
+            GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
+            bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
+            bomb.GetComponent<Bomb>().Radius = bombRadius;
+            dropZone.hasBomb = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

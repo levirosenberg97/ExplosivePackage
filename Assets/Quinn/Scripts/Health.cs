@@ -13,15 +13,24 @@ public class Health : MonoBehaviour
     public MyEvent OnOverHeal;
     public MyEvent OnZeroHP;
     private PlayerControl player;
+    private BreakableWall wall;
     private bool isWall = false;
+    private bool isPlayer = false;
     // Use this for initialization
     void Start()
     {
         CurrentHP = MaxHP;
         BreakableWall attempt = GetComponent<BreakableWall>();
+        PlayerControl playerAttempt = GetComponent<PlayerControl>();
         if (attempt != null)
         {
             isWall = true;
+            wall = attempt;
+        }
+        if (playerAttempt != null)
+        {
+            isPlayer = true;
+            player = playerAttempt;
         }
     }
 
@@ -45,26 +54,55 @@ public class Health : MonoBehaviour
     //sets the value of the HP bar
     public void SetHP(float value)
     {
-        //if(player.isInvincible == false)
+        if(isPlayer)
         {
-            CurrentHP = value;
-            if (CurrentHP <= 0)
+            if (player.isInvincible == false)
             {
-                if(isWall)
                 {
-                    GetComponent<BreakableWall>().Destroy();
+                    CurrentHP = value;
+                    if (CurrentHP <= 0)
+                    {
+                        if (isWall)
+                        {
+                            wall.Destroy();
+                        }
+                        else
+                        {
+                            CurrentHP = 0;
+                            OnZeroHP.Invoke();
+                        }
+                    }
+                    else if (CurrentHP > MaxHP)
+                    {
+                        OnOverHeal.Invoke();
+                        CurrentHP = MaxHP;
+                    }
                 }
-                else
-                {
-                    CurrentHP = 0;
-                    OnZeroHP.Invoke();
-                }
-            }
-            else if (CurrentHP > MaxHP)
-            {
-                OnOverHeal.Invoke();
-                CurrentHP = MaxHP;
             }
         }
+        else
+        {
+            {
+                CurrentHP = value;
+                if (CurrentHP <= 0)
+                {
+                    if (isWall)
+                    {
+                        wall.Destroy();
+                    }
+                    else
+                    {
+                        CurrentHP = 0;
+                        OnZeroHP.Invoke();
+                    }
+                }
+                else if (CurrentHP > MaxHP)
+                {
+                    OnOverHeal.Invoke();
+                    CurrentHP = MaxHP;
+                }
+            }
+        }
+        
     }
 }
