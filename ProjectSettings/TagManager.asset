@@ -12,6 +12,7 @@ TagManager:
   - FireDown
   - Pain
   - SlowPickUp
+  - UnbreakableWall
   layers:
   - Default
   - TransparentFX

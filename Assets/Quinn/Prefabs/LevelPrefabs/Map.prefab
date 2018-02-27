@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 114680873881123054}
   - component: {fileID: 114519218306818578}
   - component: {fileID: 114568350056761650}
+  - component: {fileID: 54407528871908348}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -215,6 +216,7 @@ GameObject:
   - component: {fileID: 114896435561786672}
   - component: {fileID: 114149837863006016}
   - component: {fileID: 114628425944222746}
+  - component: {fileID: 54831567820774312}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -512,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1153553030196996
 GameObject:
   m_ObjectHideFlags: 1
@@ -585,6 +587,7 @@ GameObject:
   - component: {fileID: 114462585096742396}
   - component: {fileID: 114574730866420160}
   - component: {fileID: 114364806594690184}
+  - component: {fileID: 54888262971297176}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -644,6 +647,7 @@ GameObject:
   - component: {fileID: 114506815391792332}
   - component: {fileID: 114188671523071926}
   - component: {fileID: 114526799078250826}
+  - component: {fileID: 54888538525187504}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -857,6 +861,7 @@ GameObject:
   - component: {fileID: 114176212312566390}
   - component: {fileID: 114904098266817082}
   - component: {fileID: 114691777559848754}
+  - component: {fileID: 54031150758857962}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -878,6 +883,7 @@ GameObject:
   - component: {fileID: 114313366115585966}
   - component: {fileID: 114977563208984564}
   - component: {fileID: 114358240309835396}
+  - component: {fileID: 54626829514505572}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -952,6 +958,7 @@ GameObject:
   - component: {fileID: 114628554243039564}
   - component: {fileID: 114219761087527300}
   - component: {fileID: 114992826471987616}
+  - component: {fileID: 54251992532814878}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -973,6 +980,7 @@ GameObject:
   - component: {fileID: 114353050126439268}
   - component: {fileID: 114239296321549814}
   - component: {fileID: 114727464695457688}
+  - component: {fileID: 54146733983681642}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -1032,6 +1040,7 @@ GameObject:
   - component: {fileID: 114146753464751652}
   - component: {fileID: 114705168832096740}
   - component: {fileID: 114895287188282564}
+  - component: {fileID: 54439906709431100}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -1058,7 +1067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1383451455664360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1451,7 @@ GameObject:
   - component: {fileID: 114488202436693094}
   - component: {fileID: 114578741784681510}
   - component: {fileID: 114121551059757220}
+  - component: {fileID: 54886467686529934}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -1518,9 +1528,9 @@ GameObject:
   - component: {fileID: 33187772944108682}
   - component: {fileID: 114496527902204774}
   - component: {fileID: 64151458612391322}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SideWalls
-  m_TagString: Untagged
+  m_TagString: UnbreakableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -1588,7 +1598,7 @@ GameObject:
   - component: {fileID: 23789934766716988}
   m_Layer: 0
   m_Name: StaticWall
-  m_TagString: Untagged
+  m_TagString: UnbreakableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1692,7 +1702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1599162581822092
 GameObject:
   m_ObjectHideFlags: 1
@@ -1727,6 +1737,7 @@ GameObject:
   - component: {fileID: 114417461982514996}
   - component: {fileID: 114825818843088680}
   - component: {fileID: 114847166302911930}
+  - component: {fileID: 54196836885035884}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -1899,6 +1910,7 @@ GameObject:
   - component: {fileID: 114037087686498690}
   - component: {fileID: 114627228539769554}
   - component: {fileID: 114047418179423164}
+  - component: {fileID: 54921165386637076}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -1938,6 +1950,7 @@ GameObject:
   - component: {fileID: 114412553286340456}
   - component: {fileID: 114935988266947932}
   - component: {fileID: 114290529850425424}
+  - component: {fileID: 54850933399309568}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -1959,6 +1972,7 @@ GameObject:
   - component: {fileID: 114746315243084000}
   - component: {fileID: 114010152844913504}
   - component: {fileID: 114130757807732088}
+  - component: {fileID: 54552166213741962}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -2096,6 +2110,7 @@ GameObject:
   - component: {fileID: 114157683412611040}
   - component: {fileID: 114685592871512656}
   - component: {fileID: 114309517004866462}
+  - component: {fileID: 54746066837804092}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -2337,9 +2352,9 @@ GameObject:
   - component: {fileID: 33698946701755386}
   - component: {fileID: 114240488670390698}
   - component: {fileID: 64991933689314334}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SideWalls
-  m_TagString: Untagged
+  m_TagString: UnbreakableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -2436,6 +2451,7 @@ GameObject:
   - component: {fileID: 114108955353186042}
   - component: {fileID: 114889335162355032}
   - component: {fileID: 114974887259805166}
+  - component: {fileID: 54585646534322982}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -2492,6 +2508,7 @@ GameObject:
   - component: {fileID: 114824850022838134}
   - component: {fileID: 114831490478028400}
   - component: {fileID: 114857681141710898}
+  - component: {fileID: 54743233153283252}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -2816,9 +2833,9 @@ GameObject:
   - component: {fileID: 33920362952707624}
   - component: {fileID: 114430416819477796}
   - component: {fileID: 64933169925368054}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SideWalls
-  m_TagString: Untagged
+  m_TagString: UnbreakableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -2836,9 +2853,9 @@ GameObject:
   - component: {fileID: 33044189284201372}
   - component: {fileID: 114037515668369752}
   - component: {fileID: 64517152470977992}
-  m_Layer: 0
-  m_Name: SideWalls
-  m_TagString: Untagged
+  m_Layer: 2
+  m_Name: SideWalls1
+  m_TagString: UnbreakableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -2857,6 +2874,7 @@ GameObject:
   - component: {fileID: 114786078699200722}
   - component: {fileID: 114480019820687672}
   - component: {fileID: 114738791697700920}
+  - component: {fileID: 54358486231027620}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -2878,6 +2896,7 @@ GameObject:
   - component: {fileID: 114288517120961960}
   - component: {fileID: 114147469059791260}
   - component: {fileID: 114473515954984656}
+  - component: {fileID: 54734798944062852}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -2944,7 +2963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1927958117678440
 GameObject:
   m_ObjectHideFlags: 1
@@ -3049,6 +3068,7 @@ GameObject:
   - component: {fileID: 114904441506907412}
   - component: {fileID: 114239743761893056}
   - component: {fileID: 114674684197311388}
+  - component: {fileID: 54455352173621732}
   m_Layer: 0
   m_Name: BombDropZone
   m_TagString: BombDropZone
@@ -11239,6 +11259,306 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150294177684724}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54031150758857962
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295169871575722}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54146733983681642
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1335367132171066}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54196836885035884
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606662614794586}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54251992532814878
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1320370493213658}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54358486231027620
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911369280424182}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54407528871908348
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1077976848858424}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54439906709431100
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365894690881334}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54455352173621732
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944765306842072}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54552166213741962
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678373166366696}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54585646534322982
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1791652789985042}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54626829514505572
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301541777445222}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &54734798944062852
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912337068720716}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54743233153283252
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802526643582960}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54746066837804092
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1722485008501220}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54831567820774312
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1080663452738278}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54850933399309568
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676529039253692}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54886467686529934
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1497529330645734}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54888262971297176
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175776010784118}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54888538525187504
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214399910821724}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!54 &54921165386637076
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667214402351220}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!64 &64004726334798640
 MeshCollider:
   m_ObjectHideFlags: 1
