@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23668291809088200}
   - component: {fileID: 33383146952696302}
   - component: {fileID: 114788419994082732}
-  - component: {fileID: 54959768984467702}
   m_Layer: 0
   m_Name: Head
   m_TagString: Player
@@ -41,6 +40,8 @@ GameObject:
   - component: {fileID: 4645141194817024}
   - component: {fileID: 114981602858458760}
   - component: {fileID: 136508879389285404}
+  - component: {fileID: 54291104587913714}
+  - component: {fileID: 114897308186121560}
   m_Layer: 0
   m_Name: Player4
   m_TagString: Untagged
@@ -224,20 +225,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757754195118478}
   m_Mesh: {fileID: 0}
---- !u!54 &54959768984467702
+--- !u!54 &54291104587913714
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1367846411086734}
+  m_GameObject: {fileID: 1420002053092730}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &114095755540303296
 MonoBehaviour:
@@ -6447,6 +6448,18 @@ MonoBehaviour:
   - x: 3
     y: 2
   m_selectedTriangles: 000000000100000002000000010000000300000002000000
+--- !u!114 &114897308186121560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420002053092730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3448ded424d2cb41ba156cd9e9b78de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BombObject: {fileID: 1489254698031880, guid: 29f5b8c0a2717e849ad42e97fa2b2cf5, type: 2}
 --- !u!114 &114981602858458760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6459,7 +6472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  bomb: {fileID: 0}
+  placer: {fileID: 114897308186121560}
   spawnTime: 0
   playerNumber: 4
   pickupTimer: 5
