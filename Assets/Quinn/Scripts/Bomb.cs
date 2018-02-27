@@ -29,9 +29,8 @@ public class Bomb : MonoBehaviour {
     {
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Radius);
         List<Health> toBeDamaged = new List<Health>();
-        int i = 0;
         //for each thing i hit with the sphere
-        while (i < hitColliders.Length)
+        for(int i = 0; i < hitColliders.Length; i++)
         {
             RaycastHit hit;
             //can I directly see the object?
@@ -51,6 +50,7 @@ public class Bomb : MonoBehaviour {
         {
             hp.TakeDamage(Damage);
         }
+        DropZone.GetComponent<BombDropZone>().hasBomb = false;
         //spawn explosion effect
         Instantiate(Explosion, gameObject.transform.position, gameObject.transform.rotation);
         //destroy bomb

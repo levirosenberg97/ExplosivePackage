@@ -31,6 +31,15 @@ public class PlayerControl : MonoBehaviour
     float moveVertical;
     Vector3 movement;
 
+    //takes an axis name and will add the appropreate player number to the end then return the input from that axis
+    public float GetAxisFromController(string axisName)
+    {
+        return Input.GetAxis(axisName + playerNumber);
+    }
+    public bool GetButtonFromController(string buttonName)
+    {
+        return Input.GetButton(buttonName + playerNumber);
+    }
 
     private void move()
     {
@@ -40,8 +49,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
+        moveHorizontal = GetAxisFromController("Horizontal");
+        moveVertical = -GetAxisFromController("Vertical");
 
 
         movement = new Vector3(moveHorizontal, 0f, moveVertical);
@@ -53,14 +62,11 @@ public class PlayerControl : MonoBehaviour
         
 
     }
-
-    // Update is called once per frame
-    private void FixedUpdate()
+    //moved from fixed update due to conflicts with triggerzones
+    private void Update()
     {
-        move();
-
         //places the bomb
-        if (Input.GetButton("Fire1"))
+        if (GetButtonFromController("Bomb"))
         {
             if (isAlive == true)
             {
@@ -76,6 +82,12 @@ public class PlayerControl : MonoBehaviour
         {
             spawnTime += Time.deltaTime;
         }
+    }
+    // Update is called once per frame
+    private void FixedUpdate()
+    {
+        move();
+
         //makes the invincible powerup work
         if (isInvincible == true)
         {
