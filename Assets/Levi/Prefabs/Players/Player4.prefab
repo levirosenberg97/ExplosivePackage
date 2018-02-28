@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 136508879389285404}
   - component: {fileID: 54291104587913714}
   - component: {fileID: 114897308186121560}
+  - component: {fileID: 114713397725996092}
   m_Layer: 0
   m_Name: Player4
   m_TagString: Player
@@ -264,6 +265,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 4
+--- !u!114 &114713397725996092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420002053092730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c79a21fbcda0364f94148f3fe87722a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHP: 1
+  MaxHP: 1
+  OnOverHeal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnZeroHP:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114981602858458760}
+        m_MethodName: SetAlive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  items: []
 --- !u!114 &114788419994082732
 MonoBehaviour:
   m_ObjectHideFlags: 1
