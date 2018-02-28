@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 33135653527493796}
   - component: {fileID: 114581612076641082}
   - component: {fileID: 65197239047222332}
+  - component: {fileID: 114777659932619172}
   m_Layer: 0
   m_Name: FireDown
   m_TagString: FireDown
@@ -38,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1885780888108868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4891, y: 1.2562, z: 3.64}
-  m_LocalScale: {x: 0.32751635, y: 0.325534, z: 0.47399637}
+  m_LocalPosition: {x: -2.4414892, y: 1.314, z: 3.959}
+  m_LocalScale: {x: 0.26825175, y: 0.26662812, z: 0.38822618}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -3868,6 +3869,22 @@ MonoBehaviour:
   - x: 56
     y: 54
   m_selectedTriangles: 750000007600000077000000e7000000e8000000e9000000ae000000af000000b0000000b1000000b2000000b3000000450000004600000047000000e4000000e5000000e6000000ea000000eb000000ec000000ab000000ac000000ad000000030000000400000005000000540000005500000056000000390000003a0000003b0000005a0000005b0000005c0000005700000058000000590000002d0000002e0000002f000000330000003400000035000000360000003700000038000000
+--- !u!114 &114777659932619172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885780888108868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7939dd2ca318dc049a496a874f454f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationRateX: 0
+  rotationRateY: 1
+  rotationRateZ: 0
+  amplitude: 0.15
+  frequency: 1
 --- !u!114 &114805008473865876
 MonoBehaviour:
   m_ObjectHideFlags: 1

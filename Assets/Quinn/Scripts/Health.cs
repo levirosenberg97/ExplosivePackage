@@ -17,6 +17,17 @@ public class Health : MonoBehaviour
     private bool isWall = false;
     private bool isPlayer = false;
     // Use this for initialization
+
+
+    float dropRate = .4f;
+    public List<Transform> items = new List<Transform>();
+
+
+    void dropRandomItem()
+    {
+        Instantiate(items[Random.Range(0, items.Count - 1)], transform.position, Quaternion.identity);
+    }
+
     void Start()
     {
         CurrentHP = MaxHP;
@@ -35,7 +46,7 @@ public class Health : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()   
     {
     }
 
@@ -65,6 +76,10 @@ public class Health : MonoBehaviour
                         if (isWall)
                         {
                             wall.Destroy();
+                            if (Random.Range(0f, 1f) <= dropRate)
+                            {
+                                dropRandomItem();
+                            }
                         }
                         else
                         {
@@ -89,6 +104,10 @@ public class Health : MonoBehaviour
                     if (isWall)
                     {
                         wall.Destroy();
+                        if (Random.Range(0f, 1f) <= dropRate)
+                        {
+                            dropRandomItem();
+                        }
                     }
                     else
                     {
