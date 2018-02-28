@@ -121,7 +121,7 @@ public class PlayerControl : MonoBehaviour
         //removes the player on death
         if (isAlive == false)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
     }

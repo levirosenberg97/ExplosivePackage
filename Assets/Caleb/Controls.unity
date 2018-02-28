@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 323222877}
   - component: {fileID: 323222876}
   - component: {fileID: 323222875}
+  - component: {fileID: 323222882}
   - component: {fileID: 323222881}
   m_Layer: 5
   m_Name: Canvas
@@ -252,6 +253,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627b948f4758ef941a104ccdee142fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &323222882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 323222874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9640aef55605c7a4894ab910d8aea026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 894706119}
+  selectable: {fileID: 0}
 --- !u!1 &570098460
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,9 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal1
-  m_VerticalAxis: Vertical1
-  m_SubmitButton: Bomb1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
