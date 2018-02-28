@@ -1,27 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class PlayerControl : MonoBehaviour
 {
     public float speed;
-
-    public GameObject bomb;
-
+    public BombPlacement placer;
     public float spawnTime;
+    public float bombRadius;
+
+    public PlayerIndex playerNumber;
+    GamePadState state;
+    GamePadState prevState;
+
+    public float pickupTimer;
+    public bool isInvincible = false;
+    public ParticleSystem InvincibleParticles;
+
 
     private Rigidbody rb;
-
-    private bool isAlive = true;
+    private float startingSpawnTimer;
+    private float startingPickUpTimer;
+    public bool isAlive = true;
+   
     // Use this for initialization
     void Start ()
     {
+        isAlive = true;
         rb = GetComponent<Rigidbody>();
+        startingPickUpTimer = pickupTimer;
+        startingSpawnTimer = spawnTime;
 	}
 
     float moveHorizontal;
     float moveVertical;
     Vector3 movement;
+
+    //takes an axis name and will add the appropreate player number to the end then return the input from that axis
+    //public float GetAxisFromController(string axisName)
+    //{
+    //    return Input.GetAxis(axisName + playerNumber);
+    //}
+    //public bool GetButtonFromController(string buttonName)
+    //{
+    //    return Input.GetButton(buttonName + playerNumber);
+    //}
+
     private void move()
     {
         if(moveHorizontal != 0 || moveVertical != 0)
@@ -30,8 +55,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
+        moveHorizontal = state.ThumbSticks.Left.X;
+        moveVertical = state.ThumbSticks.Left.Y;
 
 
         movement = new Vector3(moveHorizontal, 0f, moveVertical);
@@ -44,57 +69,110 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
+    public void SetAlive(bool set = false)
     {
+        isAlive = set;
+    }
+
+
+    //moved from fixed update due to conflicts with triggerzones
+    private void Update()
+    {
+        prevState = state;
+        state = GamePad.GetState(playerNumber);
+
         move();
-        if (Input.GetKey(KeyCode.Space))
+
+        //places the bomb
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
-            bombSpawner();
+            if (isAlive == true)
+            {
+                if (spawnTime >= startingSpawnTimer)
+                {
+                    placer.PlaceBomb(1, bombRadius + .5f);
+                    spawnTime = 0;
+                }
+            }
         }
-        if (spawnTime < 3)
+        //resets the bomb placement time
+        if (spawnTime < startingSpawnTimer)
         {
             spawnTime += Time.deltaTime;
         }
-
     }
-
-    void bombSpawner()
+    // Update is called once per frame
+    private void FixedUpdate()
     {
-        if (isAlive == true)
-        {
-            if (spawnTime >= 3)
-            {
-                Instantiate(bomb, transform.position, transform.rotation);
-                spawnTime = 0;
-            }
-
-           
         
+
+        //makes the invincible powerup work
+        if (isInvincible == true)
+        {
+            pickupTimer -= Time.deltaTime;
+            isAlive = true;
+            if (pickupTimer <= 0)
+            {
+                isInvincible = false;
+                pickupTimer = startingPickUpTimer;
+                InvincibleParticles.gameObject.SetActive(false);
+            }
         }
+        //removes the player on death
+        if (isAlive == false)
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SlowPickUp")
+        if (isAlive == true)
         {
-            if (speed > 3)
+            if ( other.tag == "Invincible")
             {
-                speed -= 3;
+                isInvincible = true;
+                InvincibleParticles.gameObject.SetActive(true);
                 Destroy(other.gameObject);
             }
-        }
 
-
-        if (other.tag == "SpeedPickUp")
-        {
-            if (speed != 9)
+            if (other.tag == "FireUp")
             {
-                speed += 3;
+                if (bombRadius < 4)
+                {
+                    bombRadius += 1;
+                }
+                Destroy(other.gameObject);
+            }
+
+            if (other.tag == "FireDown")
+            {
+                if (bombRadius > 1)
+                {
+                    bombRadius -= 1;
+                }
+                Destroy(other.gameObject);
+            }
+
+            if (other.tag == "SlowPickUp")
+            {
+                if (speed > 3)
+                {
+                    speed -= 1;
+                }
+                Destroy(other.gameObject);
+            }
+
+            if (other.tag == "SpeedPickUp")
+            {
+                if (speed != 6)
+                {
+                    speed += 1;
+                }
                 Destroy(other.gameObject);
             }
         }
     }
-
 
 }

@@ -6,6 +6,13 @@ TagManager:
   tags:
   - BreakableWall
   - BombDropZone
+  - SpeedPickUp
+  - Invincible
+  - FireUp
+  - FireDown
+  - Pain
+  - SlowPickUp
+  - UnbreakableWall
   layers:
   - Default
   - TransparentFX

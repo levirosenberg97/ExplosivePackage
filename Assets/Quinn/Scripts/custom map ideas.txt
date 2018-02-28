@@ -1,0 +1,25 @@
+map file
+	camera position
+	map info (txt file of what walls are what)
+
+map load 
+	generate map based on txt file 
+		place grass (and scale appropriately?/ alway large grass on custom map?)
+		create unbreakable walls around area based on size of map
+	place camera in maps position
+	
+	
+map creation 
+	in game? (txt box with a generate button?)
+	txt editor (notepad)
+	unity SDK where players can create their own levels in unity (asset pack for spawnpoints and everything else)
+		need to learn how to levels/scripts in real time
+		most customization with least effort after sdk pack creation
+	
+	
+	
+Unbreakable
+Breakable
+Powerup
+Spawnpoint
+ (bomb drop zone)

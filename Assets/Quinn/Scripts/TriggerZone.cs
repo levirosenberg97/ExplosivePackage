@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public enum TriggerState
 {
-    Untriggered,
+    All,
     Enter,
     Stay,
     Exit
@@ -17,6 +17,7 @@ public class TriggerZone : MonoBehaviour {
     [Header("Objects with these tags will be collected when they collide with this object")]
     [Tooltip("leave empty or make an unused tag to not collect any objects")]
     public List<string> InteractsWithTags;
+    public bool DebugInteractors = false;
     [System.Serializable]
     public class MyEvent : UnityEvent { }
     public MyEvent OnEnter;
@@ -42,6 +43,18 @@ public class TriggerZone : MonoBehaviour {
         {
             return Exited;
         }
+        else if (triggerState == TriggerState.All)
+        {
+            List<GameObject> retval = Entered;
+            foreach(GameObject interactor in Stayed)
+            {
+                if(retval.Contains(interactor) == false)
+                {
+                    retval.Add(interactor);
+                }
+            }
+            return retval;
+        }
         else
         {
             Debug.Log(triggerState + " Not supported a triggerstate was passed\nNeeds to be enter stay or exit");
@@ -61,6 +74,13 @@ public class TriggerZone : MonoBehaviour {
         if (Exited.Count > 0)
         {
             OnExit.Invoke();
+        }
+        if (DebugInteractors)
+        {
+            foreach(GameObject interactor in GetInteractors(TriggerState.All))
+            {
+                Debug.Log(interactor.name);
+            }
         }
 	}
     //clear the lists of objects 
@@ -104,5 +124,22 @@ public class TriggerZone : MonoBehaviour {
                 Exited.Add(other.gameObject);
             }
         }
+    }
+    //check if zone contians an object
+    public bool Contains(GameObject search)
+    {
+        if (GetInteractors(TriggerState.Enter).Contains(search))
+        {
+            return true;
+        }
+        else if (GetInteractors(TriggerState.Stay).Contains(search))
+        {
+            return true;
+        }
+        else if (GetInteractors(TriggerState.Exit).Contains(search))
+        {
+            return true;
+        }
+        return false;
     }
 }
