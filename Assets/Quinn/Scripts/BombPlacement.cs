@@ -11,7 +11,7 @@ public class BombPlacement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        NPlaceBomb();
 	}
     //can be used to place a bomb via unity events
     public void PlaceBombHere()
@@ -61,5 +61,23 @@ public class BombPlacement : MonoBehaviour {
         {
             return false;
         }
+    }
+    public Transform NPlaceBomb(float placeDist = 1f, float bombRadius = 1.5f)
+    {
+        Transform retVal = gameObject.transform;
+        float y = gameObject.transform.rotation.eulerAngles.y % 360;
+        if (y % 90 != 0)
+        {
+            if (y % 90 < 45)
+            {
+                retVal.Rotate(0, -(y % 90), 0);
+            }
+            else
+            {
+                retVal.Rotate(0, y % 90, 0);
+            }
+        }
+        //RaycastHit[] hit = Physics.RaycastAll(gameObject.transform.position, (transform.forward * placeDist));
+        return retVal;
     }
 }
