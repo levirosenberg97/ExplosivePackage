@@ -291,8 +291,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   placer: {fileID: 114255112255366118}
-  spawnTime: 0
-  playerNumber: 1
+  spawnTime: 3
+  bombRadius: 1
+  playerNumber: 0
   pickupTimer: 5
   isInvincible: 0
   InvincibleParticles: {fileID: 198074912434468058}
