@@ -25,7 +25,10 @@ public class Health : MonoBehaviour
 
     void dropRandomItem()
     {
-        Instantiate(items[Random.Range(0, items.Count - 1)], transform.position, Quaternion.identity);
+        if (items.Count > 0)
+        {
+            Instantiate(items[Random.Range(0, items.Count - 1)], transform.position, Quaternion.identity);
+        }
     }
 
     void Start()
