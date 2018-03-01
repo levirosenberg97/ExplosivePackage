@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody rb;
     private float startingSpawnTimer;
     private float startingPickUpTimer;
-    private bool isAlive = true;
+    public bool isAlive = true;
    
     // Use this for initialization
     void Start ()

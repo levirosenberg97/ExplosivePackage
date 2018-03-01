@@ -11,7 +11,6 @@ public class BombPlacement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        NPlaceBomb();
 	}
     //can be used to place a bomb via unity events
     public void PlaceBombHere()
@@ -21,6 +20,56 @@ public class BombPlacement : MonoBehaviour {
     //returns true if bomb was placed successfuly use radius to control explosion radius
     public bool PlaceBomb(float placeDist = 1f, float bombRadius = 1.5f)
     {
+        //Quaternion originalPos = gameObject.transform.rotation;
+        //Transform tempVal = gameObject.transform;
+        ////snap to nearest axis
+        //float y = gameObject.transform.rotation.eulerAngles.y % 360;
+        //if (y % 90 != 0)
+        //{
+        //    if (y % 90 < 45)
+        //    {
+        //        tempVal.Rotate(0, -(y % 90), 0);
+        //    }
+        //    else
+        //    {
+        //        tempVal.Rotate(0, y % 90, 0);
+        //    }
+        //}
+        ////see whats in that direction
+        //Debug.DrawLine(gameObject.transform.position, (tempVal.forward * placeDist), Color.red);
+        //RaycastHit[] hit = Physics.RaycastAll(gameObject.transform.position, (tempVal.forward * placeDist), placeDist);
+        //List<GameObject> place = new List<GameObject>();
+        //float dist = placeDist + 1;
+        ////set player rotation back
+        //gameObject.transform.rotation = originalPos;
+        //foreach (RaycastHit hitInfo in hit)
+        //{
+        //    if (hitInfo.collider.tag == "BombDropZone")
+        //    {
+        //        if (hitInfo.collider.gameObject.GetComponent<TriggerZone>().GetInteractors(TriggerState.All).Count == 0 && hitInfo.collider.gameObject.GetComponent<BombDropZone>().hasBomb == false)
+        //        {
+        //            if (hitInfo.distance < dist)
+        //            {
+        //                dist = hitInfo.distance;
+        //                place.Clear();
+        //                place.Add(hitInfo.collider.gameObject);
+        //            }
+        //        }
+        //    }
+        //}
+        //if (dist != placeDist + 1 && place.Count > 0)
+        //{
+        //    BombDropZone dropZone = place[0].GetComponent<BombDropZone>();
+        //    GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
+        //    bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
+        //    bomb.GetComponent<Bomb>().Radius = bombRadius;
+        //    dropZone.hasBomb = true;
+        //    //placed bomb
+        //    return true;
+        //}
+        ////return I didnt place
+        //return false;
+        //OLD
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, placeDist);
         List<GameObject> placeable = new List<GameObject>();
         //for each thing i hit with the sphere
@@ -61,23 +110,5 @@ public class BombPlacement : MonoBehaviour {
         {
             return false;
         }
-    }
-    public Transform NPlaceBomb(float placeDist = 1f, float bombRadius = 1.5f)
-    {
-        Transform retVal = gameObject.transform;
-        float y = gameObject.transform.rotation.eulerAngles.y % 360;
-        if (y % 90 != 0)
-        {
-            if (y % 90 < 45)
-            {
-                retVal.Rotate(0, -(y % 90), 0);
-            }
-            else
-            {
-                retVal.Rotate(0, y % 90, 0);
-            }
-        }
-        //RaycastHit[] hit = Physics.RaycastAll(gameObject.transform.position, (transform.forward * placeDist));
-        return retVal;
     }
 }
