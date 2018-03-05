@@ -27,69 +27,120 @@ public class BombPlacement : MonoBehaviour {
         //find where the y rotation is closest to
         Vector3 snap = transform.eulerAngles;
         snap.y = Mathf.Round(snap.y / 90) * 90;
-        if (snap.y == 0)
+        if (snap.y % 360 == 0)
         {
             //raycast forward/+z
             rayDest.z += placeDist;
         }
-        else if(snap.y == 90)
+        else if(snap.y % 360 == 90)
         {
             //raycast right/+x
             rayDest.x += placeDist;
         }
-        else if (snap.y == 180)
+        else if (snap.y % 360 == 180)
         {
             //raycast back/-z
             rayDest.z -= placeDist;
         }
-        else if (snap.y == 270)
+        else if (snap.y % 360 == 270)
         {
             //raycast left/-x
             rayDest.x -= placeDist;
         }
         Debug.DrawLine(adjustment, rayDest, Color.red);
-        RaycastHit[] hit = Physics.RaycastAll(adjustment, rayDest, placeDist);
-        List<GameObject> place = new List<GameObject>();
-        float dist = placeDist + 1;
-        foreach (RaycastHit hitInfo in hit)
+        RaycastHit hitInfo;
+        if (Physics.Linecast(adjustment, rayDest, out hitInfo))
         {
             if (hitInfo.collider.tag == "BombDropZone")
             {
-                if (hitInfo.collider.gameObject.GetComponent<BombDropZone>().hasBomb == false)
+                if (hitInfo.collider.GetComponent<BombDropZone>().hasBomb == false)
                 {
                     bool hasPlayer = false;
                     Collider[] inBombsPlace = Physics.OverlapSphere(hitInfo.collider.transform.position, 0.5f);
-                    foreach(Collider col in inBombsPlace)
+                    foreach (Collider col in inBombsPlace)
                     {
                         //player within bomb if spawned 
                         if (col.tag == "Player")
                         {
                             //skip the spawn
                             hasPlayer = true;
+                            break;
                         }
                     }
-                    //is it the closest place I can put a bomb?
-                    if (hitInfo.distance < dist && hasPlayer == false)
+                    if (hasPlayer == false)
                     {
-                        dist = hitInfo.distance;
-                        place.Clear();
-                        place.Add(hitInfo.collider.gameObject);
+                        BombDropZone dropZone = hitInfo.collider.gameObject.GetComponent<BombDropZone>();
+                        GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
+                        bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
+                        bomb.GetComponent<Bomb>().Radius = bombRadius;
+                        dropZone.hasBomb = true;
+                        //placed bomb
+                        return true;
                     }
                 }
             }
         }
-        if (dist != placeDist + 1 && place.Count > 0)
-        {
-            BombDropZone dropZone = place[0].GetComponent<BombDropZone>();
-            GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
-            bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
-            bomb.GetComponent<Bomb>().Radius = bombRadius;
-            dropZone.hasBomb = true;
-            //placed bomb
-            return true;
-        }
-        //return I didnt place
         return false;
+
+        //RaycastHit[] hit = Physics.RaycastAll(adjustment, rayDest, placeDist);
+        //List<GameObject> place = new List<GameObject>();
+        //float dist = placeDist + 1;
+        
+        //foreach (RaycastHit hitInfo in hit)
+        //{
+        //    if (hitInfo.collider.tag == "BombDropZone")
+        //    {
+        //        if (hitInfo.collider.gameObject.GetComponent<BombDropZone>().hasBomb == false)
+        //        {
+        //            bool hasPlayer = false;
+        //            Collider[] inBombsPlace = Physics.OverlapSphere(hitInfo.collider.transform.position, 0.5f);
+        //            foreach(Collider col in inBombsPlace)
+        //            {
+        //                //player within bomb if spawned 
+        //                if (col.tag == "Player")
+        //                {
+        //                    //skip the spawn
+        //                    hasPlayer = true;
+        //                    break;
+        //                }
+        //            }
+        //            //is it the closest place I can put a bomb?
+        //            if (hitInfo.distance < dist && hasPlayer == false)
+        //            {
+        //                dist = hitInfo.distance;
+        //                place.Clear();
+        //                place.Add(hitInfo.collider.gameObject);
+        //            }
+        //        }
+        //    }
+        //}
+        //if (dist != placeDist + 1 && place.Count > 0)
+        //{
+        //    BombDropZone dropZone = place[0].GetComponent<BombDropZone>();
+        //    GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
+        //    bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
+        //    bomb.GetComponent<Bomb>().Radius = bombRadius;
+        //    dropZone.hasBomb = true;
+        //    //placed bomb
+        //    return true;
+        //}
+        ////return I didnt place
+        //return false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //OLD
         //Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, placeDist);
         //List<GameObject> placeable = new List<GameObject>();
