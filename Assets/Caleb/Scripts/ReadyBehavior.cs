@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ReadyBehavior : MonoBehaviour {
-
+    static int players;
     public GameObject[] ReadyUp;
     PlayerIndex pIdx = PlayerIndex.One;
     GamePadState state;
@@ -27,6 +27,7 @@ public class ReadyBehavior : MonoBehaviour {
             if (ReadyUp[i].activeInHierarchy)
             {
                 check++;
+                players = check;
             }
         }
 
@@ -44,7 +45,7 @@ public class ReadyBehavior : MonoBehaviour {
             state = GamePad.GetState(pIdx);
             if (state.Buttons.Start == ButtonState.Pressed)
             {
-                SceneManager.LoadScene("Level(test)");
+                SceneManager.LoadScene("Level");
             }
         }
 	}
