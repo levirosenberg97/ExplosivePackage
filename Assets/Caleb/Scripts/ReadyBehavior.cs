@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ReadyBehavior : MonoBehaviour {
-    public int players;
+    static int players;
     public GameObject[] ReadyUp;
     PlayerIndex pIdx = PlayerIndex.One;
     GamePadState state;
