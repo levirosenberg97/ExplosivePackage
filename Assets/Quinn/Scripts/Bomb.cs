@@ -142,6 +142,14 @@ public class Bomb : MonoBehaviour {
                             retVal.Add(hp);
                         }
                     }
+                    else if (interactor.tag == "Invincible" || interactor.tag == "FireUp" || interactor.tag == "FireDown" || interactor.tag == "SpeedPickUp" || interactor.tag == "SlowPickUp")
+                    {
+                        Health hp = interactor.GetComponent<Health>();
+                        if (retVal.Contains(hp) == false)
+                        {
+                            retVal.Add(hp);
+                        }
+                    }
                 }
             }
         }
