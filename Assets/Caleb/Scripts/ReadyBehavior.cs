@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ReadyBehavior : MonoBehaviour {
-
+    public int players;
     public GameObject[] ReadyUp;
     PlayerIndex pIdx = PlayerIndex.One;
     GamePadState state;
@@ -27,6 +27,7 @@ public class ReadyBehavior : MonoBehaviour {
             if (ReadyUp[i].activeInHierarchy)
             {
                 check++;
+                players = check;
             }
         }
 
