@@ -9,17 +9,20 @@ EditorBuildSettings:
     path: 
     guid: 6ff714be34d6dc048b5ca6eb97f7325c
   - enabled: 0
-    path: Assets/Levi/Scenes/PlayerTestScene.unity
-    guid: df1057bfc674079439da3ddf8d06ad3f
-  - enabled: 0
+    path: Assets/Caleb/Level(test).unity
+    guid: a8749fa0395abff4e894b9c45a9cf541
+  - enabled: 1
     path: Assets/Caleb/Menu.unity
     guid: 57704c6972cd59e44a80f7244a0ed06d
-  - enabled: 0
-    path: Assets/Caleb/NumberOfPlayers.unity
-    guid: 29c5b8cead777be458a81e2681f5378f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Caleb/Controls.unity
     guid: c8344cea6523dfd4ba44ca89c10907f1
+  - enabled: 1
+    path: Assets/Caleb/NumberOfPlayers.unity
+    guid: 29c5b8cead777be458a81e2681f5378f
+  - enabled: 1
+    path: Assets/Levi/Scenes/PlayerTestScene.unity
+    guid: df1057bfc674079439da3ddf8d06ad3f
   - enabled: 1
     path: Assets/Quinn/Scenes/QuinnTestScene.unity
     guid: c642035f27684ce48b846d36913aef4f
