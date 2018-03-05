@@ -20,7 +20,7 @@ public class WinScreen : MonoBehaviour
 
     private void Start()
     {
-        playerCount = 
+        //playerCount = 
     }
 
     private void Update()
