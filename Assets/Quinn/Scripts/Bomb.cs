@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour {
     public float Damage = 1;
     public float fuseTime = 3;
     public GameObject Explosion;
+    public GameObject SmallExplosion;
     public GameObject DropZone;
     public List<string> Damages = new List<string>();
     //private 
@@ -33,9 +34,17 @@ public class Bomb : MonoBehaviour {
         public GameObject item;
         public float dist;
     };
-    private List<Health> ValidTargets(RaycastHit[] hit)
+    struct ExplosionInfo
     {
-        
+        public List<Health> toBeDamaged;
+        public List<Vector3> explosionEffects;
+    }
+    private ExplosionInfo ValidTargets(RaycastHit[] hit)
+    {
+        //holds items that are within blast radius in a direction that might need the explosion effect
+        List<GameObject> potentialEffects = new List<GameObject>();
+        //holds positions that will get the explosion effect spawned on them
+        List<Vector3> explosions = new List<Vector3>();
         //list of health components that will take damage from this exposion
         List<Health> retVal = new List<Health>();
         //list of gameobjects and their distance to the center of the explosion
@@ -60,15 +69,10 @@ public class Bomb : MonoBehaviour {
             else if (hit[i].collider.tag == "BombDropZone")
             {
                 TriggerZone zone = hit[i].collider.gameObject.GetComponent<TriggerZone>();
-                float dist = Vector3.Distance(gameObject.transform.position, hit[i].collider.gameObject.transform.position);
-                int interactors = zone.GetInteractors(TriggerState.All).Count;
-                foreach (GameObject interactor in zone.GetInteractors(TriggerState.All))
-                {
-                    distToExplosion toAdd = new distToExplosion();
-                    toAdd.item = interactor;
-                    toAdd.dist = dist;
-                    distanceToExplosion.Add(toAdd);
-                }
+                distToExplosion toAdd = new distToExplosion();
+                toAdd.item = hit[i].collider.gameObject;
+                toAdd.dist = Vector3.Distance(gameObject.transform.position, hit[i].collider.gameObject.transform.position); ;
+                distanceToExplosion.Add(toAdd);
             }
         }
         //orders by distance to explosion
@@ -114,22 +118,45 @@ public class Bomb : MonoBehaviour {
             }
             else if (distanceToExplosion[i].item.tag == "BreakableWall")
             {
+                //add as a place that might need the explision effect
+                explosions.Add(distanceToExplosion[i].item.transform.position);
                 //add wall to the to be damaged list
                 retVal.Add(distanceToExplosion[i].item.GetComponent<Health>());
                 //stop dealing damage in this direction
                 i = distanceToExplosion.Count;
             }
-            else if (distanceToExplosion[i].item.tag == "Player")
+            else if (distanceToExplosion[i].item.tag == "BombDropZone")
             {
-                Health hp = distanceToExplosion[i].item.GetComponent<Health>();
-                //if the list does not already contain this player (stops double damage)
-                if (retVal.Contains(hp) == false)
+                //add as a place that might need the explision effect
+                explosions.Add(distanceToExplosion[i].item.transform.position);
+                //check for players to damage inside this zone and within radius of explosion
+                List<GameObject> interactors = distanceToExplosion[i].item.GetComponent<TriggerZone>().GetInteractors(TriggerState.All);
+                foreach (GameObject interactor in interactors)
                 {
-                    retVal.Add(hp);
+                    if (interactor.tag == "Player" && Vector3.Distance(transform.position, interactor.transform.position) <= Radius)
+                    {
+                        Health hp = interactor.GetComponent<Health>();
+                        if (retVal.Contains(hp) == false)
+                        {
+                            //add hp to list of to be damaged
+                            retVal.Add(hp);
+                        }
+                    }
+                    else if (interactor.tag == "Invincible" || interactor.tag == "FireUp" || interactor.tag == "FireDown" || interactor.tag == "SpeedPickUp" || interactor.tag == "SlowPickUp")
+                    {
+                        Health hp = interactor.GetComponent<Health>();
+                        if (retVal.Contains(hp) == false)
+                        {
+                            retVal.Add(hp);
+                        }
+                    }
                 }
             }
         }
-        return retVal;
+        ExplosionInfo retValue;
+        retValue.toBeDamaged = retVal;
+        retValue.explosionEffects = explosions;
+        return retValue;
     }
 
 
@@ -152,16 +179,23 @@ public class Bomb : MonoBehaviour {
     {
         Vector3 rayDir = transform.forward;
         List<Health> toBeDamaged = new List<Health>();
+        List<Vector3> explosionOrigins = new List<Vector3>();
         for (int i = 0; i < 4; i++)
         {
-            List <Health> toBeAdded = ValidTargets(Physics.RaycastAll(gameObject.transform.position, (rayDir /** Radius*/), Radius));
+            ExplosionInfo info = ValidTargets(Physics.RaycastAll(gameObject.transform.position, (rayDir /** Radius*/), Radius));
+            List<Health> toBeAdded = info.toBeDamaged;
                 foreach (Health hp in toBeAdded)
                 {
                     if (toBeDamaged.Contains(hp) == false)
                     {
+                    if (Vector3.Distance(hp.gameObject.transform.position, transform.position) <= Radius)
                         toBeDamaged.Add(hp);
                     }
                 }
+                foreach(Vector3 explosionOrigin in info.explosionEffects)
+            {
+                explosionOrigins.Add(explosionOrigin);
+            }
             rayDir = Quaternion.AngleAxis(90, transform.up) * rayDir;
         }
         //deal damage
@@ -173,6 +207,11 @@ public class Bomb : MonoBehaviour {
         DropZone.GetComponent<BombDropZone>().hasBomb = false;
         //spawn explosion effect
         Instantiate(Explosion, gameObject.transform.position, gameObject.transform.rotation);
+        foreach (Vector3 position in explosionOrigins)
+        {
+            //spawn small explosion effect
+            Instantiate(SmallExplosion, position, gameObject.transform.rotation);
+        }
         //destroy bomb
         Destroy(gameObject);
     }

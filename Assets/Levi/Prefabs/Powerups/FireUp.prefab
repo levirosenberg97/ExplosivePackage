@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114894131649894444}
   - component: {fileID: 65929910392338254}
   - component: {fileID: 114160549479170072}
+  - component: {fileID: 114803195229745266}
+  - component: {fileID: 114286121230917366}
   m_Layer: 0
   m_Name: FireUp
   m_TagString: FireUp
@@ -54,7 +56,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 2
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,7 +72,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -115,6 +115,52 @@ MonoBehaviour:
   rotationRateZ: 0
   amplitude: 0.15
   frequency: 1
+--- !u!114 &114286121230917366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1955946277726978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f697528feb4c8c2438999758a39006b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114803195229745266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1955946277726978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c79a21fbcda0364f94148f3fe87722a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHP: 1
+  MaxHP: 1
+  OnOverHeal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnZeroHP:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114286121230917366}
+        m_MethodName: DestroyObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1955946277726978}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  items: []
 --- !u!114 &114806438838192190
 MonoBehaviour:
   m_ObjectHideFlags: 1
