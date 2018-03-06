@@ -57,3 +57,5 @@ MonoBehaviour:
   FireDown: {fileID: 1049205733411494, guid: 45f4a552c368ab34382f1a8ad701a3a7, type: 2}
   SpeedUp: {fileID: 1126658202059186, guid: 186c2d56c1d1f7946804531b5fd49088, type: 2}
   SpeedDown: {fileID: 1437414487855892, guid: d24f1da34ae97894bb0c0fc0697ea2c8, type: 2}
+  BombUp: {fileID: 1693703452518894, guid: 1498c240998c0194ca0c9ad73185ef5a, type: 2}
+  BombDown: {fileID: 1360667290120920, guid: 76cc812cb23eac94ca1c6ceb3df180df, type: 2}
