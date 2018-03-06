@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 33591300883054970}
   - component: {fileID: 114778476863046080}
   - component: {fileID: 65084815467811616}
-  - component: {fileID: 114784246543796260}
   - component: {fileID: 114772619772013318}
   - component: {fileID: 114587995156751504}
   m_Layer: 0
@@ -40,13 +39,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1219681419013128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.01, z: 2.204}
   m_LocalScale: {x: 0.37845564, y: 0.6390162, z: 0.63901657}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!23 &23289608649638038
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -56,6 +55,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 2
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,6 +71,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -4870,19 +4871,3 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
---- !u!114 &114784246543796260
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1219681419013128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7939dd2ca318dc049a496a874f454f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationRateX: 0
-  rotationRateY: 1
-  rotationRateZ: 0
-  amplitude: 0.15
-  frequency: 1
