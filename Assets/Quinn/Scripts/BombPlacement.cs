@@ -5,15 +5,74 @@ using UnityEngine;
 public class BombPlacement : MonoBehaviour {
     public GameObject BombObject;
     public GameObject Indicator;
-    private List<GameObject> Indicators;
+    public bool EnableIndicators = true;
+    private List<Vector3> PreviousIndicators = new List<Vector3>();
+    private List<GameObject> Indicators = new List<GameObject>();
     // Use this for initialization
     void Start() {
-
+        List<Vector3> newIndicators = PlaceBombIndicators();
+        foreach (Vector3 pos in newIndicators)
+        {
+            Indicators.Add(Instantiate(Indicator, pos, gameObject.transform.rotation));
+        }
+        //
+        //Debug.Log(Indicators.Count);
     }
 
     // Update is called once per frame
     void Update() {
+        if (EnableIndicators)
+        {
+            //Debug.Log(Indicators.Count);
+            List<Vector3> newIndicators = PlaceBombIndicators();
+            List<Vector3> IndicatorsPos = new List<Vector3>();
+            foreach (GameObject ind in Indicators)
+            {
+                IndicatorsPos.Add(ind.gameObject.transform.position);
+            }
+            if (!isListEqual(newIndicators , IndicatorsPos))
+            {
+                if (Indicators.Count > 0 )
+                {
+                    while(Indicators.Count > 0)
+                    {
+                        GameObject ind = Indicators[0];
+                        Indicators.Remove(ind);
+                        Destroy(ind);
+                    }
+                }
+                foreach(Vector3 pos in newIndicators)
+                {
+                    Indicators.Add(Instantiate(Indicator, pos, gameObject.transform.rotation));
+                }
+            }
+            PreviousIndicators = newIndicators;
+            Debug.Log(Indicators.Count);
+        }
     }
+
+    bool isListEqual(List<Vector3> listA, List<Vector3> listB)
+    {
+        int check = 0;
+        if (listA.Count != listB.Count)
+        {
+            return false;
+        }
+        else
+        {
+           
+            for (int i = 0; i < listA.Count;i++)
+            {
+                if(listA[i] == listB[i])
+                {
+                    check++;
+                }
+            }
+            
+        }
+        return check == listA.Count;
+    }
+
     //can be used to place a bomb via unity events
     public void PlaceBombHere()
     {
@@ -215,13 +274,8 @@ public class BombPlacement : MonoBehaviour {
         //    return false;
         //}
     }
-    public void PlaceBombIndicators()
+    public List<Vector3> PlaceBombIndicators()
     {
-        foreach (GameObject ind in Indicators)
-        {
-            Destroy(ind);
-        }
-        PlaceDir directionOverwrite = PlaceDir.ObjectDirection;
         List<Vector3> IndicatorsLocation = new List<Vector3>();
         for (int i = 0; i < 4; i++)
         {
@@ -273,11 +327,26 @@ public class BombPlacement : MonoBehaviour {
                         if (hasPlayer == false)
                         {
                             IndicatorsLocation.Add(hitInfo.collider.gameObject.transform.position);
-                            BombDropZone dropZone = hitInfo.collider.gameObject.GetComponent<BombDropZone>();
-                            GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
+                            //BombDropZone dropZone = hitInfo.collider.gameObject.GetComponent<BombDropZone>();
+                            //GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
                         }
                     }
                 }
+            }
+
+        }
+        return IndicatorsLocation;
+    }
+    void OnDisable()
+    {
+        Debug.Log(Indicators.Count);
+        if (Indicators.Count > 0)
+        {
+            while (Indicators.Count > 0)
+            {
+                GameObject ind = Indicators[0];
+                Indicators.Remove(ind);
+                Destroy(ind);
             }
         }
     }
