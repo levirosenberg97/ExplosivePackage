@@ -4969,6 +4969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BombObject: {fileID: 1489254698031880, guid: 29f5b8c0a2717e849ad42e97fa2b2cf5, type: 2}
+  Indicator: {fileID: 1646001227569874, guid: ff84f604a11c6bb4ba302c2245f60fd8, type: 2}
+  EnableIndicators: 1
 --- !u!114 &114362942460631798
 MonoBehaviour:
   m_ObjectHideFlags: 1
