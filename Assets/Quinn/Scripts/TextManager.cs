@@ -9,13 +9,17 @@ public class TextManager : MonoBehaviour {
     public GameObject FireDown;
     public GameObject SpeedUp;
     public GameObject SpeedDown;
+    public GameObject BombUp;
+    public GameObject BombDown;
     public enum TextString
     {
         Invincible,
         FireUp,
         FireDown,
         SpeedUp,
-        SpeedDown
+        SpeedDown,
+        BombUp,
+        BombDown
     }
 
     public void SpawnText(TextString input)
@@ -43,6 +47,16 @@ public class TextManager : MonoBehaviour {
         else if (input == TextString.SpeedDown)
         {
             GameObject spawned = Instantiate(SpeedDown);
+            spawned.GetComponent<FollowPlayer>().Leader = Player;
+        }
+        else if (input == TextString.BombUp)
+        {
+            GameObject spawned = Instantiate(BombUp);
+            spawned.GetComponent<FollowPlayer>().Leader = Player;
+        }
+        else if (input == TextString.BombDown)
+        {
+            GameObject spawned = Instantiate(BombDown);
             spawned.GetComponent<FollowPlayer>().Leader = Player;
         }
     }
