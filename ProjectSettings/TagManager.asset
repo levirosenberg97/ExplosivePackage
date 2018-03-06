@@ -15,6 +15,7 @@ TagManager:
   - UnbreakableWall
   - BombUp
   - BombDown
+  - Bomb
   layers:
   - Default
   - TransparentFX
