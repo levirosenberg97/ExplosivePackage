@@ -221,9 +221,37 @@ public class PlayerControl : MonoBehaviour
                 if(spawnTime > 1f)
                 {
                     spawnTime -= .5f;
+                    if (spawnTime <= 1f)
+                    {
+                        spawnTime = 1;
+                    }
                     currentSpawnTimer = spawnTime;
                     powerUpText.text = "Bomb Up";
+
+                    PowerTextManager.SpawnText(TextManager.TextString.BombUp);
+
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
+                   
+                }
+                Destroy(other.gameObject);
+            }
+
+            if (other.tag == "BombDown")
+            {
+                if (spawnTime < startingSpawnTimer)
+                {
+                    spawnTime += .5f;
+                    if (spawnTime >= startingSpawnTimer)
+                    {
+                        spawnTime = startingSpawnTimer;
+                    }
+                    currentSpawnTimer = spawnTime;
+                    powerUpText.text = "Bomb Down";
+
+                    PowerTextManager.SpawnText(TextManager.TextString.BombDown);
+
+                    StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
+
                 }
                 Destroy(other.gameObject);
             }
