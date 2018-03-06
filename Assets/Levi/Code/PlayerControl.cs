@@ -86,8 +86,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        moveHorizontal = state.ThumbSticks.Left.X;
-        moveVertical = state.ThumbSticks.Left.Y;
+        moveHorizontal = state.ThumbSticks.Right.X;
+        moveVertical = state.ThumbSticks.Right.Y;
 
 
         movement = new Vector3(moveHorizontal, 0f, moveVertical);
@@ -125,20 +125,64 @@ public class PlayerControl : MonoBehaviour
 
         move();
 
-        //places the bomb
-        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+        //places the bomb above
+
+        if (prevState.DPad.Up == ButtonState.Released && state.DPad.Up == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
                 if (spawnTime >= startingSpawnTimer)
                 {
-                    if (placer.PlaceBomb(1, bombRadius + .5f))
+                    if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Forward))
                     {
                         spawnTime = 0;
                     }
                 }
             }
         }
+
+        if (prevState.DPad.Down == ButtonState.Released && state.DPad.Down == ButtonState.Pressed)
+        {
+            if (isAlive == true)
+            {
+                if (spawnTime >= startingSpawnTimer)
+                {
+                    if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Backward))
+                    {
+                        spawnTime = 0;
+                    }
+                }
+            }
+        }
+
+        if (prevState.DPad.Left == ButtonState.Released && state.DPad.Left == ButtonState.Pressed)
+        {
+            if (isAlive == true)
+            {
+                if (spawnTime >= startingSpawnTimer)
+                {
+                    if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Left))
+                    {
+                        spawnTime = 0;
+                    }
+                }
+            }
+        }
+
+        if (prevState.DPad.Right == ButtonState.Released && state.DPad.Right == ButtonState.Pressed)
+        {
+            if (isAlive == true)
+            {
+                if (spawnTime >= startingSpawnTimer)
+                {
+                    if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Right))
+                    {
+                        spawnTime = 0;
+                    }
+                }
+            }
+        }
+
         //resets the bomb placement time
         if (spawnTime < startingSpawnTimer)
         {
