@@ -25,20 +25,12 @@ public class PlayerControl : MonoBehaviour
 
     private Rigidbody rb;
     private float startingSpawnTimer;
+    public float currentSpawnTimer;
     private float startingPickUpTimer;
     public bool isAlive = true;
     //Quinn edit
     public float TextLife = 2;
     //private
-    private GameObject InvincibleText;
-    private GameObject SpeedUpText;
-    private float speedUpTime = 0;
-    private GameObject SpeedDownText;
-    private float speedDownTime = 0;
-    private GameObject FireUpText;
-    private float fireUpTime = 0;
-    private GameObject FireDownText;
-    private float fireDownTime = 0;
 
     // Use this for initialization
     void Start ()
@@ -49,29 +41,8 @@ public class PlayerControl : MonoBehaviour
         startingSpawnTimer = spawnTime;
 
         startingFadeTime = fadeTimer;
-        foreach(Transform child in gameObject.transform)
-        {
-            if (child.name == "Invincible")
-            {
-                InvincibleText = child.gameObject;
-            }
-            else if (child.name == "Speed Up")
-            {
-                SpeedUpText = child.gameObject;
-            }
-            else if (child.name == "Speed Down")
-            {
-                SpeedDownText = child.gameObject;
-            }
-            else if (child.name == "Fire Up")
-            {
-                FireUpText = child.gameObject;
-            }
-            else if (child.name == "Fire Down")
-            {
-                FireDownText = child.gameObject;
-            }
-        }
+        currentSpawnTimer = spawnTime;
+        
 	}
 
     float moveHorizontal;
@@ -86,8 +57,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        moveHorizontal = state.ThumbSticks.Right.X;
-        moveVertical = state.ThumbSticks.Right.Y;
+        moveHorizontal = state.ThumbSticks.Left.X;
+        moveVertical = state.ThumbSticks.Left.Y;
 
 
         movement = new Vector3(moveHorizontal, 0f, moveVertical);
@@ -127,11 +98,11 @@ public class PlayerControl : MonoBehaviour
 
         //places the bomb above
 
-        if (prevState.DPad.Up == ButtonState.Released && state.DPad.Up == ButtonState.Pressed)
+        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Forward))
                     {
@@ -141,11 +112,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.DPad.Down == ButtonState.Released && state.DPad.Down == ButtonState.Pressed)
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Backward))
                     {
@@ -155,11 +126,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.DPad.Left == ButtonState.Released && state.DPad.Left == ButtonState.Pressed)
+        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Left))
                     {
@@ -169,11 +140,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.DPad.Right == ButtonState.Released && state.DPad.Right == ButtonState.Pressed)
+        if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Right))
                     {
@@ -184,47 +155,11 @@ public class PlayerControl : MonoBehaviour
         }
 
         //resets the bomb placement time
-        if (spawnTime < startingSpawnTimer)
+        if (spawnTime < currentSpawnTimer)
         {
             spawnTime += Time.deltaTime;
         }
-        //manage text overhead
-        if (SpeedDownText.activeInHierarchy)
-        {
-            speedDownTime += Time.deltaTime;
-            if (speedDownTime >= TextLife)
-            {
-                SpeedDownText.SetActive(false);
-                speedDownTime = 0;
-            }
-        }
-        else if (SpeedUpText.activeInHierarchy)
-        {
-            speedUpTime += Time.deltaTime;
-            if (speedUpTime >= TextLife)
-            {
-                SpeedUpText.SetActive(false);
-                speedUpTime = 0;
-            }
-        }
-        else if (FireUpText.activeInHierarchy)
-        {
-            fireUpTime += Time.deltaTime;
-            if (fireUpTime >= TextLife)
-            {
-                FireUpText.SetActive(false);
-                fireUpTime = 0;
-            }
-        }
-        else if (FireDownText.activeInHierarchy)
-        {
-            fireDownTime += Time.deltaTime;
-            if (fireDownTime >= TextLife)
-            {
-                FireDownText.SetActive(false);
-                fireDownTime = 0;
-            }
-        }
+
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -241,7 +176,7 @@ public class PlayerControl : MonoBehaviour
                 isInvincible = false;
                 pickupTimer = startingPickUpTimer;
                 InvincibleParticles.gameObject.SetActive(false);
-                InvincibleText.SetActive(false);
+             
             }
         }
         //removes the player on death
@@ -278,12 +213,24 @@ public class PlayerControl : MonoBehaviour
     {
         if (isAlive == true)
         {
+            if (other.tag == "BombUp")
+            {
+                if(spawnTime > 1f)
+                {
+                    spawnTime -= .5f;
+                    currentSpawnTimer = spawnTime;
+                    powerUpText.text = "Bomb Up";
+                    StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
+                }
+                Destroy(other.gameObject);
+            }
+
             if ( other.tag == "Invincible")
             {
                 isInvincible = true;
                 InvincibleParticles.gameObject.SetActive(true);
                 powerUpText.text = "Invincible";
-                InvincibleText.SetActive(true);
+            
                 //fades text in
                 StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
 
@@ -296,8 +243,7 @@ public class PlayerControl : MonoBehaviour
                 if (bombRadius < 4)
                 {
                     bombRadius += 1;
-                    FireUpText.SetActive(true);
-                    fireUpTime = 0;
+              
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
 
@@ -311,8 +257,7 @@ public class PlayerControl : MonoBehaviour
                 if (bombRadius > 1)
                 {
                     bombRadius -= 1;
-                    FireDownText.SetActive(true);
-                    fireDownTime = 0;
+                  
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
              
@@ -327,8 +272,7 @@ public class PlayerControl : MonoBehaviour
                 if (speed > 3)
                 {
                     speed -= 1;
-                    SpeedDownText.SetActive(true);
-                    speedDownTime = 0;
+                
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
                           
@@ -344,8 +288,7 @@ public class PlayerControl : MonoBehaviour
                 if (speed != 6)
                 {
                     speed += 1;
-                    SpeedUpText.SetActive(true);
-                    speedUpTime = 0;
+           
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
                   
