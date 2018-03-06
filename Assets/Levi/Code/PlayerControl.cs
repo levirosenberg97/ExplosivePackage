@@ -25,6 +25,7 @@ public class PlayerControl : MonoBehaviour
 
     private Rigidbody rb;
     private float startingSpawnTimer;
+    public float currentSpawnTimer;
     private float startingPickUpTimer;
     public bool isAlive = true;
     public GameObject PowerTextManagerObj;
@@ -46,6 +47,7 @@ public class PlayerControl : MonoBehaviour
                 PowerTextManager = child.GetComponent<TextManager>();
             }
         }
+        currentSpawnTimer = spawnTime;
 	}
 
     float moveHorizontal;
@@ -60,8 +62,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        moveHorizontal = state.ThumbSticks.Right.X;
-        moveVertical = state.ThumbSticks.Right.Y;
+        moveHorizontal = state.ThumbSticks.Left.X;
+        moveVertical = state.ThumbSticks.Left.Y;
 
 
         movement = new Vector3(moveHorizontal, 0f, moveVertical);
@@ -101,11 +103,11 @@ public class PlayerControl : MonoBehaviour
 
         //places the bomb above
 
-        if (prevState.DPad.Up == ButtonState.Released && state.DPad.Up == ButtonState.Pressed)
+        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Forward))
                     {
@@ -115,11 +117,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.DPad.Down == ButtonState.Released && state.DPad.Down == ButtonState.Pressed)
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Backward))
                     {
@@ -129,11 +131,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.DPad.Left == ButtonState.Released && state.DPad.Left == ButtonState.Pressed)
+        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Left))
                     {
@@ -143,11 +145,11 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.DPad.Right == ButtonState.Released && state.DPad.Right == ButtonState.Pressed)
+        if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed)
         {
             if (isAlive == true)
             {
-                if (spawnTime >= startingSpawnTimer)
+                if (spawnTime >= currentSpawnTimer)
                 {
                     if (placer.PlaceBomb(1, bombRadius + .5f, BombPlacement.PlaceDir.Right))
                     {
@@ -158,7 +160,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //resets the bomb placement time
-        if (spawnTime < startingSpawnTimer)
+        if (spawnTime < currentSpawnTimer)
         {
             spawnTime += Time.deltaTime;
         }
@@ -214,6 +216,18 @@ public class PlayerControl : MonoBehaviour
     {
         if (isAlive == true)
         {
+            if (other.tag == "BombUp")
+            {
+                if(spawnTime > 1f)
+                {
+                    spawnTime -= .5f;
+                    currentSpawnTimer = spawnTime;
+                    powerUpText.text = "Bomb Up";
+                    StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
+                }
+                Destroy(other.gameObject);
+            }
+
             if ( other.tag == "Invincible")
             {
                 isInvincible = true;
