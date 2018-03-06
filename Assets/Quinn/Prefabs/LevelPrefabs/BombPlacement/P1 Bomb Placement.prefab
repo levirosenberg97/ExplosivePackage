@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 135691553135051034}
   - component: {fileID: 23662504878003212}
   m_Layer: 0
-  m_Name: P1 Bomb Placement Indicator
+  m_Name: P1 Bomb Placement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
