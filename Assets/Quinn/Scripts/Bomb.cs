@@ -10,11 +10,20 @@ public class Bomb : MonoBehaviour {
     public GameObject SmallExplosion;
     public GameObject DropZone;
     public List<string> Damages = new List<string>();
+    private bool ExplodeNextFrame = false;
+    //public List<string> p= new List<string>();
     //private 
     float timer = 0;
 	// Use this for initialization
 	void Start () {
 	}
+    void LateUpdate()
+    {
+        if (ExplodeNextFrame)
+        {
+            Explode();
+        }
+    }
     void Update()
     {
         //add time to timer
@@ -127,6 +136,15 @@ public class Bomb : MonoBehaviour {
             }
             else if (distanceToExplosion[i].item.tag == "BombDropZone")
             {
+                List<GameObject> inOwnZone = DropZone.GetComponent<TriggerZone>().GetInteractors(TriggerState.All);
+                foreach (GameObject interactor in inOwnZone)
+                {
+                    if (interactor.tag == "Player" || interactor.tag == "Invincible" || interactor.tag == "FireUp" || interactor.tag == "FireDown" || interactor.tag == "SpeedPickUp" || interactor.tag == "SlowPickUp" || interactor.tag == "BombUp" || interactor.tag == "BombDown")
+                    {
+                        Health hp = interactor.GetComponent<Health>();
+                        retVal.Add(hp);
+                    }
+                }
                 //add as a place that might need the explision effect
                 explosions.Add(distanceToExplosion[i].item.transform.position);
                 //check for players to damage inside this zone and within radius of explosion
@@ -142,13 +160,17 @@ public class Bomb : MonoBehaviour {
                             retVal.Add(hp);
                         }
                     }
-                    else if (interactor.tag == "Invincible" || interactor.tag == "FireUp" || interactor.tag == "FireDown" || interactor.tag == "SpeedPickUp" || interactor.tag == "SlowPickUp")
+                    else if (interactor.tag == "Invincible" || interactor.tag == "FireUp" || interactor.tag == "FireDown" || interactor.tag == "SpeedPickUp" || interactor.tag == "SlowPickUp" || interactor.tag == "BombUp" || interactor.tag == "BombDown")
                     {
                         Health hp = interactor.GetComponent<Health>();
                         if (retVal.Contains(hp) == false)
                         {
                             retVal.Add(hp);
                         }
+                    }
+                    else if (interactor.tag == "Bomb")
+                    {
+                        interactor.GetComponent<Bomb>().ExplodeNextFrame = true;
                     }
                 }
             }

@@ -172,107 +172,11 @@ public class BombPlacement : MonoBehaviour {
             }
         }
         return false;
-
-        //RaycastHit[] hit = Physics.RaycastAll(adjustment, rayDest, placeDist);
-        //List<GameObject> place = new List<GameObject>();
-        //float dist = placeDist + 1;
-
-        //foreach (RaycastHit hitInfo in hit)
-        //{
-        //    if (hitInfo.collider.tag == "BombDropZone")
-        //    {
-        //        if (hitInfo.collider.gameObject.GetComponent<BombDropZone>().hasBomb == false)
-        //        {
-        //            bool hasPlayer = false;
-        //            Collider[] inBombsPlace = Physics.OverlapSphere(hitInfo.collider.transform.position, 0.5f);
-        //            foreach(Collider col in inBombsPlace)
-        //            {
-        //                //player within bomb if spawned 
-        //                if (col.tag == "Player")
-        //                {
-        //                    //skip the spawn
-        //                    hasPlayer = true;
-        //                    break;
-        //                }
-        //            }
-        //            //is it the closest place I can put a bomb?
-        //            if (hitInfo.distance < dist && hasPlayer == false)
-        //            {
-        //                dist = hitInfo.distance;
-        //                place.Clear();
-        //                place.Add(hitInfo.collider.gameObject);
-        //            }
-        //        }
-        //    }
-        //}
-        //if (dist != placeDist + 1 && place.Count > 0)
-        //{
-        //    BombDropZone dropZone = place[0].GetComponent<BombDropZone>();
-        //    GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
-        //    bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
-        //    bomb.GetComponent<Bomb>().Radius = bombRadius;
-        //    dropZone.hasBomb = true;
-        //    //placed bomb
-        //    return true;
-        //}
-        ////return I didnt place
-        //return false;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //OLD
-        //Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, placeDist);
-        //List<GameObject> placeable = new List<GameObject>();
-        ////for each thing i hit with the sphere
-        //for (int i = 0; i < hitColliders.Length; i++)
-        //{
-        //    if (hitColliders[i].tag == "BombDropZone")
-        //    {
-        //        TriggerZone placeZone = hitColliders[i].GetComponent<TriggerZone>();
-        //        BombDropZone dropZone = hitColliders[i].GetComponent<BombDropZone>();
-        //        //check that the tile doesnt have a bomb and contains the object that would like to place a bomb there
-        //        if (dropZone.hasBomb == false && placeZone.Contains(gameObject))
-        //        {
-        //            placeable.Add(hitColliders[i].gameObject);
-        //        }
-        //    }
-        //}
-        ////check to see if i can place somewhere and decide where to place if multiple areas are valid
-        //if (placeable.Count > 0)
-        //{
-        //    BombDropZone dropZone = placeable[0].GetComponent<BombDropZone>();
-        //    float min = Vector3.Distance(placeable[0].gameObject.transform.position, gameObject.transform.position);
-        //    foreach (GameObject zone in placeable)
-        //    {
-        //        float dist = Vector3.Distance(zone.gameObject.transform.position, gameObject.transform.position);
-        //        if (min >= dist)
-        //        {
-        //            min = dist;
-        //            dropZone = zone.GetComponent<BombDropZone>();
-        //        }
-        //    }
-        //    GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
-        //    bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
-        //    bomb.GetComponent<Bomb>().Radius = bombRadius;
-        //    dropZone.hasBomb = true;
-        //    return true;
-        //}
-        //else
-        //{
-        //    return false;
-        //}
+    }
+    struct PlaceInfo
+    {
+        public BombDropZone Zone;
+        public float Dist;
     }
     public List<Vector3> PlaceBombIndicators()
     {
@@ -283,6 +187,59 @@ public class BombPlacement : MonoBehaviour {
             //adjust height to match boxes
             Vector3 adjustment = transform.position;
             adjustment.y = 0.5f;
+            Collider[] DropZones = Physics.OverlapSphere(adjustment, placeDist/2);
+            List<PlaceInfo> info = new List<PlaceInfo>();
+            foreach (Collider col in DropZones)
+            {
+                BombDropZone zone = col.GetComponent<BombDropZone>();
+                if (zone != null)
+                {
+                    if (zone.GetComponent<TriggerZone>().Contains(gameObject))
+                    {
+                        PlaceInfo pinfo;
+                        pinfo.Zone = zone;
+                        pinfo.Dist = Vector3.Distance(zone.transform.position, adjustment);
+                        info.Add(pinfo);
+                    }
+                }
+            }
+            bool inWrongOrder = true;
+            while (inWrongOrder)
+            {
+                if (info.Count > 0)
+                {
+                    float previous = info[0].Dist;
+                    bool correct = true;
+                    for (int j = 0; j < info.Count; ++j)
+                    {
+                        if (info[j].Dist < previous)
+                        {
+                            //wrong order
+                            correct = false;
+                            //flip the previous value with this one so the smaller of the two is in front
+                            PlaceInfo temp = info[j];
+                            info[j] = info[j - 1];
+                            info[j - 1] = temp;
+                        }
+                        previous = info[j].Dist;
+                    }
+                    //was it in the correct order
+                    if (correct)
+                    {
+                        inWrongOrder = false;
+                    }
+                }
+                else
+                {
+                    //nothing to sort
+                    inWrongOrder = false;
+                }
+
+            }
+            if (info.Count >0)
+            {
+                adjustment = info[0].Zone.transform.position;
+            }
             Vector3 rayDest = adjustment;
             // set destination based on direction
             if (i == 0)

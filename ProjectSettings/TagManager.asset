@@ -14,6 +14,7 @@ TagManager:
   - SlowPickUp
   - UnbreakableWall
   - BombUp
+  - Bomb
   layers:
   - Default
   - TransparentFX
