@@ -10,6 +10,7 @@ public class bombTimer : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        bombSlider.maxValue = player.currentSpawnTimer;
         bombSlider.value = player.spawnTime;
         if (player.isAlive == false)
         {
