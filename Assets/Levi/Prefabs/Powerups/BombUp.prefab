@@ -41,11 +41,9 @@ GameObject:
   - component: {fileID: 23309146222137468}
   - component: {fileID: 33588154106874866}
   - component: {fileID: 114321563085447690}
-  - component: {fileID: 114711330186842346}
-  - component: {fileID: 114118273807587936}
   m_Layer: 0
   m_Name: Bomb Up
-  m_TagString: BombUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -422,7 +420,7 @@ MonoBehaviour:
         m_MethodName: DestroyObject
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1111022933248956}
+          m_ObjectArgument: {fileID: 1104340730657952}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -444,19 +442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
---- !u!114 &114118273807587936
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1111022933248956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f697528feb4c8c2438999758a39006b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 0
-  delayed: 0
 --- !u!114 &114321563085447690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6780,41 +6765,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
---- !u!114 &114711330186842346
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1111022933248956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c79a21fbcda0364f94148f3fe87722a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentHP: 1
-  MaxHP: 1
-  OnOverHeal:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  OnZeroHP:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114118273807587936}
-        m_MethodName: DestroyObject
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1111022933248956}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  items: []
 --- !u!114 &114740493701478182
 MonoBehaviour:
   m_ObjectHideFlags: 1
