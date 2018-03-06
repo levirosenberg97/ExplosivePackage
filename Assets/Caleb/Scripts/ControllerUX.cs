@@ -10,12 +10,14 @@ public class ControllerUX : MonoBehaviour {
     GamePadState state;
     GamePadState PrevState;
     public Button button;
+    public AudioSource sound;
     public Selectable selectable;
 	// Use this for initialization
 	void Start ()
     {
         selectable = button;
-	}
+        
+    }
 
     int downCount = 0;
     public bool getButtonDown()
@@ -28,6 +30,7 @@ public class ControllerUX : MonoBehaviour {
             {
                 return false;
             }
+            
             return true;
         }
         downCount = 0;
@@ -55,15 +58,15 @@ public class ControllerUX : MonoBehaviour {
 
         if (trySelect != null)
         {
-            
+            sound.Play();
             selectable = trySelect;
             button = (Button)selectable;
         }
 
         if (getButtonDown())
         {
-
-            button.onClick.Invoke();
+            
+           button.onClick.Invoke();
         }
 
         button.Select();
