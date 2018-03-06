@@ -27,18 +27,8 @@ public class PlayerControl : MonoBehaviour
     private float startingSpawnTimer;
     private float startingPickUpTimer;
     public bool isAlive = true;
-    //Quinn edit
-    public float TextLife = 2;
-    //private
-    private GameObject InvincibleText;
-    private GameObject SpeedUpText;
-    private float speedUpTime = 0;
-    private GameObject SpeedDownText;
-    private float speedDownTime = 0;
-    private GameObject FireUpText;
-    private float fireUpTime = 0;
-    private GameObject FireDownText;
-    private float fireDownTime = 0;
+    public GameObject PowerTextManagerObj;
+    private TextManager PowerTextManager;
 
     // Use this for initialization
     void Start ()
@@ -49,27 +39,11 @@ public class PlayerControl : MonoBehaviour
         startingSpawnTimer = spawnTime;
 
         startingFadeTime = fadeTimer;
-        foreach(Transform child in gameObject.transform)
+        foreach(Transform child in transform)
         {
-            if (child.name == "Invincible")
+            if (child.name == "TextManager")
             {
-                InvincibleText = child.gameObject;
-            }
-            else if (child.name == "Speed Up")
-            {
-                SpeedUpText = child.gameObject;
-            }
-            else if (child.name == "Speed Down")
-            {
-                SpeedDownText = child.gameObject;
-            }
-            else if (child.name == "Fire Up")
-            {
-                FireUpText = child.gameObject;
-            }
-            else if (child.name == "Fire Down")
-            {
-                FireDownText = child.gameObject;
+                PowerTextManager = child.GetComponent<TextManager>();
             }
         }
 	}
@@ -188,43 +162,6 @@ public class PlayerControl : MonoBehaviour
         {
             spawnTime += Time.deltaTime;
         }
-        //manage text overhead
-        if (SpeedDownText.activeInHierarchy)
-        {
-            speedDownTime += Time.deltaTime;
-            if (speedDownTime >= TextLife)
-            {
-                SpeedDownText.SetActive(false);
-                speedDownTime = 0;
-            }
-        }
-        else if (SpeedUpText.activeInHierarchy)
-        {
-            speedUpTime += Time.deltaTime;
-            if (speedUpTime >= TextLife)
-            {
-                SpeedUpText.SetActive(false);
-                speedUpTime = 0;
-            }
-        }
-        else if (FireUpText.activeInHierarchy)
-        {
-            fireUpTime += Time.deltaTime;
-            if (fireUpTime >= TextLife)
-            {
-                FireUpText.SetActive(false);
-                fireUpTime = 0;
-            }
-        }
-        else if (FireDownText.activeInHierarchy)
-        {
-            fireDownTime += Time.deltaTime;
-            if (fireDownTime >= TextLife)
-            {
-                FireDownText.SetActive(false);
-                fireDownTime = 0;
-            }
-        }
     }
     // Update is called once per frame
     private void FixedUpdate()
@@ -241,7 +178,6 @@ public class PlayerControl : MonoBehaviour
                 isInvincible = false;
                 pickupTimer = startingPickUpTimer;
                 InvincibleParticles.gameObject.SetActive(false);
-                InvincibleText.SetActive(false);
             }
         }
         //removes the player on death
@@ -283,7 +219,7 @@ public class PlayerControl : MonoBehaviour
                 isInvincible = true;
                 InvincibleParticles.gameObject.SetActive(true);
                 powerUpText.text = "Invincible";
-                InvincibleText.SetActive(true);
+                PowerTextManager.SpawnText(TextManager.TextString.Invincible);
                 //fades text in
                 StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
 
@@ -296,8 +232,7 @@ public class PlayerControl : MonoBehaviour
                 if (bombRadius < 4)
                 {
                     bombRadius += 1;
-                    FireUpText.SetActive(true);
-                    fireUpTime = 0;
+                    PowerTextManager.SpawnText(TextManager.TextString.FireUp);
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
 
@@ -311,8 +246,7 @@ public class PlayerControl : MonoBehaviour
                 if (bombRadius > 1)
                 {
                     bombRadius -= 1;
-                    FireDownText.SetActive(true);
-                    fireDownTime = 0;
+                    PowerTextManager.SpawnText(TextManager.TextString.FireDown);
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
              
@@ -327,8 +261,7 @@ public class PlayerControl : MonoBehaviour
                 if (speed > 3)
                 {
                     speed -= 1;
-                    SpeedDownText.SetActive(true);
-                    speedDownTime = 0;
+                    PowerTextManager.SpawnText(TextManager.TextString.SpeedDown);
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
                           
@@ -344,8 +277,7 @@ public class PlayerControl : MonoBehaviour
                 if (speed != 6)
                 {
                     speed += 1;
-                    SpeedUpText.SetActive(true);
-                    speedUpTime = 0;
+                    PowerTextManager.SpawnText(TextManager.TextString.SpeedUp);
                     //fades text in
                     StartCoroutine(FadeTextToFullAlpha(1f, powerUpText));
                   
