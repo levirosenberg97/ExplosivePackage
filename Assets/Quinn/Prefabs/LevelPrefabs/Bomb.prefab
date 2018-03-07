@@ -560,6 +560,7 @@ MonoBehaviour:
   BombColor2: {fileID: 2100000, guid: 3c036d54d64edbb4599987a53918c8d7, type: 2}
   BombColor3: {fileID: 2100000, guid: 2e9e0240a87323c429e595a2bc705b17, type: 2}
   BombColor4: {fileID: 2100000, guid: a70ed0c5ff4ce5a4fb366ca123c15acd, type: 2}
+  Exploded: 0
 --- !u!135 &135330080023818984
 SphereCollider:
   m_ObjectHideFlags: 1
