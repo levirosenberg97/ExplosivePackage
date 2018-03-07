@@ -10,13 +10,47 @@ public class Bomb : MonoBehaviour {
     public GameObject SmallExplosion;
     public GameObject DropZone;
     public List<string> Damages = new List<string>();
+    public List<GameObject> IgnoredPlayers = new List<GameObject>();
+    private Material BombColor1;
+    public Material BombColor2;
+    public Material BombColor3;
+    public Material BombColor4;
+    private Renderer rend;
     private bool ExplodeNextFrame = false;
+    private Collider thisCollider;
     //public List<string> p= new List<string>();
     //private 
     float timer = 0;
 	// Use this for initialization
 	void Start () {
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
+        thisCollider = GetComponent<Collider>();
+        BombColor1 = rend.sharedMaterial;
 	}
+    void FixedUpdate()
+    {
+        //stop ignoreing collision logic
+        if (IgnoredPlayers.Count > 0)
+        {
+            List<GameObject> PlayersInBomb = new List<GameObject>();
+            Collider[] InBomb = Physics.OverlapSphere(transform.position, 0.5f);
+            foreach(Collider col in InBomb)
+            {
+                if (col.tag == "Player")
+                {
+                    PlayersInBomb.Add(col.gameObject);
+                }
+            }
+            foreach(GameObject obj in IgnoredPlayers)
+            {
+                if (PlayersInBomb.Contains(obj) == false)
+                {
+                    Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider, false);
+                }
+            }
+        }
+    }
     void LateUpdate()
     {
         if (ExplodeNextFrame)
@@ -26,6 +60,23 @@ public class Bomb : MonoBehaviour {
     }
     void Update()
     {
+        //max range of 4
+        if (Radius >= 1 && Radius < 2)
+        {
+            rend.sharedMaterial = BombColor1;
+        }
+        else if (Radius >= 2 && Radius < 2)
+        {
+            rend.sharedMaterial = BombColor2;
+        }
+        else if (Radius >= 3 && Radius < 4)
+        {
+            rend.sharedMaterial = BombColor3;
+        }
+        else
+        {
+            rend.sharedMaterial = BombColor4;
+        }
         //add time to timer
         timer += Time.deltaTime;
         //explode the bomb if timer is more than fuse time
@@ -37,6 +88,7 @@ public class Bomb : MonoBehaviour {
             //call explode
             Explode();
         }
+
     }
     struct distToExplosion
     {
