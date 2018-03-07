@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
+    public AudioSource powerUp;
+    public AudioSource powerDown;
     public float speed;
     public BombPlacement placer;
     public float spawnTime;
@@ -97,7 +99,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (powerUpText.color.a >= 1.0f)
+        if (powerUpText.color.a >= .9f)
         {
             fadeTimer -= Time.deltaTime;
         }
@@ -235,6 +237,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if(spawnTime > 1f)
                 {
+                    powerUp.Play();
+
                     spawnTime -= .5f;
                     if (spawnTime <= 1f)
                     {
@@ -255,6 +259,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (spawnTime < startingSpawnTimer)
                 {
+                    powerDown.Play();
                     spawnTime += .5f;
                     if (spawnTime >= startingSpawnTimer)
                     {
@@ -273,6 +278,8 @@ public class PlayerControl : MonoBehaviour
 
             if ( other.tag == "Invincible")
             {
+                powerUp.Play();
+
                 isInvincible = true;
                 InvincibleParticles.gameObject.SetActive(true);
                 powerUpText.text = "Invincible";
@@ -288,6 +295,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if (bombRadius < 4)
                 {
+                    powerUp.Play();
+
                     bombRadius += 1;
                     PowerTextManager.SpawnText(TextManager.TextString.FireUp);
                     //fades text in
@@ -302,6 +311,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if (bombRadius > 1)
                 {
+                    powerDown.Play();
+
                     bombRadius -= 1;
                     PowerTextManager.SpawnText(TextManager.TextString.FireDown);
                     //fades text in
@@ -317,6 +328,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if (speed > 3)
                 {
+                    powerDown.Play();
+
                     speed -= 1;
                     PowerTextManager.SpawnText(TextManager.TextString.SpeedDown);
                     //fades text in
@@ -333,6 +346,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (speed != 6)
                 {
+                    powerUp.Play();
                     speed += 1;
                     PowerTextManager.SpawnText(TextManager.TextString.SpeedUp);
                     //fades text in

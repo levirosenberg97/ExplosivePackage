@@ -9,15 +9,14 @@ public class CurrentlyPlaying : MonoBehaviour
     public GameObject player3;
     public GameObject player4;
 
-
     public RawImage player3Face;
     public RawImage player4Face;
-
 
     public Slider player3Slider;
     public Slider player4Slider;
 
-
+    public GameObject player3Indicator;
+    public GameObject player4Indicator;
 
     private void Start()
     {
@@ -26,6 +25,7 @@ public class CurrentlyPlaying : MonoBehaviour
             player4.SetActive(false);
             player4Face.gameObject.SetActive(false);
             player4Slider.gameObject.SetActive(false);
+            player4Indicator.SetActive(false);
         }
 
         if (ReadyBehavior.players < 3)
@@ -33,6 +33,7 @@ public class CurrentlyPlaying : MonoBehaviour
             player3.SetActive(false);
             player3Face.gameObject.SetActive(false);
             player3Slider.gameObject.SetActive(false);
+            player3Indicator.SetActive(false);
         }
     }
 }
