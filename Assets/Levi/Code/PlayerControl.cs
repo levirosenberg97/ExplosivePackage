@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerIndex playerNumber;
     GamePadState state;
     GamePadState prevState;
-
+    
     public float pickupTimer;
     public bool isInvincible = false;
     public ParticleSystem InvincibleParticles;
@@ -31,9 +31,12 @@ public class PlayerControl : MonoBehaviour
     public GameObject PowerTextManagerObj;
     private TextManager PowerTextManager;
 
+    public float vibrationCounter = 1;
+
     // Use this for initialization
     void Start ()
     {
+        
         isAlive = true;
         rb = GetComponent<Rigidbody>();
         startingPickUpTimer = pickupTimer;
@@ -85,6 +88,15 @@ public class PlayerControl : MonoBehaviour
     //moved from fixed update due to conflicts with triggerzones
     private void Update()
     {
+        if (isAlive == false)
+        {
+            vibrationCounter -= Time.deltaTime;
+            if (vibrationCounter <= 0)
+            {
+                GamePad.SetVibration(playerNumber, 0, 0);
+            }
+        }
+
         if (powerUpText.color.a >= 1.0f)
         {
             fadeTimer -= Time.deltaTime;
@@ -98,7 +110,7 @@ public class PlayerControl : MonoBehaviour
 
         prevState = state;
         state = GamePad.GetState(playerNumber);
-
+     
         move();
 
         //places the bomb above
@@ -119,6 +131,7 @@ public class PlayerControl : MonoBehaviour
 
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
+            
             if (isAlive == true)
             {
                 if (spawnTime >= currentSpawnTimer)
@@ -185,6 +198,8 @@ public class PlayerControl : MonoBehaviour
         //removes the player on death
         if (isAlive == false)
         {
+            GamePad.SetVibration(playerNumber, 0, 0);
+           
             gameObject.SetActive(false);
         }
 
