@@ -27,8 +27,11 @@ public class BombPlacement : MonoBehaviour {
                     Destroy(ind);
                 }
             }
-            Transform place = PlaceBombIndicators().transform;
-            Indicators.Add(Instantiate(Indicator, place.transform.position, place.transform.rotation));
+            if (PlaceBombIndicators() != null)
+            {
+                Transform place = PlaceBombIndicators().transform;
+                Indicators.Add(Instantiate(Indicator, place.transform.position, place.transform.rotation));
+            }
         }
     }
 

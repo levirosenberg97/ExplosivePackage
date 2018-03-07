@@ -65,7 +65,7 @@ public class Bomb : MonoBehaviour {
         {
             rend.sharedMaterial = BombColor1;
         }
-        else if (Radius >= 2 && Radius < 2)
+        else if (Radius >= 2 && Radius < 3)
         {
             rend.sharedMaterial = BombColor2;
         }
