@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 802627967}
   - component: {fileID: 802627966}
   - component: {fileID: 802627968}
+  - component: {fileID: 802627969}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -390,7 +391,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: df2bb06bc947cd645919753924a29a80, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -416,6 +417,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pIdx: 0
   PlayerReady: {fileID: 1622525879}
+--- !u!114 &802627969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 802627964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990241a28832f1e439b8c6c04ada7e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Frame1: {fileID: 2800000, guid: 1d40f90f224237f4397e1c2c6be834ea, type: 3}
+  Frame2: {fileID: 2800000, guid: ebd097eee66c72346a221b06a6530c6d, type: 3}
+  Frame3: {fileID: 2800000, guid: 58e9d969c40d3e142bf4cac814a54d99, type: 3}
+  Frame4: {fileID: 2800000, guid: 5e7a584d9637aa544953b0131692b7ca, type: 3}
+  selection: {fileID: 802627966}
 --- !u!1 &829339635
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +444,7 @@ GameObject:
   - component: {fileID: 829339638}
   - component: {fileID: 829339637}
   - component: {fileID: 829339639}
+  - component: {fileID: 829339640}
   m_Layer: 5
   m_Name: RawImage (3)
   m_TagString: Untagged
@@ -471,7 +489,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: c052eb95304f0cd4484bbcd6d3f84287, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -497,6 +515,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pIdx: 3
   PlayerReady: {fileID: 792712868}
+--- !u!114 &829339640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829339635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990241a28832f1e439b8c6c04ada7e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Frame1: {fileID: 2800000, guid: e17703d06e362704f812f38adc4fea67, type: 3}
+  Frame2: {fileID: 2800000, guid: ab3e23e32c041b2479d0d753be3f8935, type: 3}
+  Frame3: {fileID: 2800000, guid: ff00875a1ea1c7d49bc61bfd442da703, type: 3}
+  Frame4: {fileID: 2800000, guid: 6e26de8a03ae7344f90e129d42c9cb9d, type: 3}
+  selection: {fileID: 829339637}
 --- !u!1 &962602926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1088,7 @@ GameObject:
   - component: {fileID: 1500826452}
   - component: {fileID: 1500826451}
   - component: {fileID: 1500826453}
+  - component: {fileID: 1500826454}
   m_Layer: 5
   m_Name: RawImage (2)
   m_TagString: Untagged
@@ -1098,7 +1133,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 782231ead78800c4a8d09dabdac2116a, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1124,6 +1159,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pIdx: 2
   PlayerReady: {fileID: 2104668167}
+--- !u!114 &1500826454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1500826449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990241a28832f1e439b8c6c04ada7e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Frame1: {fileID: 2800000, guid: 3d5b8674d81026d4abfc3e22b43fe9d4, type: 3}
+  Frame2: {fileID: 2800000, guid: f1a7c7b2d6a44ef42903ac642adaf953, type: 3}
+  Frame3: {fileID: 2800000, guid: f18e0245e102e47488d335a5b2bf183d, type: 3}
+  Frame4: {fileID: 2800000, guid: d63da4d872aed3341b0441cd2517ba32, type: 3}
+  selection: {fileID: 1500826451}
 --- !u!1 &1622525879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1334,7 @@ GameObject:
   - component: {fileID: 1636948617}
   - component: {fileID: 1636948616}
   - component: {fileID: 1636948618}
+  - component: {fileID: 1636948619}
   m_Layer: 5
   m_Name: RawImage (1)
   m_TagString: Untagged
@@ -1327,7 +1379,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: cb5e92b87f9a2824b9aa618d56a10a2f, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1353,6 +1405,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pIdx: 1
   PlayerReady: {fileID: 962602926}
+--- !u!114 &1636948619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1636948614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990241a28832f1e439b8c6c04ada7e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Frame1: {fileID: 2800000, guid: b276c15db72658b47b2538267d6c4b69, type: 3}
+  Frame2: {fileID: 2800000, guid: e36fd5416b4599d4187e4b26e1f33407, type: 3}
+  Frame3: {fileID: 2800000, guid: 49d03c38204539046b653b7f0cce75a8, type: 3}
+  Frame4: {fileID: 2800000, guid: 471cfe5c064f8994eb924cd03564141f, type: 3}
+  selection: {fileID: 1636948616}
 --- !u!1 &1640681225
 GameObject:
   m_ObjectHideFlags: 0
