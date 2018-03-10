@@ -237,7 +237,8 @@ public class Bomb : MonoBehaviour {
                         Bomb bomb = interactor.GetComponent<Bomb>();
                         if (bomb.Exploded == false)
                         {
-                            interactor.GetComponent<Bomb>().Explode();
+                            bomb.timer = bomb.fuseTime + 1;
+                            //interactor.GetComponent<Bomb>().Explode();
                         }
                     }
                 }
