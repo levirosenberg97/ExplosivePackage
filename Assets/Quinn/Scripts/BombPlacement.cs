@@ -6,7 +6,6 @@ public class BombPlacement : MonoBehaviour {
     public GameObject BombObject;
     public GameObject Indicator;
     public bool EnableIndicators = true;
-    private List<Vector3> PreviousIndicators = new List<Vector3>();
     private List<GameObject> Indicators = new List<GameObject>();
     // Use this for initialization
     void Start() {
@@ -27,8 +26,11 @@ public class BombPlacement : MonoBehaviour {
                     Destroy(ind);
                 }
             }
-            Transform place = PlaceBombIndicators().transform;
-            Indicators.Add(Instantiate(Indicator, place.transform.position, place.transform.rotation));
+            if (PlaceBombIndicators() != null)
+            {
+                Transform place = PlaceBombIndicators().transform;
+                Indicators.Add(Instantiate(Indicator, place.transform.position, place.transform.rotation));
+            }
         }
     }
 
@@ -171,7 +173,7 @@ public class BombPlacement : MonoBehaviour {
     }
     void OnDisable()
     {
-        Debug.Log(Indicators.Count);
+        //Debug.Log(Indicators.Count);
         if (Indicators.Count > 0)
         {
             while (Indicators.Count > 0)
