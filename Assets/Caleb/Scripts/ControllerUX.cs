@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ControllerUX : MonoBehaviour {
 
-    PlayerIndex pIdx = PlayerIndex.One;
+    public PlayerIndex pIdx;
     GamePadState state;
     GamePadState PrevState;
     public Button button;
@@ -26,7 +26,7 @@ public class ControllerUX : MonoBehaviour {
         if (state.Buttons.A == ButtonState.Pressed)
         {
             downCount++;
-            if (downCount >= 1)
+            if (downCount > 1)
             {
                 return false;
             }
@@ -58,9 +58,17 @@ public class ControllerUX : MonoBehaviour {
 
         if (trySelect != null)
         {
-            sound.Play();
+            if(sound != null)
+            {
+                sound.Play();
+            }
+            
             selectable = trySelect;
-            button = (Button)selectable;
+            if(selectable.GetComponent<Button>())
+            {
+                button = selectable.GetComponent<Button>();
+            }
+           
         }
 
         if (getButtonDown())
