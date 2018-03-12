@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
+    public AudioSource powerUp;
+    public AudioSource powerDown;
     public float speed;
     public BombPlacement placer;
     public float spawnTime;
@@ -36,8 +38,9 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        
+
         isAlive = true;
+
         rb = GetComponent<Rigidbody>();
         startingPickUpTimer = pickupTimer;
         startingSpawnTimer = spawnTime;
@@ -61,7 +64,7 @@ public class PlayerControl : MonoBehaviour
     {
         if(moveHorizontal != 0 || moveVertical != 0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .15f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 9 * Time.deltaTime);
         }
 
 
@@ -97,7 +100,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (powerUpText.color.a >= 1.0f)
+        if (powerUpText.color.a >= .9f)
         {
             fadeTimer -= Time.deltaTime;
         }
@@ -115,7 +118,7 @@ public class PlayerControl : MonoBehaviour
 
         //places the bomb above
 
-        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)
+        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed && Time.timeScale != 0)
         {
             if (isAlive == true)
             {
@@ -129,7 +132,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed && Time.timeScale != 0)
         {
             
             if (isAlive == true)
@@ -144,7 +147,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed)
+        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed && Time.timeScale != 0)
         {
             if (isAlive == true)
             {
@@ -158,7 +161,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed)
+        if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed && Time.timeScale != 0)
         {
             if (isAlive == true)
             {
@@ -235,6 +238,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if(spawnTime > 1f)
                 {
+                    powerUp.Play();
+
                     spawnTime -= .5f;
                     if (spawnTime <= 1f)
                     {
@@ -255,6 +260,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (spawnTime < startingSpawnTimer)
                 {
+                    powerDown.Play();
                     spawnTime += .5f;
                     if (spawnTime >= startingSpawnTimer)
                     {
@@ -273,6 +279,8 @@ public class PlayerControl : MonoBehaviour
 
             if ( other.tag == "Invincible")
             {
+                powerUp.Play();
+
                 isInvincible = true;
                 InvincibleParticles.gameObject.SetActive(true);
                 powerUpText.text = "Invincible";
@@ -288,6 +296,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if (bombRadius < 4)
                 {
+                    powerUp.Play();
+
                     bombRadius += 1;
                     PowerTextManager.SpawnText(TextManager.TextString.FireUp);
                     //fades text in
@@ -302,6 +312,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if (bombRadius > 1)
                 {
+                    powerDown.Play();
+
                     bombRadius -= 1;
                     PowerTextManager.SpawnText(TextManager.TextString.FireDown);
                     //fades text in
@@ -317,6 +329,8 @@ public class PlayerControl : MonoBehaviour
             {
                 if (speed > 3)
                 {
+                    powerDown.Play();
+
                     speed -= 1;
                     PowerTextManager.SpawnText(TextManager.TextString.SpeedDown);
                     //fades text in
@@ -333,6 +347,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (speed != 6)
                 {
+                    powerUp.Play();
                     speed += 1;
                     PowerTextManager.SpawnText(TextManager.TextString.SpeedUp);
                     //fades text in
