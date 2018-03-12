@@ -927,6 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627b948f4758ef941a104ccdee142fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons: {fileID: 0}
 --- !u!114 &1647698191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,6 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9640aef55605c7a4894ab910d8aea026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pIdx: 0
   button: {fileID: 862199148}
   sound: {fileID: 1647698198}
   selectable: {fileID: 0}
@@ -1351,7 +1353,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
