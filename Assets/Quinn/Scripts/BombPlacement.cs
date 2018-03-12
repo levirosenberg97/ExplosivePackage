@@ -173,7 +173,7 @@ public class BombPlacement : MonoBehaviour {
     }
     void OnDisable()
     {
-        Debug.Log(Indicators.Count);
+        //Debug.Log(Indicators.Count);
         if (Indicators.Count > 0)
         {
             while (Indicators.Count > 0)

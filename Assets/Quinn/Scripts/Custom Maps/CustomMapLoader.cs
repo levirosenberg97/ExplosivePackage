@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CustomMapLoader : MonoBehaviour {
     [Tooltip("Map settings to be loaded if the custom map isn't loaded correctly")]
@@ -62,6 +63,7 @@ public class CustomMapLoader : MonoBehaviour {
                 File.Copy(Application.streamingAssetsPath + @"/ExampleMap.txt", mapFolder + @"/ExampleMap.txt");
             }
         }
+        ConstructMap(ReadMap("ExampleMap"));
     }
 	
 	// Update is called once per frame
@@ -69,30 +71,42 @@ public class CustomMapLoader : MonoBehaviour {
 		
 	}
     //takes map data and creates a map
-    public void ConstructMap(MapData map)
+    public void ConstructMap(MapData map, int numberOfPlayers = 2)
     {
+        //find overlay for hooking in players
+        foreach (Text text in GameObject.FindObjectsOfType<Text>())
+        {
+            if (text.name == "Player1Text")
+            {
+
+            }
+        }
         //camera setting
         Camera cam = GameObject.FindObjectOfType<Camera>();
         cam.transform.SetPositionAndRotation(map.CamPosition, Quaternion.Euler(map.CamRotation));
         //map setting
         //tiles
+        //Vector3 TopLeft = new Vector3();
+        //Vector3 BottomRight = new Vector3();
         for (int i = 0; i < map.Tiles.Length; i++)
         {
             string line = map.Tiles[i];
             for (int j = 0; j < line.Length; j++)
             {
-                Vector3 position = new Vector3(0 + i, 0.5f, 0 - j);
+                Vector3 position = new Vector3(0 + j, 0.5f, 0 - i);
                 //top and bottom walls
                 if (i == 0 || i == map.Tiles.Length - 1)
                 {
                     Vector3 positionAdjustment = position;
                     if (i == 0)
                     {
-                        positionAdjustment.x--;
+                        //down
+                        positionAdjustment.z++;
                     }
                     else
                     {
-                        positionAdjustment.x++;
+                        //up
+                        positionAdjustment.z--;
                     }
                     //place unbreakable wall
                     Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
@@ -103,23 +117,25 @@ public class CustomMapLoader : MonoBehaviour {
                     Vector3 positionAdjustment = position;
                     if (j == 0)
                     {
-                        positionAdjustment.z--;
+                        //left
+                        positionAdjustment.x--;
                     }
                     else
                     {
-                        positionAdjustment.z++;
+                        //right
+                        positionAdjustment.x++;
                     }
                     //place unbreakable wall
                     Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
                     //corners
                     if (i == 0)
                     {
-                        positionAdjustment.x--;
+                        positionAdjustment.z++;
                         Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
                     }
                     else if (i == map.Tiles.Length - 1)
                     {
-                        positionAdjustment.x--;
+                        positionAdjustment.z--;
                         Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
                     }
                 }
@@ -139,34 +155,131 @@ public class CustomMapLoader : MonoBehaviour {
                 }
                 else if (c == '1')
                 {
-                    Instantiate(P1Spawn, position, P1Spawn.transform.rotation);
+                    if (numberOfPlayers >= 1)
+                    {
+                        GameObject spawnPoint = Instantiate(P1Spawn, position, P1Spawn.transform.rotation);
+                        PlayerControl Player = new PlayerControl();
+                        foreach (Transform child in spawnPoint.transform)
+                        {
+                            PlayerControl PC = child.GetComponent<PlayerControl>();
+                            if (PC != null)
+                            {
+                                Player = PC;
+                            }
+                        }
+                        foreach (Text text in GameObject.FindObjectsOfType<Text>())
+                        {
+                            if (text.name == "Player1Text")
+                            {
+                                Player.powerUpText = text;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
+                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                    }
                 }
                 else if (c == '2')
                 {
-                    Instantiate(P2Spawn, position, P2Spawn.transform.rotation);
+                    if (numberOfPlayers >= 2)
+                    {
+                        GameObject spawnPoint = Instantiate(P2Spawn, position, P2Spawn.transform.rotation);
+                        PlayerControl Player = new PlayerControl();
+                        foreach (Transform child in spawnPoint.transform)
+                        {
+                            PlayerControl PC = child.GetComponent<PlayerControl>();
+                            if (PC != null)
+                            {
+                                Player = PC;
+                            }
+                        }
+                        foreach (Text text in GameObject.FindObjectsOfType<Text>())
+                        {
+                            if (text.name == "Player2Text")
+                            {
+                                Player.powerUpText = text;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
+                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                    }
                 }
                 else if (c == '3')
                 {
-                    Instantiate(P3Spawn, position, P3Spawn.transform.rotation);
+                    if (numberOfPlayers >= 3)
+                    {
+                        GameObject spawnPoint = Instantiate(P3Spawn, position, P3Spawn.transform.rotation);
+                        PlayerControl Player = new PlayerControl();
+                        foreach (Transform child in spawnPoint.transform)
+                        {
+                            PlayerControl PC = child.GetComponent<PlayerControl>();
+                            if (PC != null)
+                            {
+                                Player = PC;
+                            }
+                        }
+                        foreach (Text text in GameObject.FindObjectsOfType<Text>())
+                        {
+                            if (text.name == "Player3Text")
+                            {
+                                Player.powerUpText = text;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
+                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                    }
                 }
                 else if (c == '4')
                 {
-                    Instantiate(P4Spawn, position, P4Spawn.transform.rotation);
+                    if (numberOfPlayers >= 4)
+                    {
+                        GameObject spawnPoint = Instantiate(P4Spawn, position, P4Spawn.transform.rotation);
+                        PlayerControl Player = new PlayerControl();
+                        foreach (Transform child in spawnPoint.transform)
+                        {
+                            PlayerControl PC = child.GetComponent<PlayerControl>();
+                            if (PC != null)
+                            {
+                                Player = PC;
+                            }
+                        }
+                        foreach (Text text in GameObject.FindObjectsOfType<Text>())
+                        {
+                            if (text.name == "Player4Text")
+                            {
+                                Player.powerUpText = text;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
+                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                    }
                 }
             }
         }
         //floor? (textures might cause issues so the renderer will be turned off)
-        GameObject floor = Instantiate(Floor, new Vector3(map.MapSize.x / 2, 0, -map.MapSize.y / 2), new Quaternion());
+        GameObject floor = Instantiate(Floor, new Vector3(-.5f + map.MapSize.x / 2, 0, .5f - map.MapSize.y / 2), Floor.transform.rotation);
         Vector3 scale = floor.transform.localScale;
-        scale.x = (map.MapSize.x / 10);
-        scale.z = (map.MapSize.y / 10);
+        scale.z = (map.MapSize.x / 10);
+        scale.x = (map.MapSize.y / 10);
         floor.transform.localScale = scale;
-        floor.GetComponent<Renderer>().enabled = false;
+        Renderer rend = floor.GetComponent<Renderer>();
+        rend.material.mainTextureScale = new Vector2(map.MapSize.y/5, map.MapSize.x / 5);
     }
     //reads info from text file and returns map data
     public MapData ReadMap(string mapFile)
     {
-        string path = Application.persistentDataPath + @"\Maps\" + mapFile + ".txt";
+        string path = Application.persistentDataPath + @"/Maps/" + mapFile + ".txt";
         MapData retval = new MapData()
         {
             MapSize = new Vector2(0, 0),
@@ -176,7 +289,9 @@ public class CustomMapLoader : MonoBehaviour {
         {
             bool setPos = false;
             bool setRot = false;
+            bool setTiles = false;
             var lines = File.ReadAllLines(path);
+            List<string> tileInfo = new List<string>();
             foreach (var line in lines)
             {
                 if (line[0] != '#')
@@ -249,7 +364,7 @@ public class CustomMapLoader : MonoBehaviour {
                             retval.CamRotation.x = floatlist[0];
                             retval.CamRotation.y = floatlist[1];
                             retval.CamRotation.z = floatlist[2];
-                            setPos = true;
+                            setRot = true;
                         }
                         else
                         {
@@ -257,8 +372,9 @@ public class CustomMapLoader : MonoBehaviour {
                             Debug.Log("map file has wrong number of rotation values");
                         }
                     }
-                    if (setPos && setRot)
+                    else if (setPos && setRot)
                     {
+                        setTiles = true;
                         //keep track of number of lines
                         retval.MapSize.y++;
                         //set line length
@@ -330,13 +446,18 @@ public class CustomMapLoader : MonoBehaviour {
                                 retval.LoadMessages.Add("unrecognized char " + c + " this will be replaced with a random value if there are no map loading errors");
                             }
                         }
-
+                        tileInfo.Add(retline);
                     }
                     
                 }
                 //ignore line if starts with #
             }
+            retval.Tiles = tileInfo.ToArray();
             bool LoadDefault = false;
+            if (setTiles == false || setPos == false || setRot == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set tiles, rotation or position");
+            }
             foreach (string line in retval.LoadMessages)
             {
                 if (line.Contains("ERROR"))

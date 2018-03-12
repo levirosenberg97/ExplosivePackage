@@ -8,7 +8,7 @@
 #3 	P3 SPAWN
 #4	P4 SPAWN
 #Camera Settings (note position:0,0,0 is ground level at the top left corner of the tiles, rotation:90,0,0 is the default camera rotation so that controls and map creation are logical)
-position:0,22.31,-0.12
+position:5,22.31,-6
 rotation:90,0,0
 #Map Tiles
 1  BBBBBBB  4
