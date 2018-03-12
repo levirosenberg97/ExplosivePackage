@@ -6,26 +6,49 @@ using UnityEngine.UI;
 public class GameAudio : MonoBehaviour {
 
     public AudioSource[] sound;
+
+    AudioSource currentSong;
+
+    public int currentIndex;
+
 	// Use this for initialization
 	void Start ()
     {
+        currentSong = sound[currentIndex];
+        currentSong.Play();
         DontDestroyOnLoad(gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if (!sound[0].isPlaying)
+
+        //if the current song is not playing
+        //then
+        //Find our next index and make sure not go over
+        //set our current song equal to the index that we found
+        //
+        //tell our currentSong to play
+        //
+         if (!currentSong.isPlaying)
         {
-            sound[1].Play();
+            currentIndex++;
+            if (currentIndex >= 5)
+            {
+                currentIndex = 0;
+                currentSong = sound[currentIndex];
+                currentSong.Play();
+            }
+            currentSong = sound[currentIndex];
+            currentSong.Play();
         }
-        else if (!sound[1].isPlaying)
-        {
-            sound[2].Play();
-        }
-        else if (!sound[2].isPlaying)
-        {
-            sound[0].Play();
-        }
+         
+
+
+        //To wrap the index
+        //
+
+
+
 	}
 }
