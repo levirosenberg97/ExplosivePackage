@@ -6,7 +6,6 @@ public class BombPlacement : MonoBehaviour {
     public GameObject BombObject;
     public GameObject Indicator;
     public bool EnableIndicators = true;
-    private List<Vector3> PreviousIndicators = new List<Vector3>();
     private List<GameObject> Indicators = new List<GameObject>();
     // Use this for initialization
     void Start() {

@@ -107,11 +107,11 @@ public class Bomb : MonoBehaviour {
     {
         public List<Health> toBeDamaged;
         public List<Vector3> explosionEffects;
+        public List<Bomb> ToBeExploded;
     }
     private ExplosionInfo ValidTargets(RaycastHit[] hit)
     {
-        //holds items that are within blast radius in a direction that might need the explosion effect
-        List<GameObject> potentialEffects = new List<GameObject>();
+        List<Bomb> ChainedBombs = new List<Bomb>();
         //holds positions that will get the explosion effect spawned on them
         List<Vector3> explosions = new List<Vector3>();
         //list of health components that will take damage from this exposion
@@ -237,7 +237,7 @@ public class Bomb : MonoBehaviour {
                         Bomb bomb = interactor.GetComponent<Bomb>();
                         if (bomb.Exploded == false)
                         {
-                            bomb.timer = bomb.fuseTime + 1;
+                            ChainedBombs.Add(bomb);
                             //interactor.GetComponent<Bomb>().Explode();
                         }
                     }
@@ -245,6 +245,7 @@ public class Bomb : MonoBehaviour {
             }
         }
         ExplosionInfo retValue;
+        retValue.ToBeExploded = ChainedBombs;
         retValue.toBeDamaged = retVal;
         retValue.explosionEffects = explosions;
         return retValue;
@@ -288,6 +289,10 @@ public class Bomb : MonoBehaviour {
                 {
                     explosionOrigins.Add(explosionOrigin);
                 }
+                foreach(Bomb bomb in info.ToBeExploded)
+                {
+                    bomb.timer = bomb.fuseTime + 1;
+                }
                 rayDir = Quaternion.AngleAxis(90, transform.up) * rayDir;
             }
             //deal damage
@@ -305,35 +310,9 @@ public class Bomb : MonoBehaviour {
                 Instantiate(SmallExplosion, position, gameObject.transform.rotation);
             }
             //destroy bomb
-            Debug.Log("exploded " + explosionOrigins.Count);
             Exploded = true;
             Destroy(gameObject);
         }
-        else
-        {
-            Vector3 rayDir = transform.forward;
-            List<Vector3> explosionOrigins = new List<Vector3>();
-            for (int i = 0; i < 4; i++)
-            {
-                ExplosionInfo info = ValidTargets(Physics.RaycastAll(gameObject.transform.position, rayDir, Radius));
-                foreach (Vector3 explosionOrigin in info.explosionEffects)
-                {
-                    explosionOrigins.Add(explosionOrigin);
-                }
-                rayDir = Quaternion.AngleAxis(90, transform.up) * rayDir;
-            }
-            //tell the triggerzone that it no longer contains a bomb
-            DropZone.GetComponent<BombDropZone>().hasBomb = false;
-            //spawn explosion effect
-            Instantiate(Explosion, gameObject.transform.position, gameObject.transform.rotation);
-            foreach (Vector3 position in explosionOrigins)
-            {
-                //spawn small explosion effect
-                Instantiate(SmallExplosion, position, gameObject.transform.rotation);
-            }
-            //destroy bomb
-            Debug.Log("exploded a exploded bomb" + explosionOrigins.Count);
-            Destroy(gameObject);
-        }
+        
     }
 }
