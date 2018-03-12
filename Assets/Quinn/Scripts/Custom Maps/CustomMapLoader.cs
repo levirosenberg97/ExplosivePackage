@@ -9,6 +9,7 @@ public class CustomMapLoader : MonoBehaviour {
     [Header("Default map settings")]
     public Vector3 CameraPosition = new Vector3 (0,22.31f,-0.12f);
     public Vector3 CameraRotation = new Vector3(90, 0, 0);
+    public float CameraSize = 6.64601f;
     public string[] TileInfo = new string[11] {
         "1  BBBBBBB  4",
         " UBUBUBUBUBU ",
@@ -45,6 +46,136 @@ public class CustomMapLoader : MonoBehaviour {
     public bool CreateMapFolder = true;
     [Tooltip("Create Map Folder must be enabled for this to work\nWill create a map file of the default map as an example with a map key included")]
     public bool CreateExampleMap = true;
+
+    private RawImage player3Face;
+    private RawImage player4Face;
+
+    private Slider player3Slider;
+    private Slider player4Slider;
+
+    private GameObject player3Indicator;
+    private GameObject player4Indicator;
+    void HookUpPlayers(GameObject P1, GameObject P2, GameObject P3, GameObject P4)
+    {
+        WinScreen screen = GameObject.FindObjectOfType<WinScreen>();
+        screen.player1 = P1.GetComponent<PlayerControl>();
+        screen.player2 = P2.GetComponent<PlayerControl>();
+        screen.player3 = P3.GetComponent<PlayerControl>();
+        screen.player4 = P4.GetComponent<PlayerControl>();
+        screen.playerCount = 4;
+        foreach (Canvas canvas in GameObject.FindObjectsOfType<Canvas>())
+        {
+            if (canvas.name == "Overlay")
+            {
+                foreach (Transform sectiont in canvas.transform)
+                {
+                    GameObject section = sectiont.gameObject;
+                    if (section.name == "Faces")
+                    {
+                        foreach (Transform childt in section.transform)
+                        {
+                            GameObject child = childt.gameObject;
+                            if (child.name == "Player1")
+                            {
+                                child.GetComponent<DeathVibration>().player = P1.GetComponent<PlayerControl>();
+                                child.GetComponent<DeathIndicator>().player = P1.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player2")
+                            {
+                                child.GetComponent<DeathVibration>().player = P2.GetComponent<PlayerControl>();
+                                child.GetComponent<DeathIndicator>().player = P2.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player3")
+                            {
+                                player3Face = child.GetComponent<RawImage>();
+                                child.GetComponent<DeathVibration>().player = P3.GetComponent<PlayerControl>();
+                                child.GetComponent<DeathIndicator>().player = P3.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player4")
+                            {
+                                player4Face = child.GetComponent<RawImage>();
+                                child.GetComponent<DeathVibration>().player = P4.GetComponent<PlayerControl>();
+                                child.GetComponent<DeathIndicator>().player = P4.GetComponent<PlayerControl>();
+                            }
+                        }
+                    }
+                    else if (section.name == "BombIndiacators")
+                    {
+                        foreach (Transform childt in section.transform)
+                        {
+                            GameObject child = childt.gameObject;
+                            if (child.name == "Player1Slider")
+                            {
+                                child.GetComponent<bombTimer>().player = P1.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player2Slider")
+                            {
+                                child.GetComponent<bombTimer>().player = P2.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player3Slider")
+                            {
+                                child.GetComponent<bombTimer>().player = P3.GetComponent<PlayerControl>();
+                                player3Slider = child.GetComponent<Slider>();
+                            }
+                            if (child.name == "Player4Slider")
+                            {
+                                child.GetComponent<bombTimer>().player = P3.GetComponent<PlayerControl>();
+                                player4Slider = child.GetComponent<Slider>();
+                            }
+                        }
+                    }
+                    else if (section.name == "PowerUpIndicators")
+                    {
+                        foreach (Transform childt in section.transform)
+                        {
+                            GameObject child = childt.gameObject;
+                            if (child.name == "Player1Flames")
+                            {
+                                child.GetComponent<PowerUpIndicator>().player = P1.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player2Flames")
+                            {
+                                child.GetComponent<PowerUpIndicator>().player = P2.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player3Flames")
+                            {
+                                player3Indicator = child;
+                                child.GetComponent<PowerUpIndicator>().player = P3.GetComponent<PlayerControl>();
+                            }
+                            if (child.name == "Player4Flames")
+                            {
+                                player4Indicator = child;
+                                child.GetComponent<PowerUpIndicator>().player = P4.GetComponent<PlayerControl>();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    void RemovePlayer(GameObject Player, bool P4 = true)
+    {
+        WinScreen screen = GameObject.FindObjectOfType<WinScreen>();
+        Player.SetActive(false);
+        if (P4)
+        {
+            player4Face.gameObject.SetActive(false);
+            player4Slider.gameObject.SetActive(false);
+            player4Indicator.SetActive(false);
+
+            screen.playerCount--;
+            screen.player4Died = true;
+        }
+        else
+        {
+            player3Face.gameObject.SetActive(false);
+            player3Slider.gameObject.SetActive(false);
+            player3Indicator.SetActive(false);
+
+            screen.playerCount--;
+            screen.player3Died = true;
+        }
+    }
     // Use this for initialization
     void Start () {
         Debug.Log(Application.persistentDataPath);
@@ -63,7 +194,7 @@ public class CustomMapLoader : MonoBehaviour {
                 File.Copy(Application.streamingAssetsPath + @"/ExampleMap.txt", mapFolder + @"/ExampleMap.txt");
             }
         }
-        ConstructMap(ReadMap("ExampleMap"));
+        ConstructMap(ReadMap("ExampleMap"), 2);
     }
 	
 	// Update is called once per frame
@@ -73,17 +204,15 @@ public class CustomMapLoader : MonoBehaviour {
     //takes map data and creates a map
     public void ConstructMap(MapData map, int numberOfPlayers = 2)
     {
-        //find overlay for hooking in players
-        foreach (Text text in GameObject.FindObjectsOfType<Text>())
-        {
-            if (text.name == "Player1Text")
-            {
-
-            }
-        }
+        GameObject P1 = gameObject;
+        GameObject P2 = gameObject;
+        GameObject P3 = gameObject;
+        GameObject P4 = gameObject;
+        GameObject Parent = (new GameObject("Map"));
         //camera setting
         Camera cam = GameObject.FindObjectOfType<Camera>();
         cam.transform.SetPositionAndRotation(map.CamPosition, Quaternion.Euler(map.CamRotation));
+        cam.orthographicSize = map.CamSize;
         //map setting
         //tiles
         //Vector3 TopLeft = new Vector3();
@@ -109,7 +238,7 @@ public class CustomMapLoader : MonoBehaviour {
                         positionAdjustment.z--;
                     }
                     //place unbreakable wall
-                    Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
+                    Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation).transform.SetParent(Parent.transform);
                 }
                 //right and left walls as well as corners
                 if (j == 0 || j == line.Length - 1)
@@ -126,38 +255,39 @@ public class CustomMapLoader : MonoBehaviour {
                         positionAdjustment.x++;
                     }
                     //place unbreakable wall
-                    Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
+                    Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation).transform.SetParent(Parent.transform);
                     //corners
                     if (i == 0)
                     {
                         positionAdjustment.z++;
-                        Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
+                        Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation).transform.SetParent(Parent.transform);
                     }
                     else if (i == map.Tiles.Length - 1)
                     {
                         positionAdjustment.z--;
-                        Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation);
+                        Instantiate(UnbreakableWall, positionAdjustment, UnbreakableWall.transform.rotation).transform.SetParent(Parent.transform);
                     }
                 }
                 char c = line[j];
                 //place tiles
                 if (c == 'U')
                 {
-                    Instantiate(UnbreakableWall, position, UnbreakableWall.transform.rotation);
+                    Instantiate(UnbreakableWall, position, UnbreakableWall.transform.rotation).transform.SetParent(Parent.transform);
                 }
                 else if (c == 'B')
                 {
-                    Instantiate(BreakableWall, position, BreakableWall.transform.rotation);
+                    Instantiate(BreakableWall, position, BreakableWall.transform.rotation).transform.SetParent(Parent.transform);
                 }
                 else if (c == ' ')
                 {
-                    Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                    Instantiate(BombDropZone, position, BombDropZone.transform.rotation).transform.SetParent(Parent.transform);
                 }
                 else if (c == '1')
                 {
                     if (numberOfPlayers >= 1)
                     {
                         GameObject spawnPoint = Instantiate(P1Spawn, position, P1Spawn.transform.rotation);
+                        spawnPoint.transform.SetParent(Parent.transform);
                         PlayerControl Player = new PlayerControl();
                         foreach (Transform child in spawnPoint.transform)
                         {
@@ -174,11 +304,12 @@ public class CustomMapLoader : MonoBehaviour {
                                 Player.powerUpText = text;
                             }
                         }
+                        P1 = Player.gameObject;
                     }
                     else
                     {
-                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
-                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                        Debug.Log("player count to low play");
+                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation).transform.SetParent(Parent.transform);
                     }
                 }
                 else if (c == '2')
@@ -186,6 +317,7 @@ public class CustomMapLoader : MonoBehaviour {
                     if (numberOfPlayers >= 2)
                     {
                         GameObject spawnPoint = Instantiate(P2Spawn, position, P2Spawn.transform.rotation);
+                        spawnPoint.transform.SetParent(Parent.transform);
                         PlayerControl Player = new PlayerControl();
                         foreach (Transform child in spawnPoint.transform)
                         {
@@ -202,73 +334,76 @@ public class CustomMapLoader : MonoBehaviour {
                                 Player.powerUpText = text;
                             }
                         }
+                        P2 = Player.gameObject;
                     }
                     else
                     {
-                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
-                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                        Debug.Log("player count to low play");
+                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation).transform.SetParent(Parent.transform);
                     }
                 }
                 else if (c == '3')
                 {
-                    if (numberOfPlayers >= 3)
+                    GameObject spawnPoint = Instantiate(P3Spawn, position, P3Spawn.transform.rotation);
+                    spawnPoint.transform.SetParent(Parent.transform);
+                    PlayerControl Player = new PlayerControl();
+                    foreach (Transform child in spawnPoint.transform)
                     {
-                        GameObject spawnPoint = Instantiate(P3Spawn, position, P3Spawn.transform.rotation);
-                        PlayerControl Player = new PlayerControl();
-                        foreach (Transform child in spawnPoint.transform)
+                        PlayerControl PC = child.GetComponent<PlayerControl>();
+                        if (PC != null)
                         {
-                            PlayerControl PC = child.GetComponent<PlayerControl>();
-                            if (PC != null)
-                            {
-                                Player = PC;
-                            }
-                        }
-                        foreach (Text text in GameObject.FindObjectsOfType<Text>())
-                        {
-                            if (text.name == "Player3Text")
-                            {
-                                Player.powerUpText = text;
-                            }
+                            Player = PC;
                         }
                     }
-                    else
+                    foreach (Text text in GameObject.FindObjectsOfType<Text>())
                     {
-                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
-                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                        if (text.name == "Player3Text")
+                        {
+                            Player.powerUpText = text;
+                        }
                     }
+                    P3 = Player.gameObject;
                 }
                 else if (c == '4')
                 {
-                    if (numberOfPlayers >= 4)
+                    GameObject spawnPoint = Instantiate(P4Spawn, position, P4Spawn.transform.rotation);
+                    spawnPoint.transform.SetParent(Parent.transform);
+                    PlayerControl Player = new PlayerControl();
+                    foreach (Transform child in spawnPoint.transform)
                     {
-                        GameObject spawnPoint = Instantiate(P4Spawn, position, P4Spawn.transform.rotation);
-                        PlayerControl Player = new PlayerControl();
-                        foreach (Transform child in spawnPoint.transform)
+                        PlayerControl PC = child.GetComponent<PlayerControl>();
+                        if (PC != null)
                         {
-                            PlayerControl PC = child.GetComponent<PlayerControl>();
-                            if (PC != null)
-                            {
-                                Player = PC;
-                            }
-                        }
-                        foreach (Text text in GameObject.FindObjectsOfType<Text>())
-                        {
-                            if (text.name == "Player4Text")
-                            {
-                                Player.powerUpText = text;
-                            }
+                            Player = PC;
                         }
                     }
-                    else
+                    foreach (Text text in GameObject.FindObjectsOfType<Text>())
                     {
-                        Debug.Log("player count to low to spawn player, will be replaced with a bomb drop zone");
-                        Instantiate(BombDropZone, position, BombDropZone.transform.rotation);
+                        if (text.name == "Player4Text")
+                        {
+                            Player.powerUpText = text;
+                        }
                     }
+                    P4 = Player.gameObject;
                 }
             }
         }
+        if (P1 != gameObject && P2 != gameObject && P3 != gameObject && P4 != gameObject)
+        {
+            HookUpPlayers(P1, P2, P3, P4);
+            if (numberOfPlayers < 4)
+            {
+                RemovePlayer(P4, true);
+            }
+            if (numberOfPlayers < 3)
+            {
+                RemovePlayer(P3, false);
+            }
+        }
+        
         //floor? (textures might cause issues so the renderer will be turned off)
         GameObject floor = Instantiate(Floor, new Vector3(-.5f + map.MapSize.x / 2, 0, .5f - map.MapSize.y / 2), Floor.transform.rotation);
+        floor.transform.SetParent(Parent.transform);
         Vector3 scale = floor.transform.localScale;
         scale.z = (map.MapSize.x / 10);
         scale.x = (map.MapSize.y / 10);
@@ -289,6 +424,7 @@ public class CustomMapLoader : MonoBehaviour {
         {
             bool setPos = false;
             bool setRot = false;
+            bool setSize = false;
             bool setTiles = false;
             var lines = File.ReadAllLines(path);
             List<string> tileInfo = new List<string>();
@@ -372,7 +508,37 @@ public class CustomMapLoader : MonoBehaviour {
                             Debug.Log("map file has wrong number of rotation values");
                         }
                     }
-                    else if (setPos && setRot)
+                    else if (setSize == false && (line.Contains("size:") || line.Contains("Size:")))
+                    {
+                        int start = 0;
+                        for (int i = 0; i < line.Length; i++)
+                        {
+                            //checks for starting char
+                            if (line[i] == ':')
+                            {
+                                start = i + 1;
+                                i = line.Length;
+                            }
+                        }
+                        //create string of everything past the starting char
+                        string positionStr = "";
+                        for (int i = start; i < line.Length; i++)
+                        {
+                            positionStr = positionStr + line[i];
+                        }
+                        float f;
+                        if (float.TryParse(positionStr, out f))
+                        {
+                            setSize = true;
+                            retval.CamSize = f;
+                        }
+                        else
+                        {
+                            retval.LoadMessages.Add("ERROR size value not valid");
+                            Debug.Log("map file has a bad size value");
+                        }
+                    }
+                    else if (setPos && setRot && setSize)
                     {
                         setTiles = true;
                         //keep track of number of lines
@@ -454,9 +620,9 @@ public class CustomMapLoader : MonoBehaviour {
             }
             retval.Tiles = tileInfo.ToArray();
             bool LoadDefault = false;
-            if (setTiles == false || setPos == false || setRot == false)
+            if (setTiles == false || setPos == false || setRot == false || setSize == false)
             {
-                retval.LoadMessages.Add("ERROR failed to set tiles, rotation or position");
+                retval.LoadMessages.Add("ERROR failed to set tiles, rotation, position or camera size");
             }
             foreach (string line in retval.LoadMessages)
             {
@@ -478,6 +644,7 @@ public class CustomMapLoader : MonoBehaviour {
         retval.CamPosition = CameraPosition;
         retval.CamRotation = CameraRotation;
         retval.MapSize = new Vector2(TileInfo[0].Length, TileInfo.Length);
+        retval.CamSize = CameraSize;
         retval.Tiles = TileInfo;
         retval.LoadMessages.Add("loaded default map");
         return retval;
@@ -489,6 +656,7 @@ public class CustomMapLoader : MonoBehaviour {
         //holds camera info
         public Vector3 CamPosition;
         public Vector3 CamRotation;
+        public float CamSize;
         //holds map info
         public Vector2 MapSize;
         public string[] Tiles;
