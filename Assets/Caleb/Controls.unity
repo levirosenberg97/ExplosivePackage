@@ -266,7 +266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 894706119}
-  sound: {fileID: 323222883}
   selectable: {fileID: 0}
 --- !u!82 &323222883
 AudioSource:
