@@ -45,7 +45,8 @@ public class ReadyBehavior : MonoBehaviour {
             state = GamePad.GetState(pIdx);
             if (state.Buttons.Start == ButtonState.Pressed)
             {
-                SceneManager.LoadScene("Level");
+                SceneManager.LoadScene("PlayerTestScene1");
+                
             }
         }
 	}

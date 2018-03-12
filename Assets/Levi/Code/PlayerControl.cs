@@ -38,8 +38,9 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        
+
         isAlive = true;
+
         rb = GetComponent<Rigidbody>();
         startingPickUpTimer = pickupTimer;
         startingSpawnTimer = spawnTime;
@@ -63,7 +64,7 @@ public class PlayerControl : MonoBehaviour
     {
         if(moveHorizontal != 0 || moveVertical != 0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .15f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 9 * Time.deltaTime);
         }
 
 
@@ -117,7 +118,7 @@ public class PlayerControl : MonoBehaviour
 
         //places the bomb above
 
-        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed)
+        if (prevState.Buttons.Y == ButtonState.Released && state.Buttons.Y == ButtonState.Pressed && Time.timeScale != 0)
         {
             if (isAlive == true)
             {
@@ -131,7 +132,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed && Time.timeScale != 0)
         {
             
             if (isAlive == true)
@@ -146,7 +147,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed)
+        if (prevState.Buttons.X == ButtonState.Released && state.Buttons.X == ButtonState.Pressed && Time.timeScale != 0)
         {
             if (isAlive == true)
             {
@@ -160,7 +161,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed)
+        if (prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed && Time.timeScale != 0)
         {
             if (isAlive == true)
             {

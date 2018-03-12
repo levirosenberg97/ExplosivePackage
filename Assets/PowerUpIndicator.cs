@@ -42,5 +42,11 @@ public class PowerUpIndicator : MonoBehaviour
         {
             flame3.texture = activated;
         }
+
+
+        if( player.isAlive == false)
+        {
+            gameObject.SetActive(false);
+        }
 	}
 }
