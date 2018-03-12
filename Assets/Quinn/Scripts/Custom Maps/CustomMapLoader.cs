@@ -169,7 +169,7 @@ public class CustomMapLoader : MonoBehaviour {
         string path = Application.persistentDataPath + @"\Maps\" + mapFile + ".txt";
         MapData retval = new MapData()
         {
-            MapSize = new Vector2Int(0, 0),
+            MapSize = new Vector2(0, 0),
             LoadMessages = new List<string>()
         };
         if (File.Exists(path))
@@ -356,7 +356,7 @@ public class CustomMapLoader : MonoBehaviour {
         }
         retval.CamPosition = CameraPosition;
         retval.CamRotation = CameraRotation;
-        retval.MapSize = new Vector2Int(TileInfo[0].Length, TileInfo.Length);
+        retval.MapSize = new Vector2(TileInfo[0].Length, TileInfo.Length);
         retval.Tiles = TileInfo;
         retval.LoadMessages.Add("loaded default map");
         return retval;
@@ -369,7 +369,7 @@ public class CustomMapLoader : MonoBehaviour {
         public Vector3 CamPosition;
         public Vector3 CamRotation;
         //holds map info
-        public Vector2Int MapSize;
+        public Vector2 MapSize;
         public string[] Tiles;
         //holds info that was generated on read/load
         public List<string> LoadMessages;
