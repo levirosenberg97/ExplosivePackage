@@ -23,15 +23,18 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Levi/Scenes/PlayerTestScene1.unity
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/8c91a873f0c510a4493bd13bf7c581cd
     guid: 8c91a873f0c510a4493bd13bf7c581cd
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Quinn/Scenes/QuinnTestScene.unity
     guid: c642035f27684ce48b846d36913aef4f
   - enabled: 1
     path: Assets/Levi/Scenes/Level.unity
-    guid: e6873b5f64764234bb8369986ec01a01
+    guid: a911c672f4e16d24c9b7dd65934cbd5e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000

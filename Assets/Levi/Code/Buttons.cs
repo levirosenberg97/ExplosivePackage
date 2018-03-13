@@ -16,6 +16,7 @@ public class Buttons : MonoBehaviour
     public void LoadScene(string wool)
     {
         SceneManager.LoadScene(wool);
+        Time.timeScale = 1;
     }
 
     public void QuitGame()
