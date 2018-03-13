@@ -2,7 +2,7 @@
 position:5,30,-4
 rotation:90,0,0
 size:5.5
-#Tile Data
+#Map Tiles
 RRRRRRRRRRR
 R    B    R
 R    B    R
