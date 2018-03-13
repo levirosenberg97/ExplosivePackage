@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject PowerTextManagerObj;
     private TextManager PowerTextManager;
 
-    public float vibrationCounter = 1;
+    public float vibrationCounter = .5f;
 
     // Use this for initialization
     void Start ()

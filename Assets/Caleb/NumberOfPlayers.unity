@@ -996,6 +996,7 @@ MonoBehaviour:
   - {fileID: 2104668167}
   - {fileID: 792712868}
   readyStart: 0
+  scene: Level
   startText: {fileID: 965838448}
 --- !u!82 &987222701
 AudioSource:
@@ -1713,7 +1714,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Start to Play
+  m_Text: P1 Press Start to Play
 --- !u!222 &2058294788
 CanvasRenderer:
   m_ObjectHideFlags: 0
