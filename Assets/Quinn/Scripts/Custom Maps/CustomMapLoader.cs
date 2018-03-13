@@ -43,9 +43,9 @@ public class CustomMapLoader : MonoBehaviour {
     [Tooltip("This should be an invisible plane for the players to stand on that will be sized according to map size")]
     public GameObject Floor;
     [Tooltip("If enabled will check for a map folder, if one is not found it will create one")]
-    public bool CreateMapFolder = true;
+    public bool CreateMapFolder = false;
     [Tooltip("Create Map Folder must be enabled for this to work\nWill create a map file of the default map as an example with a map key included")]
-    public bool CreateExampleMap = true;
+    public bool CreateExampleMap = false;
 
     private RawImage player3Face;
     private RawImage player4Face;
@@ -577,12 +577,12 @@ public class CustomMapLoader : MonoBehaviour {
                             else if (c == 'R' || c == 'r')
                             {
                                 char randomized;
-                                int rand = Random.Range(1, 3);
+                                int rand = Random.Range(1, 4);
                                 if (rand == 1)
                                 {
                                     randomized = 'B';
                                 }
-                                if (rand == 2)
+                                else if (rand == 2)
                                 {
                                     randomized = 'U';
                                 }
@@ -596,12 +596,12 @@ public class CustomMapLoader : MonoBehaviour {
                             {
                                 //UNRECOGNIZED CHAR
                                 char randomized;
-                                int rand = Random.Range(1, 3);
+                                int rand = Random.Range(1, 4);
                                 if (rand == 1)
                                 {
                                     randomized = 'B';
                                 }
-                                if (rand == 2)
+                                else if (rand == 2)
                                 {
                                     randomized = 'U';
                                 }

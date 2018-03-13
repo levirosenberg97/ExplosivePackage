@@ -8,7 +8,9 @@ public class NamePasser : MonoBehaviour {
     public static NamePasser instace = null;
     public bool CreateMapFolder = true;
     public bool CreateExampleMap = true;
-	// Use this for initialization
+    public bool CreateRandomMap = true;
+    public bool CreateFailMap = true;
+    // Use this for initialization
 
     void Awake()
     {
@@ -35,6 +37,18 @@ public class NamePasser : MonoBehaviour {
             //creates example map file
             Debug.Log(Application.streamingAssetsPath);
             File.Copy(Application.streamingAssetsPath + @"/ExampleMap.txt", mapFolder + @"/ExampleMap.txt");
+        }
+        if (File.Exists(mapFolder + @"/RandomMap.txt") == false && CreateExampleMap == true)
+        {
+            //creates example map file
+            Debug.Log(Application.streamingAssetsPath);
+            File.Copy(Application.streamingAssetsPath + @"/RandomMap.txt", mapFolder + @"/RandomMap.txt");
+        }
+        if (File.Exists(mapFolder + @"/FailMap.txt") == false && CreateExampleMap == true)
+        {
+            //creates example map file
+            Debug.Log(Application.streamingAssetsPath);
+            File.Copy(Application.streamingAssetsPath + @"/FailMap.txt", mapFolder + @"/FailMap.txt");
         }
     }
 	
@@ -222,12 +236,12 @@ public class NamePasser : MonoBehaviour {
                             else if (c == 'R' || c == 'r')
                             {
                                 char randomized;
-                                int rand = Random.Range(1, 3);
+                                int rand = Random.Range(1, 4);
                                 if (rand == 1)
                                 {
                                     randomized = 'B';
                                 }
-                                if (rand == 2)
+                                else if (rand == 2)
                                 {
                                     randomized = 'U';
                                 }
@@ -241,12 +255,12 @@ public class NamePasser : MonoBehaviour {
                             {
                                 //UNRECOGNIZED CHAR
                                 char randomized;
-                                int rand = Random.Range(1, 3);
+                                int rand = Random.Range(1, 4);
                                 if (rand == 1)
                                 {
                                     randomized = 'B';
                                 }
-                                if (rand == 2)
+                                else if (rand == 2)
                                 {
                                     randomized = 'U';
                                 }
