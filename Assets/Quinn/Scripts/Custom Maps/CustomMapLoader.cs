@@ -151,6 +151,36 @@ public class CustomMapLoader : MonoBehaviour {
                     }
                 }
             }
+            if (canvas.name == "PauseScreen")
+            {
+                List<GameObject> players = new List<GameObject>();
+                players.Add(P1);
+                players.Add(P2);
+                players.Add(P3);
+                players.Add(P4);
+                foreach (GameObject p in players)
+                {
+                    PauseScript pause = p.GetComponent<PauseScript>();
+                    pause.pauseScreen = canvas;
+                    pause.pausedPlayer = canvas.GetComponent<ControllerUX>();
+                    Button[] buttons = GameObject.FindObjectsOfType<Button>();
+                    foreach (Button b in buttons)
+                    {
+                        if (b.name == "ResumeButton")
+                        {
+                            pause.resumeButton = b;
+                        }
+                        if (b.name == "MenuButton")
+                        {
+                            pause.menuButton = b;
+                        }
+                        if (b.name == "ExitButton")
+                        {
+                            pause.exitButton = b;
+                        }
+                    }
+                }
+            }
         }
     }
     void RemovePlayer(GameObject Player, bool P4 = true)
