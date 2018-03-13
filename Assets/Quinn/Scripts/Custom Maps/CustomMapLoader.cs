@@ -194,7 +194,8 @@ public class CustomMapLoader : MonoBehaviour {
                 File.Copy(Application.streamingAssetsPath + @"/ExampleMap.txt", mapFolder + @"/ExampleMap.txt");
             }
         }
-        ConstructMap(ReadMap("ExampleMap"), 2);
+        //pull filename from name passer
+        ConstructMap(ReadMap(GameObject.FindObjectOfType<NamePasser>().FileName), 2);
     }
 	
 	// Update is called once per frame

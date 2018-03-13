@@ -1531,6 +1531,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114608115431198406, guid: 50f55c44f0a17d442847344c8349a826,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4970888767564120, guid: 50f55c44f0a17d442847344c8349a826, type: 2}
       propertyPath: m_LocalPosition.x
       value: 772.0899
@@ -1997,6 +2002,16 @@ Prefab:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 2800000, guid: 2daf4d50c37de6942bb90f37a83d1783, type: 3}
+    - target: {fileID: 114608115431198406, guid: 50f55c44f0a17d442847344c8349a826,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114608115431198406, guid: 50f55c44f0a17d442847344c8349a826,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50f55c44f0a17d442847344c8349a826, type: 2}
   m_IsPrefabParent: 0

@@ -11,6 +11,7 @@ public class ReadyBehavior : MonoBehaviour {
     PlayerIndex pIdx = PlayerIndex.One;
     GamePadState state;
     public bool readyStart;
+    public string scene = "PlayerTestScene1";
     // Use this for initialization
     void Start ()
     {
@@ -45,7 +46,7 @@ public class ReadyBehavior : MonoBehaviour {
             state = GamePad.GetState(pIdx);
             if (state.Buttons.Start == ButtonState.Pressed)
             {
-                SceneManager.LoadScene("PlayerTestScene1");
+                SceneManager.LoadScene(scene);
                 
             }
         }
