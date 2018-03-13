@@ -19,6 +19,7 @@ public class SelectMap : MonoBehaviour {
         {
             selection.options.Add(new Dropdown.OptionData(Path.GetFileNameWithoutExtension(file)));
         }
+        selection.captionText.text = selection.options[0].text;
     }
 	// Update is called once per frame
 	void Update () {
