@@ -38,7 +38,7 @@ public class WinScreen : MonoBehaviour
 
     private void Start()
     {
-        playerCount = 2; //ReadyBehavior.players;
+        playerCount = ReadyBehavior.players;
 
         player1Died = false;
         player2Died = false;

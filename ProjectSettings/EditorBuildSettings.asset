@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: a8749fa0395abff4e894b9c45a9cf541
   - enabled: 0
     path: 
-    guid: 57704c6972cd59e44a80f7244a0ed06d
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Caleb/Menu.unity
     guid: 35268569863831c439b574262280fde0
@@ -28,7 +28,7 @@ EditorBuildSettings:
     guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
-    guid: 8c91a873f0c510a4493bd13bf7c581cd
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -47,7 +47,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levi/Scenes/PlayerTestScene1.unity
     guid: 56878b4cab24c9543be01cbb0bcead6a
   - enabled: 1

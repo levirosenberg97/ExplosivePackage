@@ -513,12 +513,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95da2bf0a2a159b4daaedc91450ce787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseScreen: {fileID: 0}
+  pauseScreen: {fileID: 223581341869996728, guid: dbacef520b88bbd4daa55d36fdc413fc,
+    type: 2}
   pIdx: 0
-  pausedPlayer: {fileID: 0}
-  resumeButton: {fileID: 0}
-  menuButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  pausedPlayer: {fileID: 114463675676973672, guid: dbacef520b88bbd4daa55d36fdc413fc,
+    type: 2}
+  resumeButton: {fileID: 114809399107365274, guid: dbacef520b88bbd4daa55d36fdc413fc,
+    type: 2}
+  menuButton: {fileID: 114630100016746686, guid: dbacef520b88bbd4daa55d36fdc413fc,
+    type: 2}
+  exitButton: {fileID: 114359452095014934, guid: dbacef520b88bbd4daa55d36fdc413fc,
+    type: 2}
   highlightColor:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8117648, g: 0.34901962, b: 0.34117648, a: 1}
