@@ -27,6 +27,11 @@ public class MenuController : MonoBehaviour {
     {
         SceneManager.LoadScene("Menu");
     }
+
+    public void Custom()
+    {
+        SceneManager.LoadScene("NumberOfPlayersCustom");
+    }
     // Use this for initialization
     void Start()
     {
