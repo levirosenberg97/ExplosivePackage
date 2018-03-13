@@ -23,7 +23,7 @@ public class ControllerUX : MonoBehaviour {
     public bool getButtonDown()
     {
 
-        if (state.Buttons.A == ButtonState.Pressed)
+        if (PrevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             downCount++;
             if (downCount > 1)

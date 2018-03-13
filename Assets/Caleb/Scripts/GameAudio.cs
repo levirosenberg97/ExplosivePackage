@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameAudio : MonoBehaviour {
 
     public AudioSource[] sound;
-
+    public static GameAudio instance = null;
     AudioSource currentSong;
 
     public int currentIndex;
@@ -14,6 +14,11 @@ public class GameAudio : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else { Destroy(gameObject); }
         currentSong = sound[currentIndex];
         currentSong.Play();
         DontDestroyOnLoad(gameObject);
@@ -33,7 +38,7 @@ public class GameAudio : MonoBehaviour {
          if (!currentSong.isPlaying)
         {
             currentIndex++;
-            if (currentIndex >= 5)
+            if (currentIndex > 5)
             {
                 currentIndex = 0;
                 currentSong = sound[currentIndex];

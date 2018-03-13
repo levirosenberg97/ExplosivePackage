@@ -1,0 +1,25 @@
+#Tile Key
+#	BOMBDROPZONE
+#U 	UNBREAKABLE WALL
+#B 	BREAKABLE WALL
+#R 	RANDOM (BombDropZone, U or B)
+#1	P1 SPAWN
+#2 	P2 SPAWN
+#3 	P3 SPAWN
+#4	P4 SPAWN
+#Camera Settings (note position:0,0,0 is ground level at the top left corner of the tiles, rotation:90,0,0 is the default camera rotation so that controls and map creation are logical)
+position:6,22.31,-5
+rotation:90,0,0
+size:6.4asdf
+#Map Tiles
+1  BBBBBBB  4
+ UBUBUBUBUBU 
+ BBBBBBBBBBB 
+BUBUBUBUBUBUB
+BBBBBBBBBBBBB
+BUBUBUBUBUBUB
+BBBBBBBBBBBBB
+BUBUBUBUBUBUB
+ BBBBBBBBBBB 
+ UBUBUBUBUBU 
+3  BBBBBBB  2
