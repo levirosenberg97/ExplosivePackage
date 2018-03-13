@@ -10,7 +10,7 @@ public class PauseScript : MonoBehaviour
     public PlayerIndex pIdx;
     GamePadState state;
     GamePadState prevState;
-
+    bool isPaused;
     public ControllerUX pausedPlayer;
     public Button resumeButton;
     public Button menuButton;
@@ -19,7 +19,7 @@ public class PauseScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-     
+        isPaused = false;
 
     }
 
@@ -34,7 +34,7 @@ public class PauseScript : MonoBehaviour
 		if (prevState.Buttons.Start == ButtonState.Released && state.Buttons.Start == ButtonState.Pressed)
         {
 
-            if (Time.timeScale == 1)
+            if (isPaused == false)
             {
                 resumeButton.colors = highlightColor;
                 menuButton.colors = highlightColor;
@@ -43,11 +43,13 @@ public class PauseScript : MonoBehaviour
                 pausedPlayer.pIdx = pIdx;
 
                 pauseScreen.gameObject.SetActive(true);
+                isPaused = true;
                 Time.timeScale = 0;
             }
-            else if (Time.timeScale == 0)
+            else if (isPaused == true)
             {
                 Time.timeScale = 1;
+                isPaused = false;
                 pauseScreen.gameObject.SetActive(false);
             }
         }
