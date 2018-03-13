@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: 
     guid: 57704c6972cd59e44a80f7244a0ed06d
   - enabled: 1
+    path: Assets/Caleb/Menu.unity
+    guid: 35268569863831c439b574262280fde0
+  - enabled: 1
     path: Assets/Caleb/Controls.unity
     guid: c8344cea6523dfd4ba44ca89c10907f1
   - enabled: 1
@@ -47,3 +50,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levi/Scenes/PlayerTestScene1.unity
     guid: 56878b4cab24c9543be01cbb0bcead6a
+  - enabled: 1
+    path: Assets/Quinn/Scenes/NumberOfPlayersCustom.unity
+    guid: 8461250a665b043439c482d89a2f6b90

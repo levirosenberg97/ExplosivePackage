@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 23704064526316604}
   - component: {fileID: 114421907489088282}
   - component: {fileID: 114813172972535750}
-  - component: {fileID: 114735229064810772}
   m_Layer: 0
   m_Name: BreakableWall
   m_TagString: BreakableWall
@@ -54,7 +53,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -70,7 +68,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -110,18 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropArea: {fileID: 1578628697074286, guid: 16d9460e3d93e214787a215b91550ca1, type: 2}
---- !u!114 &114735229064810772
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1698374755124786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c99a39fcffe470e499431af2ab973da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items: {fileID: 0}
 --- !u!114 &114813172972535750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,8 +142,11 @@ MonoBehaviour:
     m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4379131571175874, guid: e5b3b6c8686bdb940b40c3ea55c93a2e, type: 2}
+  - {fileID: 4167785758172520, guid: 610ed8c441e4aab4497c3697b2b6d7d3, type: 2}
+  - {fileID: 4063751464969486, guid: adaff9913bfaf2f4ea01c2027178aca0, type: 2}
+  - {fileID: 4486126501735030, guid: 9ebd977dc0b28bf4f8ebec96f117e068, type: 2}
+  - {fileID: 4677750031227948, guid: d2a4b81465088ce48a54d71ee4cf9b58, type: 2}
+  - {fileID: 4557984113336436, guid: 27afbf9b95297f74da25bff96505bef0, type: 2}
+  - {fileID: 4716302248891688, guid: 626a4d41ea1c89e4ea82c305b940fa60, type: 2}
   - {fileID: 0}

@@ -31,6 +31,11 @@ public class NamePasserInput : MonoBehaviour {
             
         }
     }
+    public void Menu()
+    {
+        Destroy(Passer);
+        SceneManager.LoadScene("Menu");
+    }
     public void Back()
     {
         Destroy(Passer);
