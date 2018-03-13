@@ -13,6 +13,7 @@ public class ReadyBehavior : MonoBehaviour {
     public bool readyStart;
     public string scene = "PlayerTestScene1";
     public GameObject startText;
+    public AudioSource switchSound;
     // Use this for initialization
     void Start ()
     {
@@ -49,6 +50,7 @@ public class ReadyBehavior : MonoBehaviour {
             state = GamePad.GetState(pIdx);
             if (state.Buttons.Start == ButtonState.Pressed)
             {
+                switchSound.Play();
                 SceneManager.LoadScene(scene);
                 
             }

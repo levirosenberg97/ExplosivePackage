@@ -998,6 +998,7 @@ MonoBehaviour:
   readyStart: 0
   scene: Level
   startText: {fileID: 965838448}
+  switchSound: {fileID: 987222701}
 --- !u!82 &987222701
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1008,7 +1009,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 585f713cfd87b064e80ca4dc82e8d0ea, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

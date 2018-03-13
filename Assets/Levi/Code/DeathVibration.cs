@@ -15,7 +15,7 @@ public class DeathVibration : MonoBehaviour
     {
 		if (player.isAlive == false && vibrationCounter > 0)
         {
-            GamePad.SetVibration(playerNumber, 1f, 1f);
+            GamePad.SetVibration(playerNumber, .5f, .5f);
             vibrationCounter -= Time.deltaTime;
             if (vibrationCounter <= 0)
             {
