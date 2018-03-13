@@ -1,0 +1,18 @@
+#This is an example of an invalid map
+position:6
+rotation:0
+size:T
+   BBBBBBB  4
+ UBUBUBUBUBU 
+ BBBBBBBBBBB 
+BUBUBUBUBUBUB
+BBBBBBBBBBBBB@45KA
+an
+fga	
+	gsgbr
+BUBUBUBUBUBUB
+BBBBBBBBBBBBB
+BUBUBUBUBUBUB
+ BBBBBBBBBBB 
+ UBUBUBUBUBU 
+3  BBBBBBB   
