@@ -1045,7 +1045,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177618840
 GameObject:
@@ -1373,6 +1373,11 @@ Prefab:
     - target: {fileID: 224110853121041328, guid: a861a7729086dea41bd25e2433793085,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224618610159777174, guid: a861a7729086dea41bd25e2433793085,
+        type: 2}
+      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2004,6 +2009,11 @@ Prefab:
       propertyPath: overlay
       value: 
       objectReference: {fileID: 1747530610}
+    - target: {fileID: 114643510646021114, guid: 50f55c44f0a17d442847344c8349a826,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: CustomMap
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50f55c44f0a17d442847344c8349a826, type: 2}
   m_IsPrefabParent: 0
