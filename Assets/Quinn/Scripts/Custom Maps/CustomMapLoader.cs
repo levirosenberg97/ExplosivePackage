@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CustomMapLoader : MonoBehaviour {
     [Tooltip("Map settings to be loaded if the custom map isn't loaded correctly")]
@@ -63,120 +64,127 @@ public class CustomMapLoader : MonoBehaviour {
         screen.player3 = P3.GetComponent<PlayerControl>();
         screen.player4 = P4.GetComponent<PlayerControl>();
         screen.playerCount = 4;
-        foreach (Canvas canvas in GameObject.FindObjectsOfType<Canvas>())
+        Canvas[] canvases = GameObject.FindObjectsOfType<Canvas>();
+        foreach (Canvas canvas in canvases)
         {
-            if (canvas.name == "Overlay")
+            Scene currentScene = SceneManager.GetActiveScene();
+            
+            string sceneName = currentScene.name;
+            if (sceneName == "CustomMap")
             {
-                foreach (Transform sectiont in canvas.transform)
+                if (canvas.name == "Overlay")
                 {
-                    GameObject section = sectiont.gameObject;
-                    if (section.name == "Faces")
+                    foreach (Transform sectiont in canvas.transform)
                     {
-                        foreach (Transform childt in section.transform)
+                        GameObject section = sectiont.gameObject;
+                        if (section.name == "Faces")
                         {
-                            GameObject child = childt.gameObject;
-                            if (child.name == "Player1")
+                            foreach (Transform childt in section.transform)
                             {
-                                child.GetComponent<DeathVibration>().player = P1.GetComponent<PlayerControl>();
-                                child.GetComponent<DeathIndicator>().player = P1.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player2")
-                            {
-                                child.GetComponent<DeathVibration>().player = P2.GetComponent<PlayerControl>();
-                                child.GetComponent<DeathIndicator>().player = P2.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player3")
-                            {
-                                player3Face = child.GetComponent<RawImage>();
-                                child.GetComponent<DeathVibration>().player = P3.GetComponent<PlayerControl>();
-                                child.GetComponent<DeathIndicator>().player = P3.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player4")
-                            {
-                                player4Face = child.GetComponent<RawImage>();
-                                child.GetComponent<DeathVibration>().player = P4.GetComponent<PlayerControl>();
-                                child.GetComponent<DeathIndicator>().player = P4.GetComponent<PlayerControl>();
+                                GameObject child = childt.gameObject;
+                                if (child.name == "Player1")
+                                {
+                                    child.GetComponent<DeathVibration>().player = P1.GetComponent<PlayerControl>();
+                                    child.GetComponent<DeathIndicator>().player = P1.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player2")
+                                {
+                                    child.GetComponent<DeathVibration>().player = P2.GetComponent<PlayerControl>();
+                                    child.GetComponent<DeathIndicator>().player = P2.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player3")
+                                {
+                                    player3Face = child.GetComponent<RawImage>();
+                                    child.GetComponent<DeathVibration>().player = P3.GetComponent<PlayerControl>();
+                                    child.GetComponent<DeathIndicator>().player = P3.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player4")
+                                {
+                                    player4Face = child.GetComponent<RawImage>();
+                                    child.GetComponent<DeathVibration>().player = P4.GetComponent<PlayerControl>();
+                                    child.GetComponent<DeathIndicator>().player = P4.GetComponent<PlayerControl>();
+                                }
                             }
                         }
-                    }
-                    else if (section.name == "BombIndiacators")
-                    {
-                        foreach (Transform childt in section.transform)
+                        else if (section.name == "BombIndiacators")
                         {
-                            GameObject child = childt.gameObject;
-                            if (child.name == "Player1Slider")
+                            foreach (Transform childt in section.transform)
                             {
-                                child.GetComponent<bombTimer>().player = P1.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player2Slider")
-                            {
-                                child.GetComponent<bombTimer>().player = P2.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player3Slider")
-                            {
-                                child.GetComponent<bombTimer>().player = P3.GetComponent<PlayerControl>();
-                                player3Slider = child.GetComponent<Slider>();
-                            }
-                            if (child.name == "Player4Slider")
-                            {
-                                child.GetComponent<bombTimer>().player = P3.GetComponent<PlayerControl>();
-                                player4Slider = child.GetComponent<Slider>();
+                                GameObject child = childt.gameObject;
+                                if (child.name == "Player1Slider")
+                                {
+                                    child.GetComponent<bombTimer>().player = P1.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player2Slider")
+                                {
+                                    child.GetComponent<bombTimer>().player = P2.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player3Slider")
+                                {
+                                    child.GetComponent<bombTimer>().player = P3.GetComponent<PlayerControl>();
+                                    player3Slider = child.GetComponent<Slider>();
+                                }
+                                if (child.name == "Player4Slider")
+                                {
+                                    child.GetComponent<bombTimer>().player = P3.GetComponent<PlayerControl>();
+                                    player4Slider = child.GetComponent<Slider>();
+                                }
                             }
                         }
-                    }
-                    else if (section.name == "PowerUpIndicators")
-                    {
-                        foreach (Transform childt in section.transform)
+                        else if (section.name == "PowerUpIndicators")
                         {
-                            GameObject child = childt.gameObject;
-                            if (child.name == "Player1Flames")
+                            foreach (Transform childt in section.transform)
                             {
-                                child.GetComponent<PowerUpIndicator>().player = P1.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player2Flames")
-                            {
-                                child.GetComponent<PowerUpIndicator>().player = P2.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player3Flames")
-                            {
-                                player3Indicator = child;
-                                child.GetComponent<PowerUpIndicator>().player = P3.GetComponent<PlayerControl>();
-                            }
-                            if (child.name == "Player4Flames")
-                            {
-                                player4Indicator = child;
-                                child.GetComponent<PowerUpIndicator>().player = P4.GetComponent<PlayerControl>();
+                                GameObject child = childt.gameObject;
+                                if (child.name == "Player1Flames")
+                                {
+                                    child.GetComponent<PowerUpIndicator>().player = P1.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player2Flames")
+                                {
+                                    child.GetComponent<PowerUpIndicator>().player = P2.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player3Flames")
+                                {
+                                    player3Indicator = child;
+                                    child.GetComponent<PowerUpIndicator>().player = P3.GetComponent<PlayerControl>();
+                                }
+                                if (child.name == "Player4Flames")
+                                {
+                                    player4Indicator = child;
+                                    child.GetComponent<PowerUpIndicator>().player = P4.GetComponent<PlayerControl>();
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (canvas.name == "PauseScreen")
-            {
-                List<GameObject> players = new List<GameObject>();
-                players.Add(P1);
-                players.Add(P2);
-                players.Add(P3);
-                players.Add(P4);
-                foreach (GameObject p in players)
+                if (canvas.name == "PauseScreen")
                 {
-                    PauseScript pause = p.GetComponent<PauseScript>();
-                    pause.pauseScreen = canvas;
-                    pause.pausedPlayer = canvas.GetComponent<ControllerUX>();
-                    Button[] buttons = GameObject.FindObjectsOfType<Button>();
-                    foreach (Button b in buttons)
+                    List<GameObject> players = new List<GameObject>();
+                    players.Add(P1);
+                    players.Add(P2);
+                    players.Add(P3);
+                    players.Add(P4);
+                    foreach (GameObject p in players)
                     {
-                        if (b.name == "ResumeButton")
+                        PauseScript pause = p.GetComponent<PauseScript>();
+                        pause.pauseScreen = canvas;
+                        pause.pausedPlayer = canvas.GetComponent<ControllerUX>();
+                        Button[] buttons = GameObject.FindObjectsOfType<Button>();
+                        foreach (Button b in buttons)
                         {
-                            pause.resumeButton = b;
-                        }
-                        if (b.name == "MenuButton")
-                        {
-                            pause.menuButton = b;
-                        }
-                        if (b.name == "ExitButton")
-                        {
-                            pause.exitButton = b;
+                            if (b.name == "ResumeButton")
+                            {
+                                pause.resumeButton = b;
+                            }
+                            if (b.name == "MenuButton")
+                            {
+                                pause.menuButton = b;
+                            }
+                            if (b.name == "ExitButton")
+                            {
+                                pause.exitButton = b;
+                            }
                         }
                     }
                 }

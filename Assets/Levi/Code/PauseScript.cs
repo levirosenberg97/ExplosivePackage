@@ -16,11 +16,13 @@ public class PauseScript : MonoBehaviour
     public Button menuButton;
     public Button exitButton;
     public ColorBlock highlightColor;
+
+
 	// Use this for initialization
 	void Start ()
     {
         isPaused = false;
-
+        pauseScreen = PauseStart.instance.myCanvas;
     }
 
 
