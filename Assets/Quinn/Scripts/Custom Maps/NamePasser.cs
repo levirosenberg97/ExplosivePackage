@@ -66,7 +66,10 @@ public class NamePasser : MonoBehaviour {
         }
 
     }
-
+    public void OpenMapFolder()
+    {
+        System.Diagnostics.Process.Start(Application.persistentDataPath + @"/Maps");
+    }
     void SelfDestruct()
     {
         Destroy(gameObject);
