@@ -32,3 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Quinn/Scenes/QuinnTestScene.unity
     guid: c642035f27684ce48b846d36913aef4f
+  - enabled: 1
+    path: Assets/Quinn/Scenes/CustomMap.unity
+    guid: 9fa60a91b3f5b6540b4b4d4ee26cb8d6
+  - enabled: 1
+    path: Assets/Quinn/Scenes/CustomMapSelection.unity
+    guid: ea23ecf753a692246a36f2677a3bb645
