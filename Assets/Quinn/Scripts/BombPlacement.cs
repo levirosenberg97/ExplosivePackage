@@ -4,111 +4,184 @@ using UnityEngine;
 
 public class BombPlacement : MonoBehaviour {
     public GameObject BombObject;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
+    public GameObject Indicator;
+    public bool EnableIndicators = true;
+    private List<GameObject> Indicators = new List<GameObject>();
+    // Use this for initialization
+    void Start() {
+        Transform pos = PlaceBombIndicators().transform;
+        Indicators.Add(Instantiate(Indicator, pos.transform.position, pos.transform.rotation));
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if (EnableIndicators)
+        {
+            if (Indicators.Count > 0)
+            {
+                while (Indicators.Count > 0)
+                {
+                    GameObject ind = Indicators[0];
+                    Indicators.Remove(ind);
+                    Destroy(ind);
+                }
+            }
+            if (PlaceBombIndicators() != null)
+            {
+                Transform place = PlaceBombIndicators().transform;
+                Indicators.Add(Instantiate(Indicator, place.transform.position, place.transform.rotation));
+            }
+        }
+    }
+
+    bool isListEqual(List<Vector3> listA, List<Vector3> listB)
+    {
+        int check = 0;
+        if (listA.Count != listB.Count)
+        {
+            return false;
+        }
+        else
+        {
+           
+            for (int i = 0; i < listA.Count;i++)
+            {
+                if(listA[i] == listB[i])
+                {
+                    check++;
+                }
+            }
+            
+        }
+        return check == listA.Count;
+    }
+
     //can be used to place a bomb via unity events
     public void PlaceBombHere()
     {
         PlaceBomb();
     }
-    //returns true if bomb was placed successfuly use radius to control explosion radius
-    public bool PlaceBomb(float placeDist = 1f, float bombRadius = 1.5f)
+    public enum PlaceDir
     {
-        //Quaternion originalPos = gameObject.transform.rotation;
-        //Transform tempVal = gameObject.transform;
-        ////snap to nearest axis
-        //float y = gameObject.transform.rotation.eulerAngles.y % 360;
-        //if (y % 90 != 0)
-        //{
-        //    if (y % 90 < 45)
-        //    {
-        //        tempVal.Rotate(0, -(y % 90), 0);
-        //    }
-        //    else
-        //    {
-        //        tempVal.Rotate(0, y % 90, 0);
-        //    }
-        //}
-        ////see whats in that direction
-        //Debug.DrawLine(gameObject.transform.position, (tempVal.forward * placeDist), Color.red);
-        //RaycastHit[] hit = Physics.RaycastAll(gameObject.transform.position, (tempVal.forward * placeDist), placeDist);
-        //List<GameObject> place = new List<GameObject>();
-        //float dist = placeDist + 1;
-        ////set player rotation back
-        //gameObject.transform.rotation = originalPos;
-        //foreach (RaycastHit hitInfo in hit)
-        //{
-        //    if (hitInfo.collider.tag == "BombDropZone")
-        //    {
-        //        if (hitInfo.collider.gameObject.GetComponent<TriggerZone>().GetInteractors(TriggerState.All).Count == 0 && hitInfo.collider.gameObject.GetComponent<BombDropZone>().hasBomb == false)
-        //        {
-        //            if (hitInfo.distance < dist)
-        //            {
-        //                dist = hitInfo.distance;
-        //                place.Clear();
-        //                place.Add(hitInfo.collider.gameObject);
-        //            }
-        //        }
-        //    }
-        //}
-        //if (dist != placeDist + 1 && place.Count > 0)
-        //{
-        //    BombDropZone dropZone = place[0].GetComponent<BombDropZone>();
-        //    GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
-        //    bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
-        //    bomb.GetComponent<Bomb>().Radius = bombRadius;
-        //    dropZone.hasBomb = true;
-        //    //placed bomb
-        //    return true;
-        //}
-        ////return I didnt place
-        //return false;
-        //OLD
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, placeDist);
-        List<GameObject> placeable = new List<GameObject>();
-        //for each thing i hit with the sphere
-        for (int i = 0; i < hitColliders.Length; i++)
+        ObjectDirection,
+        Forward,
+        Backward,
+        Left,
+        Right
+    };
+    //returns true if bomb was placed successfuly use radius to control explosion radius
+    public bool PlaceBomb(float placeDist = 1.5f, float bombRadius = 1.5f, PlaceDir directionOverwrite = PlaceDir.ObjectDirection)
+    {
+        //found zone, spawn bomb
+        if (PlaceBombIndicators() != null)
         {
-            if (hitColliders[i].tag == "BombDropZone")
-            {
-                TriggerZone placeZone = hitColliders[i].GetComponent<TriggerZone>();
-                BombDropZone dropZone = hitColliders[i].GetComponent<BombDropZone>();
-                //check that the tile doesnt have a bomb and contains the object that would like to place a bomb there
-                if (dropZone.hasBomb == false && placeZone.Contains(gameObject))
-                {
-                    placeable.Add(hitColliders[i].gameObject);
-                }
-            }
-        }
-        //check to see if i can place somewhere and decide where to place if multiple areas are valid
-        if (placeable.Count > 0)
-        {
-            BombDropZone dropZone = placeable[0].GetComponent<BombDropZone>();
-            float min = Vector3.Distance(placeable[0].gameObject.transform.position, gameObject.transform.position);
-            foreach (GameObject zone in placeable)
-            {
-                float dist = Vector3.Distance(zone.gameObject.transform.position, gameObject.transform.position);
-                if (min >= dist)
-                {
-                    min = dist;
-                    dropZone = zone.GetComponent<BombDropZone>();
-                }
-            }
+            BombDropZone dropZone = PlaceBombIndicators();
             GameObject bomb = Instantiate(BombObject, dropZone.transform.position, dropZone.transform.rotation);
             bomb.GetComponent<Bomb>().DropZone = dropZone.gameObject;
             bomb.GetComponent<Bomb>().Radius = bombRadius;
             dropZone.hasBomb = true;
+            Collider[] inBombsPlace = Physics.OverlapSphere(dropZone.gameObject.transform.position, 0.5f);
+            foreach (Collider col in inBombsPlace)
+            {
+                //player within bomb if spawned (ignore collision)
+                if (col.tag == "Player")
+                {
+                    bomb.GetComponent<Bomb>().IgnoredPlayers.Add(col.gameObject);
+                    Physics.IgnoreCollision(col, bomb.GetComponent<Collider>(), true);
+                }
+            }
             return true;
         }
+        //couldn't find zone, didn't spawn bomb
         else
         {
             return false;
+        }
+    }
+    struct PlaceInfo
+    {
+        public BombDropZone Zone;
+        public float Dist;
+    }
+    public BombDropZone PlaceBombIndicators()
+    {
+        //adjust height to match boxes
+        Vector3 adjustment = transform.position;
+        adjustment.y = 0.5f;
+        Collider[] hit = Physics.OverlapSphere(adjustment, 0.5f);
+        List<PlaceInfo> zones = new List<PlaceInfo>();
+        if (hit.Length > 0)
+        {
+            foreach (Collider obj in hit)
+            {
+                BombDropZone attempt = obj.GetComponent<BombDropZone>();
+                if (attempt != null && attempt.hasBomb == false)
+                {
+                    PlaceInfo val;
+                    val.Zone = attempt;
+                    val.Dist = Vector3.Distance(obj.gameObject.transform.position, adjustment);
+                    zones.Add(val);
+                }
+            }
+        }
+        if (zones.Count > 0)
+        {
+            bool inWrongOrder = true;
+            while (inWrongOrder)
+            {
+                if (zones.Count > 0)
+                {
+                    float previous = zones[0].Dist;
+                    bool correct = true;
+                    for (int j = 0; j < zones.Count; ++j)
+                    {
+                        if (zones[j].Dist < previous)
+                        {
+                            //wrong order
+                            correct = false;
+                            //flip the previous value with this one so the smaller of the two is in front
+                            PlaceInfo temp = zones[j];
+                            zones[j] = zones[j - 1];
+                            zones[j - 1] = temp;
+                        }
+                        previous = zones[j].Dist;
+                    }
+                    //was it in the correct order
+                    if (correct)
+                    {
+                        inWrongOrder = false;
+                    }
+                }
+                else
+                {
+                    //nothing to sort
+                    inWrongOrder = false;
+                }
+
+            }
+        }
+        //found zone
+        if (zones.Count > 0)
+        {
+            return zones[0].Zone;
+        }
+        //didn't find zone
+        else
+        {
+            return null;
+        }
+    }
+    void OnDisable()
+    {
+        //Debug.Log(Indicators.Count);
+        if (Indicators.Count > 0)
+        {
+            while (Indicators.Count > 0)
+            {
+                GameObject ind = Indicators[0];
+                Indicators.Remove(ind);
+                Destroy(ind);
+            }
         }
     }
 }

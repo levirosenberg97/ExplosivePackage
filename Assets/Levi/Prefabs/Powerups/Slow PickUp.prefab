@@ -40,7 +40,8 @@ GameObject:
   - component: {fileID: 33578851410642714}
   - component: {fileID: 23408220241497334}
   - component: {fileID: 65659221471424140}
-  - component: {fileID: 114612327195211212}
+  - component: {fileID: 114450751673001248}
+  - component: {fileID: 114157288809853394}
   m_Layer: 0
   m_Name: Slow PickUp
   m_TagString: SlowPickUp
@@ -54,14 +55,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1560385285628490}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -2.0864367, y: 2.8001, z: -0.2074}
   m_LocalScale: {x: 0.28511634, y: 0.28511634, z: 0.28511664}
   m_Children:
   - {fileID: 4736104864458300}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &4736104864458300
 Transform:
   m_ObjectHideFlags: 1
@@ -169,7 +170,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.433267, y: 2, z: 1.786233}
   m_Center: {x: 0.011563, y: 0, z: 0.06294221}
---- !u!114 &114612327195211212
+--- !u!114 &114157288809853394
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -177,14 +178,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560385285628490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7939dd2ca318dc049a496a874f454f82, type: 3}
+  m_Script: {fileID: 11500000, guid: f697528feb4c8c2438999758a39006b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationRateX: 0
-  rotationRateY: 1
-  rotationRateZ: 1
-  amplitude: 0.15
-  frequency: 1
+--- !u!114 &114450751673001248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560385285628490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c79a21fbcda0364f94148f3fe87722a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHP: 1
+  MaxHP: 1
+  OnOverHeal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnZeroHP:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114157288809853394}
+        m_MethodName: DestroyObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1560385285628490}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  items: []
 --- !u!136 &136070669708245906
 CapsuleCollider:
   m_ObjectHideFlags: 1

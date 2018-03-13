@@ -37,7 +37,8 @@ GameObject:
   - component: {fileID: 33252216480215172}
   - component: {fileID: 136374671951578244}
   - component: {fileID: 23414630586537628}
-  - component: {fileID: 114476161466076880}
+  - component: {fileID: 114563342205908746}
+  - component: {fileID: 114554853421219314}
   m_Layer: 0
   m_Name: Speed PickUp
   m_TagString: SpeedPickUp
@@ -133,7 +134,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1104865934147336}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -2.0864367, y: 2.8001, z: -0.2074}
   m_LocalScale: {x: 0.28511634, y: 0.28511634, z: 0.28511664}
   m_Children:
@@ -141,7 +142,7 @@ Transform:
   - {fileID: 4038682664609860}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &4731480202129320
 Transform:
   m_ObjectHideFlags: 1
@@ -332,7 +333,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1164146935611874}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114476161466076880
+--- !u!114 &114554853421219314
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -340,14 +341,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1104865934147336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7939dd2ca318dc049a496a874f454f82, type: 3}
+  m_Script: {fileID: 11500000, guid: f697528feb4c8c2438999758a39006b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationRateX: 0
-  rotationRateY: 1
-  rotationRateZ: 0
-  amplitude: 0.15
-  frequency: 1
+  duration: 0
+  delayed: 0
+--- !u!114 &114563342205908746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104865934147336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c79a21fbcda0364f94148f3fe87722a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHP: 1
+  MaxHP: 1
+  OnOverHeal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnZeroHP:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114554853421219314}
+        m_MethodName: DestroyObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1104865934147336}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Health+MyEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  items: []
 --- !u!136 &136374671951578244
 CapsuleCollider:
   m_ObjectHideFlags: 1

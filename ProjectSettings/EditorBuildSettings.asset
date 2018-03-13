@@ -7,19 +7,49 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: 
-    guid: 6ff714be34d6dc048b5ca6eb97f7325c
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Caleb/Level(test).unity
+    guid: a8749fa0395abff4e894b9c45a9cf541
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Levi/Scenes/PlayerTestScene.unity
-    guid: df1057bfc674079439da3ddf8d06ad3f
-  - enabled: 0
     path: Assets/Caleb/Menu.unity
-    guid: 57704c6972cd59e44a80f7244a0ed06d
-  - enabled: 0
+    guid: 35268569863831c439b574262280fde0
+  - enabled: 1
+    path: Assets/Caleb/Controls.unity
+    guid: c8344cea6523dfd4ba44ca89c10907f1
+  - enabled: 1
     path: Assets/Caleb/NumberOfPlayers.unity
     guid: 29c5b8cead777be458a81e2681f5378f
   - enabled: 0
-    path: Assets/Caleb/Controls.unity
-    guid: c8344cea6523dfd4ba44ca89c10907f1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Quinn/Scenes/QuinnTestScene.unity
     guid: c642035f27684ce48b846d36913aef4f
+  - enabled: 1
+    path: Assets/Quinn/Scenes/CustomMap.unity
+    guid: 9fa60a91b3f5b6540b4b4d4ee26cb8d6
+  - enabled: 1
+    path: Assets/Quinn/Scenes/CustomMapSelection.unity
+    guid: ea23ecf753a692246a36f2677a3bb645
+  - enabled: 1
+    path: Assets/Levi/Scenes/Level.unity
+    guid: a911c672f4e16d24c9b7dd65934cbd5e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Levi/Scenes/PlayerTestScene1.unity
+    guid: 56878b4cab24c9543be01cbb0bcead6a
+  - enabled: 1
+    path: Assets/Quinn/Scenes/NumberOfPlayersCustom.unity
+    guid: 8461250a665b043439c482d89a2f6b90

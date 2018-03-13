@@ -13,6 +13,9 @@ TagManager:
   - Pain
   - SlowPickUp
   - UnbreakableWall
+  - BombUp
+  - BombDown
+  - Bomb
   layers:
   - Default
   - TransparentFX

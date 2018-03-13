@@ -1,0 +1,17 @@
+#Camera Settings 
+position:6,22.31,-5
+rotation:90,0,0
+size:6.4
+#Map Tiles
+#note if the map is played again any place where there is an R will be given a random value by the game (this file will not be changed just what is loaded in game)
+1  RRRRRRR  4
+ RRRRRRRRRRR 
+ RRRRRRRRRRR 
+RRRRRRRRRRRRR
+RRRRRRRRRRRRR
+RRRRRRRRRRRRR
+RRRRRRRRRRRRR
+RRRRRRRRRRRRR
+ RRRRRRRRRRR 
+ RRRRRRRRRRR 
+3  RRRRRRR  2
