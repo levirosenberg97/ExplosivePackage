@@ -6,16 +6,16 @@ using XInputDotNetPure;
 
 public class WinScreen : MonoBehaviour
 {
-    int playerCount;
+    public int playerCount;
     public PlayerControl player1;
     public PlayerControl player2;
     public PlayerControl player3;
     public PlayerControl player4;
 
-    bool player1Died;
-    bool player2Died;
-    bool player3Died;
-    bool player4Died;
+    public bool player1Died;
+    public bool player2Died;
+    public bool player3Died;
+    public bool player4Died;
 
     public Canvas overlay;
     public Canvas winScreen;
