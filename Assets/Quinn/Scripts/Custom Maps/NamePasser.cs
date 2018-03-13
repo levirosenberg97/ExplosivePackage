@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class NamePasser : MonoBehaviour {
     public string FileName = "";
     public static NamePasser instace = null;
+    public bool CreateMapFolder = true;
+    public bool CreateExampleMap = true;
 	// Use this for initialization
 
     void Awake()
@@ -22,7 +24,19 @@ public class NamePasser : MonoBehaviour {
 
 	void Start () {
         DontDestroyOnLoad(gameObject.transform);
-	}
+        string mapFolder = Application.persistentDataPath + @"/Maps";
+        if (CreateMapFolder && Directory.Exists(mapFolder) == false)
+        {
+            //creates map folder
+            Directory.CreateDirectory(mapFolder);
+        }
+        if (File.Exists(mapFolder + @"/ExampleMap.txt") == false && CreateExampleMap == true)
+        {
+            //creates example map file
+            Debug.Log(Application.streamingAssetsPath);
+            File.Copy(Application.streamingAssetsPath + @"/ExampleMap.txt", mapFolder + @"/ExampleMap.txt");
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -43,7 +57,11 @@ public class NamePasser : MonoBehaviour {
     {
         Destroy(gameObject);
     }
-    List<string> CheckMap(string mapFile)
+    public string MapFolder()
+    {
+        return Application.persistentDataPath + @"/Maps";
+    }
+    public List<string> CheckMap(string mapFile)
     {
         string path = Application.persistentDataPath + @"/Maps/" + mapFile + ".txt";
         CustomMapLoader.MapData retval = new CustomMapLoader.MapData()
@@ -51,6 +69,7 @@ public class NamePasser : MonoBehaviour {
             MapSize = new Vector2(0, 0),
             LoadMessages = new List<string>()
         };
+        retval.LoadMessages.Add("LOADING MAP FROM\n" + path);
         if (File.Exists(path))
         {
             bool setPos = false;
@@ -97,7 +116,6 @@ public class NamePasser : MonoBehaviour {
                         }
                         else
                         {
-                            retval.LoadMessages.Add("ERROR Wrong number of position values");
                             Debug.Log("map file has wrong number of position values");
                         }
                     }
@@ -135,7 +153,6 @@ public class NamePasser : MonoBehaviour {
                         }
                         else
                         {
-                            retval.LoadMessages.Add("ERROR Wrong number of rotation values");
                             Debug.Log("map file has wrong number of rotation values");
                         }
                     }
@@ -165,7 +182,6 @@ public class NamePasser : MonoBehaviour {
                         }
                         else
                         {
-                            retval.LoadMessages.Add("ERROR size value not valid");
                             Debug.Log("map file has a bad size value");
                         }
                     }
@@ -240,7 +256,7 @@ public class NamePasser : MonoBehaviour {
                                 }
                                 retline = retline + randomized;
                                 Debug.Log("found an unsupported char in tile info " + c);
-                                retval.LoadMessages.Add("unrecognized char " + c + " this will be replaced with a random value if there are no map loading errors");
+                                retval.LoadMessages.Add("WARNING unrecognized char " + c + " this will be replaced with a random value if there are no map loading errors");
                             }
                         }
                         tileInfo.Add(retline);
@@ -251,9 +267,21 @@ public class NamePasser : MonoBehaviour {
             }
             retval.Tiles = tileInfo.ToArray();
             bool LoadDefault = false;
-            if (setTiles == false || setPos == false || setRot == false || setSize == false)
+            if (setTiles == false)
             {
-                retval.LoadMessages.Add("ERROR failed to set tiles, rotation, position or camera size");
+                retval.LoadMessages.Add("ERROR failed to set Tiles");
+            }
+            if (setPos == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set Camera Position");
+            }
+            if (setRot == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set Camera Rotation");
+            }
+            if (setSize == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set Camera Size");
             }
             foreach (string line in retval.LoadMessages)
             {
@@ -274,11 +302,11 @@ public class NamePasser : MonoBehaviour {
             Debug.Log("Custom map file not found or loaded improperly");
             retval.LoadMessages.Add("ERROR unable to access map file");
         }
-        retval.LoadMessages.Add("FAILURE loaded default map");
+        retval.LoadMessages.Add("FAILURE to load desired map");
         return retval.LoadMessages;
     }
     //note will only return false ifmap didn't load successfully
-    bool AttemptSceneChange(List<string> loadMessages)
+    public bool AttemptSceneChange(List<string> loadMessages)
     {
         if (loadMessages.Contains("SUCCESS"))
         {

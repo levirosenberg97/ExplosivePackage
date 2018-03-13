@@ -421,6 +421,7 @@ public class CustomMapLoader : MonoBehaviour {
             MapSize = new Vector2(0, 0),
             LoadMessages = new List<string>()
         };
+        retval.LoadMessages.Add("LOADING MAP FROM\n" + path);
         if (File.Exists(path))
         {
             bool setPos = false;
@@ -621,9 +622,21 @@ public class CustomMapLoader : MonoBehaviour {
             }
             retval.Tiles = tileInfo.ToArray();
             bool LoadDefault = false;
-            if (setTiles == false || setPos == false || setRot == false || setSize == false)
+            if (setTiles == false)
             {
-                retval.LoadMessages.Add("ERROR failed to set tiles, rotation, position or camera size");
+                retval.LoadMessages.Add("ERROR failed to set Tiles");
+            }
+            if (setPos == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set Camera Position");
+            }
+            if (setRot == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set Camera Rotation");
+            }
+            if (setSize == false)
+            {
+                retval.LoadMessages.Add("ERROR failed to set Camera Size");
             }
             foreach (string line in retval.LoadMessages)
             {
