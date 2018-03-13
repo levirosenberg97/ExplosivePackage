@@ -311,7 +311,7 @@ public class NamePasser : MonoBehaviour {
         if (loadMessages.Contains("SUCCESS"))
         {
             //load # of players scene 
-            SceneManager.LoadScene("NumberOfPlayersCustom");
+            SceneManager.LoadScene("CustomMap");
             return true;
         }
         else

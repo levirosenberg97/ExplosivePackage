@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class NamePasserInput : MonoBehaviour {
-    public InputField Input;
+    //public InputField Input;
+    public Dropdown Input;
     public Text LoadMessages;
     private NamePasser Passer;
 	// Use this for initialization
@@ -14,10 +15,11 @@ public class NamePasserInput : MonoBehaviour {
 	}
     public void AttemptLoad()
     {
-        if (Input.text != "")
+        Input = GameObject.FindObjectOfType<Dropdown>();
+        if (Input.options.Count > 0)
         {
             string retText = "";
-            List<string> messages = Passer.CheckMap(Input.text);
+            List<string> messages = Passer.CheckMap(Input.options[Input.value].text);
             if (Passer.AttemptSceneChange(messages) == false)
             {
                 foreach (string line in messages)
@@ -28,6 +30,11 @@ public class NamePasserInput : MonoBehaviour {
             }
             
         }
+    }
+    public void Back()
+    {
+        Destroy(Passer);
+        SceneManager.LoadScene("NumberOfPlayersCustom");
     }
 	// Update is called once per frame
 	void Update () {
