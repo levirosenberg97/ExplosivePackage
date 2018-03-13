@@ -914,12 +914,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1647698189}
-        m_MethodName: 
+      - m_Target: {fileID: 1647698190}
+        m_MethodName: Custom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -996,7 +996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36353377, y: 0.1844496}
   m_AnchorMax: {x: 0.607405, y: 0.25772482}
-  m_AnchoredPosition: {x: -0.20000076, y: -0.099998474}
+  m_AnchoredPosition: {x: -0.20000076, y: -0.1000061}
   m_SizeDelta: {x: 1, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442380492
