@@ -6,7 +6,7 @@ using XInputDotNetPure;
 public class DeathVibration : MonoBehaviour
 {
     public PlayerIndex playerNumber;
-    public float vibrationCounter = 1;
+    public float vibrationCounter = .5f;
     public PlayerControl player;
 	// Use this for initialization
 	
@@ -15,7 +15,7 @@ public class DeathVibration : MonoBehaviour
     {
 		if (player.isAlive == false && vibrationCounter > 0)
         {
-            GamePad.SetVibration(playerNumber, 2f, 2f);
+            GamePad.SetVibration(playerNumber, 1f, 1f);
             vibrationCounter -= Time.deltaTime;
             if (vibrationCounter <= 0)
             {

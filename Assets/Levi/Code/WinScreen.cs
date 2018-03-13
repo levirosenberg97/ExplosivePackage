@@ -38,7 +38,7 @@ public class WinScreen : MonoBehaviour
 
     private void Start()
     {
-        playerCount = ReadyBehavior.players;
+        playerCount = 2; //ReadyBehavior.players;
 
         player1Died = false;
         player2Died = false;
@@ -114,7 +114,7 @@ public class WinScreen : MonoBehaviour
                 winButtons.pIdx = PlayerIndex.Four;
             }
 
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
     }
 
