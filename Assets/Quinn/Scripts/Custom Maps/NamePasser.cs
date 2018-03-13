@@ -7,9 +7,7 @@ public class NamePasser : MonoBehaviour {
     public string FileName = "";
     public static NamePasser instace = null;
     public bool CreateMapFolder = true;
-    public bool CreateExampleMap = true;
-    public bool CreateRandomMap = true;
-    public bool CreateFailMap = true;
+    public bool CreateMaps = true;
     // Use this for initialization
 
     void Awake()
@@ -32,23 +30,16 @@ public class NamePasser : MonoBehaviour {
             //creates map folder
             Directory.CreateDirectory(mapFolder);
         }
-        if (File.Exists(mapFolder + @"/ExampleMap.txt") == false && CreateExampleMap == true)
+        string dir = Application.persistentDataPath + @"/Maps";
+        foreach (string file in Directory.GetFiles(Application.streamingAssetsPath, "*.txt"))
         {
-            //creates example map file
-            Debug.Log(Application.streamingAssetsPath);
-            File.Copy(Application.streamingAssetsPath + @"/ExampleMap.txt", mapFolder + @"/ExampleMap.txt");
-        }
-        if (File.Exists(mapFolder + @"/RandomMap.txt") == false && CreateExampleMap == true)
-        {
-            //creates example map file
-            Debug.Log(Application.streamingAssetsPath);
-            File.Copy(Application.streamingAssetsPath + @"/RandomMap.txt", mapFolder + @"/RandomMap.txt");
-        }
-        if (File.Exists(mapFolder + @"/FailMap.txt") == false && CreateExampleMap == true)
-        {
-            //creates example map file
-            Debug.Log(Application.streamingAssetsPath);
-            File.Copy(Application.streamingAssetsPath + @"/FailMap.txt", mapFolder + @"/FailMap.txt");
+            string filename = Path.GetFileNameWithoutExtension(file);
+            if (File.Exists(mapFolder + @"/" + filename + ".txt") == false && CreateMaps == true)
+            {
+                //creates example map file
+                Debug.Log(Application.streamingAssetsPath);
+                File.Copy(Application.streamingAssetsPath + @"/" + filename + ".txt", mapFolder + @"/" + filename + ".txt");
+            }
         }
     }
 	
@@ -93,6 +84,10 @@ public class NamePasser : MonoBehaviour {
             bool setRot = false;
             bool setSize = false;
             bool setTiles = false;
+            bool setP1Spawn = false;
+            bool setP2Spawn = false;
+            bool setP3Spawn = false;
+            bool setP4Spawn = false;
             var lines = File.ReadAllLines(path);
             List<string> tileInfo = new List<string>();
             foreach (var line in lines)
@@ -224,9 +219,53 @@ public class NamePasser : MonoBehaviour {
                         string retline = "";
                         foreach (char c in line)
                         {
-                            if (c == ' ' || c == 'B' || c == 'U' || c == '1' || c == '2' || c == '3' || c == '4')
+                            if (c == ' ' || c == 'B' || c == 'U')
                             {
                                 retline = retline + c;
+                            }
+                            else if  (c == '1')
+                            {
+                                if (setP1Spawn)
+                                {
+                                    retval.LoadMessages.Add("ERROR found an extra spawn for Player 1");
+                                }
+                                else
+                                {
+                                    setP1Spawn = true;
+                                }
+                            }
+                            else if (c == '2')
+                            {
+                                if (setP2Spawn)
+                                {
+                                    retval.LoadMessages.Add("ERROR found an extra spawn for Player 2");
+                                }
+                                else
+                                {
+                                    setP2Spawn = true;
+                                }
+                            }
+                            else if (c == '3')
+                            {
+                                if (setP3Spawn)
+                                {
+                                    retval.LoadMessages.Add("ERROR found an extra spawn for Player 3");
+                                }
+                                else
+                                {
+                                    setP3Spawn = true;
+                                }
+                            }
+                            else if (c == '4')
+                            {
+                                if (setP4Spawn)
+                                {
+                                    retval.LoadMessages.Add("ERROR found an extra spawn for Player 4");
+                                }
+                                else
+                                {
+                                    setP4Spawn = true;
+                                }
                             }
                             else if (c == 'b')
                             {
@@ -284,6 +323,45 @@ public class NamePasser : MonoBehaviour {
             }
             retval.Tiles = tileInfo.ToArray();
             bool LoadDefault = false;
+            if (setP1Spawn && setP2Spawn && setP3Spawn && setP4Spawn)
+            {
+                retval.LoadMessages.Add("ALL SPAWNS FOUND");
+            }
+            else
+            {
+                if (setP1Spawn)
+                {
+                    retval.LoadMessages.Add("Player 1 spawn set");
+                }
+                else
+                {
+                    retval.LoadMessages.Add("ERROR Player 1 spawn not set");
+                }
+                if (setP2Spawn)
+                {
+                    retval.LoadMessages.Add("Player 2 spawn set");
+                }
+                else
+                {
+                    retval.LoadMessages.Add("ERROR Player 2 spawn not set");
+                }
+                if (setP3Spawn)
+                {
+                    retval.LoadMessages.Add("Player 3 spawn set");
+                }
+                else
+                {
+                    retval.LoadMessages.Add("ERROR Player 3 spawn not set");
+                }
+                if (setP4Spawn)
+                {
+                    retval.LoadMessages.Add("Player 4 spawn set");
+                }
+                else
+                {
+                    retval.LoadMessages.Add("ERROR Player 4 spawn not set");
+                }
+            }
             if (setTiles == false)
             {
                 retval.LoadMessages.Add("ERROR failed to set Tiles");
