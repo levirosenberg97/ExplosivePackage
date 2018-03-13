@@ -1,0 +1,14 @@
+#Camera Settings
+position:5,30,-4
+rotation:90,0,0
+size:5.5
+#Tile Data
+RRRRRRRRRRR
+R    B    R
+R    B    R
+R  B1U4B  R
+RBBBUUUBBBR
+R  B3U2B  R
+R    B    R
+R    B    R
+RRRRRRRRRRR
