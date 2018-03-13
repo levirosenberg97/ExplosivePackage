@@ -285,7 +285,7 @@ public class CustomMapLoader : MonoBehaviour {
                 }
                 else if (c == '1')
                 {
-                    if (numberOfPlayers >= 1)
+                    if (true)
                     {
                         GameObject spawnPoint = Instantiate(P1Spawn, position, P1Spawn.transform.rotation);
                         spawnPoint.transform.SetParent(Parent.transform);
@@ -315,7 +315,7 @@ public class CustomMapLoader : MonoBehaviour {
                 }
                 else if (c == '2')
                 {
-                    if (numberOfPlayers >= 2)
+                    if (true)
                     {
                         GameObject spawnPoint = Instantiate(P2Spawn, position, P2Spawn.transform.rotation);
                         spawnPoint.transform.SetParent(Parent.transform);

@@ -1396,6 +1396,11 @@ Prefab:
       propertyPath: highlightColor.m_FadeDuration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114180210579276704, guid: d64eedfb9eed9aa489f0cd8596147831,
+        type: 2}
+      propertyPath: vibrationCounter
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d64eedfb9eed9aa489f0cd8596147831, type: 2}
   m_IsPrefabParent: 0
@@ -1574,6 +1579,11 @@ Prefab:
       propertyPath: highlightColor.m_FadeDuration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114220351237826964, guid: 0e3e08e712772c246a7e1ca7551e2e97,
+        type: 2}
+      propertyPath: vibrationCounter
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e3e08e712772c246a7e1ca7551e2e97, type: 2}
   m_IsPrefabParent: 0
@@ -1587,7 +1597,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1376328
+  m_Name: pb_Mesh-178910
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1737,7 +1747,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1376332
+  m_Name: pb_Mesh-178914
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1975,6 +1985,11 @@ Prefab:
         type: 2}
       propertyPath: highlightColor.m_FadeDuration
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114812790058233850, guid: 62147134e9bac2d41a87de67963b0cb3,
+        type: 2}
+      propertyPath: vibrationCounter
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 62147134e9bac2d41a87de67963b0cb3, type: 2}
@@ -5973,6 +5988,11 @@ Prefab:
       propertyPath: highlightColor.m_FadeDuration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114909613935770424, guid: 3e6246ad9da311343a27ef565f59c903,
+        type: 2}
+      propertyPath: vibrationCounter
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e6246ad9da311343a27ef565f59c903, type: 2}
   m_IsPrefabParent: 0
@@ -5981,7 +6001,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1252746
+  m_Name: pb_Mesh-178860
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -6205,7 +6225,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1252744
+  m_Name: pb_Mesh-178858
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
