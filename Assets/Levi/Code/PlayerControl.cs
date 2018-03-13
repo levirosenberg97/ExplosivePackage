@@ -201,7 +201,7 @@ public class PlayerControl : MonoBehaviour
         //removes the player on death
         if (isAlive == false)
         {
-            GamePad.SetVibration(playerNumber, 0, 0);
+            GamePad.SetVibration(playerNumber, .5f, .5f);
            
             gameObject.SetActive(false);
         }
