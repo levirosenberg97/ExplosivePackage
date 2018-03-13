@@ -12,6 +12,7 @@ public class ReadyBehavior : MonoBehaviour {
     GamePadState state;
     public bool readyStart;
     public string scene = "PlayerTestScene1";
+    public GameObject startText;
     // Use this for initialization
     void Start ()
     {
@@ -35,10 +36,12 @@ public class ReadyBehavior : MonoBehaviour {
         if (check >= 2)
         {
             readyStart = true;
+            startText.SetActive(true);
         }
         else
         {
             readyStart = false;
+            startText.SetActive(false);
         }
 
         if (readyStart == true)
